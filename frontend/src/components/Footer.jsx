@@ -118,7 +118,7 @@ export default function Footer() {
             <span className="font-serif italic text-orange-500 text-lg mb-3 tracking-wide">
               get in touch
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none mb-8 max-w-md">
+            <h2 className="text-4xl md:text-5xl lg:text-5xl font-black uppercase tracking-tight leading-none mb-8 max-w-md">
               Got a project <br /> you want to <br /> talk about?
             </h2>
             <button className="flex items-center gap-3 bg-[#e65100] hover:bg-[#bf4300] text-white font-bold uppercase tracking-wider text-xs py-4 px-6 rounded shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
@@ -137,7 +137,7 @@ export default function Footer() {
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="flex items-center justify-between text-2xl md:text-3xl font-black uppercase tracking-wider border-b border-transparent hover:border-zinc-700/50 py-1 transition-all duration-300 group"
+                  className="flex items-center justify-between text-2xl md:text-2xl font-black uppercase tracking-wider border-b border-transparent hover:border-zinc-700/50 py-1 transition-all duration-300 group"
                 >
                   <span className="group-hover:text-orange-400 transition-colors duration-300">{item}</span>
                   <ArrowUpRight className="w-6 h-6 text-zinc-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
