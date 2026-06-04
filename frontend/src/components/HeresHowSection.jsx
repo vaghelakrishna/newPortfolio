@@ -20,13 +20,13 @@ const HeresHowSection = () => {
         </div>
 
         {/* Floating Question */}
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-max">
-          <span className="text-gray-400 text-xl italic opacity-90" style={{ fontFamily: "'Gochi Hand', cursive" }}>
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-max">
+          <span className="text-gray-400 text-xs italic opacity-90" style={{ fontFamily: "'Gochi Hand', cursive" }}>
             Okay so... how do i do that?
           </span>
         </div>
 
-        <div className="relative w-40 h-40 md:w-56 md:h-56">
+        <div className="relative w-40 h-40 md:w-40 md:h-40">
           <img
             src="/src/assets/me.png"
             alt="Arjun Illustration"
@@ -37,7 +37,7 @@ const HeresHowSection = () => {
 
       {/* 3. Heading with One-Time Animation */}
       <div className="text-center mt-4">
-        <h2 className="text-6xl md:text-8xl font-bold text-[#222] tracking-tighter flex flex-wrap justify-center items-center gap-x-4">
+        <h2 className="text-4xl md:text-7xl font-bold text-[#222] tracking-tighter flex flex-wrap justify-center items-center gap-x-4">
           <span>Here's</span>
           <span className="relative inline-block">
             how
