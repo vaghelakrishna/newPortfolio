@@ -1,21 +1,21 @@
 import React from 'react';
 import MacWorkWindow from '../components/MacWorkWindow';
 import ExperienceMetrics from './ExperienceMetrics';
+import LogoMarquee from '../components/LogoMarquee';
 
 export default function BlueprintCanvasBox() {
-  // Exact layout array index loop setup matching image_4ecfbe.png
+  // Layout array index loop setup
   const topNumbers = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 14, 16, 18, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 34, 36, 37, 38,
     39, 40, 41, 42, 43, 44, 45
   ];
 
-  const leftNumbers = [0, 1];
+  const leftNumbers = [0, 1, 2, 3]; // लेफ्ट स्केल के लिए नंबर्स थोड़े बढ़ा दिए हैं ताकि नीचे तक रूलर अलाइन रहे
 
   return (
     <div
-      className="w-full min-h-screen bg-[#FDFBF7] flex items-center justify-center p-8 md:p-12 relative overflow-hidden select-none"
+      className="w-full min-h-screen bg-[#FDFBF7] flex items-center justify-center p-4 md:p-12 relative overflow-hidden select-none"
       style={{
-        // Canvas outer area dotted dashboard background mesh
         backgroundImage: 'radial-gradient(#DBD5C7 1.5px, transparent 1.5px)',
         backgroundSize: '40px 40px',
         backgroundPosition: '14px 14px'
@@ -44,7 +44,7 @@ export default function BlueprintCanvasBox() {
         <div className="w-full flex relative flex-1">
 
           {/* LEFT COORD MEASUREMENT BAR */}
-          <div className="w-[52px] border-r border-[#F4EFE6] flex flex-col items-center pt-3 gap-[30px] relative z-20 flex-shrink-0 bg-[#FEFDFB]">
+          <div className="w-[52px] border-r border-[#F4EFE6] flex flex-col items-center pt-8 gap-[60px] relative z-20 flex-shrink-0 bg-[#FEFDFB]">
             {leftNumbers.map((num, idx) => (
               <span
                 key={idx}
@@ -57,21 +57,23 @@ export default function BlueprintCanvasBox() {
 
           {/* ========================================================
               INTERNAL CRISP BACKGROUND GRID & COMPONENT HOLDER
+              (Flex-col हटाकर इसे ब्लॉक लेआउट बनाया गया है)
               ======================================================== */}
           <div
-            className="flex-1 min-h-[360px] relative px-4 pb-18 rounded-br-[24px] flex items-center justify-center flex-col" // <-- yahan flex classes add ki hain
+            className="flex-1 relative p-0 rounded-br-[24px] block overflow-y-auto pb-20"
             style={{
               backgroundImage: `
-      linear-gradient(to right, #F5EFE4 1px, transparent 1px),
-      linear-gradient(to bottom, #F5EFE4 1px, transparent 1px)
-    `,
+                linear-gradient(to right, #F5EFE4 1px, transparent 1px),
+                linear-gradient(to bottom, #F5EFE4 1px, transparent 1px)
+              `,
               backgroundSize: 'calc((100% - 32px) / 38) 46px',
               backgroundPosition: '14px 6px'
             }}
           >
- <ExperienceMetrics />  
-            <MacWorkWindow />
 
+            <ExperienceMetrics />
+            <LogoMarquee />
+            <MacWorkWindow />
           </div>
 
         </div>
