@@ -1,5 +1,6 @@
 import React from 'react';
 import MacWorkWindow from '../components/MacWorkWindow';
+import ExperienceMetrics from './ExperienceMetrics';
 
 export default function BlueprintCanvasBox() {
   // Exact layout array index loop setup matching image_4ecfbe.png
@@ -58,7 +59,7 @@ export default function BlueprintCanvasBox() {
               INTERNAL CRISP BACKGROUND GRID & COMPONENT HOLDER
               ======================================================== */}
           <div
-            className="flex-1 min-h-[360px] relative p-4 rounded-br-[24px] flex items-center justify-center" // <-- yahan flex classes add ki hain
+            className="flex-1 min-h-[360px] relative px-4 pb-18 rounded-br-[24px] flex items-center justify-center flex-col" // <-- yahan flex classes add ki hain
             style={{
               backgroundImage: `
       linear-gradient(to right, #F5EFE4 1px, transparent 1px),
@@ -68,7 +69,7 @@ export default function BlueprintCanvasBox() {
               backgroundPosition: '14px 6px'
             }}
           >
-
+ <ExperienceMetrics />  
             <MacWorkWindow />
 
           </div>
