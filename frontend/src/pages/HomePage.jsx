@@ -9,6 +9,7 @@ import MacWorkWindow from '../components/MacWorkWindow'
 import WorkSection from '../section/WorkSection'
 import MetricsSection from '../section/MetricsSection';
 import LogoMarquee from '../components/LogoMarquee'
+import Footer from '../components/Footer'
 
 export default function HomePage() {
   return (
@@ -19,11 +20,12 @@ export default function HomePage() {
 
       <Me />
       <MetricsSection />
-      <WorkSection />
+      {/* <WorkSection /> */}
       {/* <LogoMarquee /> */}
       {/* <FilmStrip /> */}
       <CustomCursor />
       <HeresHowSection />
+      <Footer />
     </>
   )
 }
