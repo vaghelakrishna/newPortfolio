@@ -13,7 +13,7 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
 
   return (
     <div
-      className="w-full max-w-5xl aspect-[16/10] bg-[#FAF8F5] rounded-2xl shadow-2xl border border-gray-300/70 overflow-hidden flex flex-col font-sans select-none text-center"
+      className="w-full max-w-4xl aspect-[20/10] bg-[#FAF8F5] rounded-2xl shadow-xs border border-gray-300/70 overflow-hidden flex flex-col font-sans select-none text-center"
       onClick={(e) => e.stopPropagation()}
     >
       {/* ========================================================
@@ -61,13 +61,13 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
             </span>
             <button
               onClick={() => {
-                setActiveTab('leave a sketch');
+                setActiveTab('Personal Project');
                 if (onFolderClick) onFolderClick('garden'); // Trigger garden view directly if needed
               }}
               className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'leave a sketch' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
                 }`}
             >
-              <span className="text-sm opacity-70">📁</span> leave a sketch
+              <span className="text-sm opacity-70">📁</span> Personal Project
             </button>
           </div>
         </aside>
