@@ -55,15 +55,7 @@ export default function InteractiveHero() {
       {/* ========================================================
           FIXED TOP NAVIGATION BAR
           ======================================================== */}
-      <header className="absolute top-0 left-0 w-full flex items-center justify-between px-16 py-6 z-40 bg-[#F9F6F0]/40 backdrop-blur-sm">
-        <div className="text-xl font-extrabold tracking-tight text-[#E25C1D] font-sans-clean">HSK</div>
-        <nav className="flex items-center gap-8 text-xs font-bold tracking-wider text-gray-600 uppercase font-sans-clean">
-          <a href="#work" className="hover:text-black transition-colors">Work</a>
-          <a href="#resume" className="hover:text-black transition-colors">Resume</a>
-          <a href="#about" className="hover:text-black transition-colors">About</a>
-          <a href="#contact" className="hover:text-black transition-colors">Contact</a>
-        </nav>
-      </header>
+
 
       {/* ========================================================
           1. MAIN ID CARD IMAGE (Exactly Centered & Focal Point)
@@ -73,7 +65,7 @@ export default function InteractiveHero() {
         dragConstraints={constraintsRef}
         dragElastic={0.1}
         whileDrag={{ scale: 1.02 }}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[310px] md:w-[330px] drop-shadow-[0_25px_45px_rgba(0,0,0,0.14)] z-30 cursor-grab active:cursor-grabbing"
+        className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 w-[310px] md:w-[330px] drop-shadow-[0_25px_45px_rgba(0,0,0,0.14)] z-30 cursor-grab active:cursor-grabbing"
       >
         <img
           src="/src/assets/krishna-id.png" 
@@ -136,7 +128,7 @@ export default function InteractiveHero() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F56]"></span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#FFBD2E]"></span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#27C93F]"></span>
-            <span className="text-[8.5px] text-gray-400 font-mono mx-auto pr-5">harini's work</span>
+            <span className="text-[8.5px] text-gray-400 font-mono mx-auto pr-5">Krishna's work</span>
           </div>
           <div className="p-2.5 grid grid-cols-3 gap-1.5 text-center text-[8.5px] font-bold text-gray-600 bg-[#F9F9F9] font-sans-clean">
             {[
@@ -176,7 +168,7 @@ export default function InteractiveHero() {
           <div className="my-auto py-1 flex justify-center text-lg opacity-15">✴</div>
           <div className="font-sans-clean">
             <span className="text-[8px] block font-bold opacity-60 uppercase tracking-widest">India</span>
-            <span className="text-sm font-extrabold tracking-tight block text-[#1B3B2B] -mt-0.5">Bangalore</span>
+            <span className="text-sm font-extrabold tracking-tight block text-[#1B3B2B] -mt-0.5">Gujarat</span>
           </div>
         </div>
       </motion.div>
@@ -210,7 +202,7 @@ export default function InteractiveHero() {
       {/* ========================================================
           6. FIXED DOWNLOAD RESUME BUTTON (Bottom Center)
           ======================================================== */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40">
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-40">
         <button className="px-5 py-2.5 border border-[#E25C1D]/30 bg-[#FFFDF9] text-[#E25C1D] rounded-full text-[10px] font-bold shadow-md hover:bg-[#E25C1D] hover:text-white hover:border-[#E25C1D] transition-all duration-200 uppercase tracking-widest active:scale-95 flex items-center gap-1.5 font-sans-clean">
           Download Resume <FiDownload size={11} />
         </button>
