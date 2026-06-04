@@ -39,7 +39,7 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
       <div className="flex-1 flex overflow-hidden">
 
         {/* 2. LEFT SIDEBAR PANEL */}
-        <aside className="w-56 bg-[#E3DFD7] border-r border-gray-300/40 p-5 flex flex-col gap-6">
+        <aside className="w-53 bg-[#E3DFD7] border-r border-gray-300/40 p-5 flex flex-col gap-6">
           {/* Favourites Section */}
           <div>
             <span className="text-[10px] font-bold text-gray-400 tracking-wider uppercase block mb-2">
