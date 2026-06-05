@@ -9,10 +9,12 @@ import MacWorkWindow from '../components/MacWorkWindow'
 import MetricsSection from '../section/MetricsSection';
 import LogoMarquee from '../components/LogoMarquee'
 import Footer from '../components/Footer'
+import WalkingRobot from '../components/WalkingRobot'
 
 export default function HomePage() {
   return (
     <>
+      <WalkingRobot />
       <HeroSection />
       <CommunityGarden />
       <AboutMe />
