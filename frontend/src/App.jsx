@@ -6,6 +6,8 @@ import { Routes, Route } from "react-router-dom";
 import VisitorGallery from './pages/VisitorGallery'
 import ProjectPage from "./pages/ProjectPage";
 import ProjectDetail from "./pages/ProjectDetail";
+import ContactUsPage from "./pages/ContactUsPage";
+import WorkPage from "./pages/WorkPage";
 // import FooterNavigation from "./components/WalkingRobot";
 
 export default function App() {
@@ -33,7 +35,10 @@ export default function App() {
         
         <Route to="/work" element={<WorkPage />} />
 
+        <Route to="/contact" element={<ContactUsPage />} />
+
       <Route
+      
         path="visitor-gallery" element={<VisitorGallery />} />
 
       <Route path="/project" element={<ProjectPage />} />
