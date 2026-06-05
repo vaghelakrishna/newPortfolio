@@ -180,7 +180,7 @@ const HeroSection = () => {
       </div>
 
       {/* Bottom Right: Microsoft Work Section */}
-      <div className="absolute bottom-[12%] right-[5%] md:right-[10%] max-w-[380px] transform rotate-[1.5deg] select-none">
+      <div className="absolute bottom-[10%] right-[5%] md:right-[10%] max-w-[380px] transform rotate-[1.5deg] select-none">
         <svg className="w-12 h-6 text-gray-200 mb-[-5px] ml-[-10px] opacity-40" viewBox="0 0 50 20">
           <path d="M2,15 Q10,5 20,15 T40,15" fill="none" stroke="currentColor" strokeWidth="2" />
         </svg>
