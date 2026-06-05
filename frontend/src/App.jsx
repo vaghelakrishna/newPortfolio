@@ -26,6 +26,12 @@ export default function App() {
         <Route
           path="/about"
           element={<AboutPage />} />
+        
+        <Route 
+        path="/contact"
+          element={<ContactUsPage />} />
+        
+        <Route to="/work" element={<WorkPage />} />
 
       <Route
         path="visitor-gallery" element={<VisitorGallery />} />
