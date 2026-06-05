@@ -6,7 +6,7 @@ import { BiHappyBeaming, BiCheckDouble } from 'react-icons/bi';
 import { FiMapPin, FiClock, FiDownload } from 'react-icons/fi';
 import { ImAttachment } from 'react-icons/im';
 import { FcFolder } from 'react-icons/fc';
-
+import KrishnaIDCard from '../assets/krishna-id.png'; 
 export default function InteractiveHero() {
   const constraintsRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -68,7 +68,7 @@ export default function InteractiveHero() {
         className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 w-[310px] md:w-[330px] drop-shadow-[0_25px_45px_rgba(0,0,0,0.14)] z-30 cursor-grab active:cursor-grabbing"
       >
         <img
-          src="/src/assets/krishna-id.png" 
+          src={KrishnaIDCard}
           alt="Krishna ID Card"
           className="w-full h-auto object-contain pointer-events-none"
         />
