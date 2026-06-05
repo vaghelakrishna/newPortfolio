@@ -37,7 +37,7 @@ export default function ExperienceMetrics() {
   ];
 
   return (
-    <section className="w-full min-h-screen  py-20 px-6 flex flex-col items-center justify-center font-sans-clean select-none relative">
+    <section className="w-full min-h-screen  py-26 px-6 flex flex-col items-center justify-center font-sans-clean select-none relative">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap');
         .font-cursive { font-family: 'Caveat', cursive; }
