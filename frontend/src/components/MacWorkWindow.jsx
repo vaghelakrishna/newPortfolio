@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-
+import { motion } from 'framer-motion';
 export default function MacWorkWindow({ onClose, onFolderClick }) {
   const [activeTab, setActiveTab] = useState('Work projects');
+  const text = "SELECTED WORK";
+
+  // Custom animation variants
+  const letterVariants = {
+    initial: { color: "#3D3A36", scale: 1 },
+    hover: { color: "#C86423", scale: 1.1, rotate: -2 } // Hover par color, size, aur halka tilt
+  };
 
   // Folders Data with exact naming from your mockup
   const folders = [
@@ -12,6 +19,35 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
   ];
 
   return (
+    <div>
+
+
+      <div className="w-full max-w-[1380px] mx-auto px-10 py-20 font-sans text-center">
+        <div className="flex items-center gap-2 mb-4 items-center justify-center">
+          <span className="text-xl">😊</span>
+          <span className="font-mono font-medium text-[#E25C1D] text-sm">2024 - 2026</span>
+        </div>
+
+        <h1 className="text-6xl font-bold text-[#3D3A36] tracking-tighter mb-6 flex cursor-default items-center justify-center">
+          {text.split("").map((char, index) => (
+            <motion.span
+              key={index}
+              variants={letterVariants}
+              initial="initial"
+              whileHover="hover"
+              className="inline-block" // Animation ke liye zaruri
+            >
+              {char}
+            </motion.span>
+          ))}
+        </h1>
+
+        <p className="text-xl text-[#7D7870] max-w-2xl leading-relaxed">
+          A selection of work I've led or contributed to significantly,
+          each with context on the problem, my process, and what we built.
+        </p>
+      </div>
+
     <div
       className="w-full max-w-4xl aspect-[20/10] bg-[#FAF8F5] rounded-2xl shadow-xs border border-gray-300/70 overflow-hidden flex flex-col font-sans select-none text-center"
       onClick={(e) => e.stopPropagation()}
@@ -116,5 +152,6 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
 
       </div>
     </div>
+      </div>
   );
 }
