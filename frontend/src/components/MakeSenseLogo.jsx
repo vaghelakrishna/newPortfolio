@@ -15,7 +15,7 @@ const MakeSenseLogo = ({ eyePos }) => {
         </span>
         {/* Asymmetric Eyes */}
         <div className="relative flex items-end -ml-1 mb-1 z-20">
-          <Eye size="w-8 h-10 md:w-9 md:h-11" offset={eyePos} rotation="-rotate-6" />
+          <Eye size="w-8 h-10 md:w-8 md:h-11" offset={eyePos} rotation="-rotate-6" />
           <Eye size="w-8 h-10 md:w-9 md:h-11" offset={eyePos} rotation="rotate-3" className="-ml-3" />
         </div>
       </div>
@@ -105,38 +105,36 @@ const HeroSection = () => {
     >
 
       {/* Top Left: Krishna Intro with Doodles */}
-      <div className="absolute top-8 left-4 md:top-[12%] md:left-[12%] flex flex-col items-start select-none transform -rotate-2 scale-75 md:scale-100">        <div className="absolute -left-10 -top-10 opacity-10 pointer-events-none">
-          <svg width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round">
-            <path d="M20,70 C5,40 35,10 55,35 C75,60 95,25 85,15" />
-            <path d="M15,75 C0,45 30,15 50,40" />
-          </svg>
-        </div>
+      <div className="absolute top-8 left-4 md:top-[24%] md:left-[12%] flex flex-col items-start select-none transform -rotate-2 scale-75 md:scale-100">
         <div className="relative flex items-center">
           <div
             className="flex items-center text-[#666] text-3xl md:text-4xl"
             style={{ fontFamily: "'Gochi Hand', cursive" }}
           >
-            <div className="relative w-[180px] md:w-[220px] h-[50px] overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={greetings[greetingIndex]}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute left-0 top-0"
-                >
-                  {greetings[greetingIndex]},
-                </motion.span>
-              </AnimatePresence>
-            </div>
+            {/* टाइपिंग एनीमेशन और क्लोज गैप के लिए */}
+            <div className="flex items-center gap-[0.2em]">
+              <motion.div
+                className="flex whitespace-nowrap"
+                key={greetings[greetingIndex]}
+                initial="hidden"
+                animate="visible"
+              >
+                {greetings[greetingIndex].split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.1, delay: i * 0.05 }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+                <span>,</span>
+              </motion.div>
 
-            <span>I'm Krishna</span>
-          </div>
-          <div className="absolute -right-12 top-4 opacity-20">
-            <svg width="40" height="60" viewBox="0 0 40 80" fill="none" stroke="#000" strokeWidth="2">
-              <path d="M5,5 Q15,5 25,5 T5,25 T25,45 T5,65" />
-            </svg>
+              {/* गैप को कम रखने के लिए सीधा span */}
+              <span className="ml-2">I'm Krishna</span>
+            </div>
           </div>
         </div>
       </div>
