@@ -5,11 +5,13 @@ import { Routes, Route } from "react-router-dom";
 import VisitorGallery from './pages/VisitorGallery'
 import ProjectPage from "./pages/ProjectPage";
 import ProjectDetail from "./pages/ProjectDetail";
-import FooterNavigation from "./components/FooterNavigation";
+// import FooterNavigation from "./components/WalkingRobot";
 
 export default function App() {
   return (
-    <><FooterNavigation /><Routes>
+    <>
+      {/* <FooterNavigation /> */}
+      <Routes>
       <Route path="/" element={<IntroScreen />} />
 
       <Route
