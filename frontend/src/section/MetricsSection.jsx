@@ -56,24 +56,26 @@ export default function BlueprintCanvasBox() {
           </div>
 
           {/* ========================================================
-              INTERNAL CRISP BACKGROUND GRID & COMPONENT HOLDER
-              (Flex-col हटाकर इसे ब्लॉक लेआउट बनाया गया है)
-              ======================================================== */}
+    INTERNAL CRISP BACKGROUND GRID & COMPONENT HOLDER
+    ======================================================== */}
           <div
-            className="flex-1 relative p-0 rounded-br-[24px] block overflow-y-auto pb-20 "
+            className="flex-1 relative p-0 rounded-br-[24px] overflow-y-auto pb-20 flex flex-col items-center" // "flex flex-col items-center" add kiya
             style={{
               backgroundImage: `
-                linear-gradient(to right, #F5EFE4 1px, transparent 1px),
-                linear-gradient(to bottom, #F5EFE4 1px, transparent 1px)
-              `,
+      linear-gradient(to right, #F5EFE4 1px, transparent 1px),
+      linear-gradient(to bottom, #F5EFE4 1px, transparent 1px)
+    `,
               backgroundSize: 'calc((100% - 32px) / 38) 46px',
               backgroundPosition: '14px 6px'
             }}
           >
-
             <ExperienceMetrics />
             <LogoMarquee />
-            <MacWorkWindow />
+
+            {/* Yahan wrapper add karein */}
+            <div className="w-full flex justify-center mt-10">
+              <MacWorkWindow />
+            </div>
           </div>
 
         </div>
