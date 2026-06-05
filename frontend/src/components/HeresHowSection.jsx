@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
+import Me from '../assets/me.png';
 const HeresHowSection = () => {
   return (
     <div className="relative w-full flex flex-col items-center justify-center py-32 bg-[#FAF9F6] overflow-hidden">
@@ -28,7 +28,7 @@ const HeresHowSection = () => {
 
         <div className="relative w-40 h-40 md:w-40 md:h-40">
           <img
-            src="/src/assets/me.png"
+            src={Me}
             alt="Arjun Illustration"
             className="w-full h-full object-contain grayscale"
           />
