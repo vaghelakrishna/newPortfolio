@@ -1,6 +1,7 @@
 import IntroScreen from "./pages/IntroScreen";
 import VisitorPass from "./pages/VisitorPass";
 import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
 import { Routes, Route } from "react-router-dom";
 import VisitorGallery from './pages/VisitorGallery'
 import ProjectPage from "./pages/ProjectPage";
@@ -20,7 +21,11 @@ export default function App() {
 
       <Route
         path="/home"
-        element={<HomePage />} />
+          element={<HomePage />} />
+        
+        <Route
+          path="/about"
+          element={<AboutPage />} />
 
       <Route
         path="visitor-gallery" element={<VisitorGallery />} />
