@@ -4,7 +4,7 @@ import { ArrowUpRight, Mail, Copy, Check, ArrowUp } from 'lucide-react'; // य�
 export default function Footer() {
   const [time, setTime] = useState('');
   const [isCopied, setIsCopied] = useState(false);
-  const emailAddress = "hello.project@gmail.com"; // आपकी पूरी ईमेल आईडी
+  const emailAddress = "krishnawork2606@gmail.com"; // आपकी पूरी ईमेल आईडी
 
   const socialLinks = [
     { name: 'LINKEDIN', color: 'text-[#0A66C2]' },
