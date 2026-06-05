@@ -14,7 +14,7 @@ export default function BlueprintCanvasBox() {
 
   return (
     <div
-      className="w-full min-h-screen bg-[#FDFBF7] flex items-center justify-center p-4 md:p-12 relative overflow-hidden select-none"
+      className="w-full min-h-screen bg-[#FDFBF7] flex items-center justify-center p-4  md:pt-30 relative overflow-hidden select-none"
       style={{
         backgroundImage: 'radial-gradient(#DBD5C7 1.5px, transparent 1.5px)',
         backgroundSize: '40px 40px',
@@ -26,7 +26,7 @@ export default function BlueprintCanvasBox() {
 
         {/* TOP COORD MEASUREMENT BAR */}
         <div className="w-full h-11 border-b border-[#F4EFE6] flex items-end relative z-20 bg-[#FEFDFB]">
-          <div className="w-[52px] h-full flex-shrink-0" /> {/* Sidebar spacing offset buffer */}
+          <div className="w-[54px] h-full flex-shrink-0" /> {/* Sidebar spacing offset buffer */}
 
           <div className="flex-1 flex justify-between pr-10 pl-2 pb-1.5">
             {topNumbers.map((num, idx) => (
@@ -60,7 +60,7 @@ export default function BlueprintCanvasBox() {
               (Flex-col हटाकर इसे ब्लॉक लेआउट बनाया गया है)
               ======================================================== */}
           <div
-            className="flex-1 relative p-0 rounded-br-[24px] block overflow-y-auto pb-20"
+            className="flex-1 relative p-0 rounded-br-[24px] block overflow-y-auto pb-20 "
             style={{
               backgroundImage: `
                 linear-gradient(to right, #F5EFE4 1px, transparent 1px),
