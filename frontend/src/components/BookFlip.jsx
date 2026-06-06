@@ -1,16 +1,23 @@
 import React from 'react';
 import HTMLFlipBook from 'react-pageflip';
+import page1 from '../assets/bookpage/1.png';
+import page2 from '../assets/bookpage/2.webp';
+import page3 from '../assets/bookpage/3.webp';
+import page4 from '../assets/bookpage/4.webp';
+import page5 from '../assets/bookpage/5.png';
+import page6 from '../assets/bookpage/6.webp';
+import page7 from '../assets/bookpage/7.webp';
+import page8 from '../assets/bookpage/8.webp';
 
 const pages = [
-  './src/assets/bookpage/1.png',
-  './src/assets/bookpage/2.webp',
-  './src/assets/bookpage/3.webp',
-  './src/assets/bookpage/4.webp',
-  './src/assets/bookpage/5.png',
-  './src/assets/bookpage/6.webp',
-  './src/assets/bookpage/7.webp',
-  './src/assets/bookpage/8.webp',
-
+  page1,
+  page2,
+  page3,
+  page4,
+  page5,
+  page6,
+  page7,
+  page8
 ];
 
 export default function BookFlip() {
