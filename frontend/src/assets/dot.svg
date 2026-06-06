@@ -1,0 +1,20 @@
+<svg width="60" height="24" viewBox="0 0 60 24" xmlns="http://www.w3.org/2000/svg">
+
+  <style>
+    .dot1 { animation: blink 1.2s infinite 0s; }
+    .dot2 { animation: blink 1.2s infinite 0.2s; }
+    .dot3 { animation: blink 1.2s infinite 0.4s; }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+  </style>
+
+  <rect x="0" y="0" width="60" height="24" rx="3" fill="#f3f3f3"/>
+
+  <rect class="dot1" x="14" y="8" width="6" height="6" fill="#999"/>
+  <rect class="dot2" x="27" y="8" width="6" height="6" fill="#999"/>
+  <rect class="dot3" x="40" y="8" width="6" height="6" fill="#999"/>
+
+</svg>
