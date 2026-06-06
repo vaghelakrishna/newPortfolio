@@ -12,7 +12,7 @@ import Footer from '../components/Footer'
 import WalkingRobot from '../components/WalkingRobot'
 import Navbar from '../components/Navbar'
 import CatLoader from '../components/CatLoader'
-import Folder from '../components/Folder'
+
 
 // import BookFlip from '../components/BookFlip'
 // import ImageScroll from '../components/ImageScroll'
@@ -27,7 +27,7 @@ export default function HomePage() {
 
       <Navbar />
       <HeroSection />
-    <Folder/>
+
       <AboutMe />
       <HeresHowSection />
 {/* <CatLoader /> */}
