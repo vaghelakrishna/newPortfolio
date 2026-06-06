@@ -26,7 +26,7 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
 
       <div className="w-full max-w-[1380px] mx-auto px-10 py-20 font-sans text-center">
         <div className="flex items-center gap-2 mb-4 items-center justify-center">
-          <span className="text-xl">😊</span>
+          {/* <span className="text-xl">😊</span> */}
           <span className="font-mono font-medium text-[#E25C1D] text-sm">2024 - 2026</span>
         </div>
 
@@ -51,7 +51,7 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
       </div>
 
     <div
-      className="w-full max-w-5xl aspect-[20/10] bg-[#FAF8F5] rounded-2xl shadow-xs border border-gray-300/70 overflow-hidden flex flex-col font-sans select-none text-center"
+      className="w-full max-w-5xl h-[490px] bg-[#FAF8F5] rounded-2xl shadow-xs border border-gray-300/70 overflow-hidden flex flex-col font-sans select-none text-center"
       onClick={(e) => e.stopPropagation()}
     >
       {/* ========================================================
@@ -115,11 +115,10 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
               Explore
             </span>
               <button
-                onClick={() => setActiveTab('Personal projects')}
-                className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'Personal projects' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
+                onClick={() => setActiveTab('Sketch')}
+                className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'Sketch' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
                   }`}
               >
-                {/* Custom Folder Icon SVG instead of Emoji */}
                 <svg className="w-4 h-4 text-[#69C1EE]" fill="currentColor" viewBox="0 0 24 20">
                   <path d="M2 3a2 2 0 012-2h4l2 3h10a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" />
                 </svg>
@@ -144,10 +143,12 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
                 ))}
               </div>
             ) : activeTab === 'Personal projects' ? (
-              // PERSONAL PROJECT / SKETCH CANVAS VIEW
+              <div className="p-10 flex items-center justify-center text-gray-400 text-sm">
+                Personal projects coming soon...
+              </div>
+            ) : activeTab === 'Sketch' ? (
               <SketchCanvas />
             ) : (
-              // FALLBACK VIEW (Optional)
               <div className="w-full h-full flex items-center justify-center text-gray-400">
                 Select a folder
               </div>
