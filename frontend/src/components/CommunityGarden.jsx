@@ -67,7 +67,7 @@ export default function CommunityGarden() {
       {/* ========================================================
           1. FIXED FLOATING ICON (Bottom Right)
           ======================================================== */}
-      <div className="fixed bottom-24 right-12 z-50 flex flex-col items-center">
+      <div className="fixed bottom-8 right-4 z-50 flex flex-col items-center">
         <button
           onClick={() => setIsOpen(true)}
           className="flex flex-col items-center gap-1.5 hover:scale-110 active:scale-95 transition-all duration-200 focus:outline-none"
