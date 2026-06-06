@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import robotSvg from '../assets/robot.svg';
 const WalkingRobot = () => {
   const [count, setCount] = useState(0);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -49,6 +49,13 @@ const WalkingRobot = () => {
                 {messages[count]}
               </div>
             </div>
+{/* 
+            <img
+              src={robotSvg}
+              alt="Robot"
+              className="w-11 h-14"
+            /> */}
+
 
             <svg width="44" height="56" viewBox="0 0 44 56" fill="none">
               <ellipse cx="22" cy="53.5" rx="14" ry="1.8" fill="#242424" opacity="0.16" />
