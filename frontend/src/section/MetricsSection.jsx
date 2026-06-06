@@ -22,7 +22,7 @@ export default function BlueprintCanvasBox() {
       }}
     >
       {/* CANVAS SHEET CONTAINER */}
-      <div className="w-full max-w-[1380px] bg-[#FEFDFB] rounded-[24px] border border-[#E3DDD3] shadow-[0_12px_40px_rgba(218,211,196,0.15)] relative flex flex-col overflow-hidden">
+      <div className="max-w-5xl bg-[#FEFDFB] rounded-[24px] border border-[#E3DDD3] shadow-[0_12px_40px_rgba(218,211,196,0.15)] relative flex flex-col overflow-hidden">
 
         {/* TOP COORD MEASUREMENT BAR */}
         <div className="w-full h-11 border-b border-[#F4EFE6] flex items-end relative z-20 bg-[#FEFDFB]">
