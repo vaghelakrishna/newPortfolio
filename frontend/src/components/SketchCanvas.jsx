@@ -1,24 +1,24 @@
-import React, { useRef, useState } from 'react';
-import { ReactSketchCanvas } from 'react-sketch-canvas';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   Pencil, Eraser, Minus, Square, Circle, Download,
   RotateCcw, RotateCw, Trash2, LayoutGrid, CircleDot
 } from 'lucide-react';
 
 export default function SketchCanvas() {
-  const canvasRef = useRef(null);
+  const mainCanvasRef = useRef(null);   // permanent drawings
+  const overlayCanvasRef = useRef(null); // shape preview
+  const historyRef = useRef([]);
+  const redoStackRef = useRef([]);
+  const isDrawingRef = useRef(false);
+  const startPosRef = useRef({ x: 0, y: 0 });
+  const lastPosRef = useRef({ x: 0, y: 0 });
 
-  // States
   const [activeTool, setActiveTool] = useState('pencil');
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [showGrid, setShowGrid] = useState(true);
   const [strokeColor, setStrokeColor] = useState('#3D3A36');
   const [strokeWidth, setStrokeWidth] = useState(4);
   const [showWidthMenu, setShowWidthMenu] = useState(false);
-
-  // Shape drawing state
-  const [isDrawing, setIsDrawing] = useState(false);
-  const [startPos, setStartPos] = useState({ x: 0, y: 0 });
 
   const tools = [
     { id: 'pencil', icon: <Pencil size={18} /> },
@@ -28,48 +28,145 @@ export default function SketchCanvas() {
     { id: 'circle', icon: <Circle size={18} /> },
   ];
 
-  const handleToolSelect = (toolId) => {
-    setActiveTool(toolId);
-    setShowSubMenu(false);
-    canvasRef.current.eraseMode(toolId === 'eraser');
+  // Resize canvases on mount
+  useEffect(() => {
+    const resize = () => {
+      const container = mainCanvasRef.current?.parentElement;
+      if (!container) return;
+      const { width, height } = container.getBoundingClientRect();
+      [mainCanvasRef, overlayCanvasRef].forEach(ref => {
+        if (ref.current) {
+          const imgData = ref.current.getContext('2d').getImageData(0, 0, ref.current.width, ref.current.height);
+          ref.current.width = width;
+          ref.current.height = height;
+          ref.current.getContext('2d').putImageData(imgData, 0, 0);
+        }
+      });
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, []);
+
+  const saveHistory = () => {
+    const ctx = mainCanvasRef.current.getContext('2d');
+    historyRef.current.push(ctx.getImageData(0, 0, mainCanvasRef.current.width, mainCanvasRef.current.height));
+    redoStackRef.current = [];
   };
 
-  const handleMouseDown = (e) => {
-    if (activeTool === 'pencil' || activeTool === 'eraser' || activeTool === 'line') return;
-    setIsDrawing(true);
-    setStartPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
+  const getPos = (e) => {
+    const rect = mainCanvasRef.current.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
   };
 
-  const handleMouseUp = (e) => {
-    if (!isDrawing) return;
-    setIsDrawing(false);
-    const endX = e.nativeEvent.offsetX;
-    const endY = e.nativeEvent.offsetY;
-
-    if (activeTool === 'rectangle') {
-      canvasRef.current.addPaths([{
-        strokeWidth, strokeColor, drawMode: 'path',
-        paths: [{ x: startPos.x, y: startPos.y }, { x: endX, y: startPos.y }, { x: endX, y: endY }, { x: startPos.x, y: endY }, { x: startPos.x, y: startPos.y }]
-      }]);
-    } else if (activeTool === 'circle') {
-      const radius = Math.sqrt(Math.pow(endX - startPos.x, 2) + Math.pow(endY - startPos.y, 2));
-      const points = [];
-      for (let i = 0; i <= 32; i++) {
-        const angle = (i / 32) * 2 * Math.PI;
-        points.push({ x: startPos.x + radius * Math.cos(angle), y: startPos.y + radius * Math.sin(angle) });
-      }
-      canvasRef.current.addPaths([{ strokeWidth, strokeColor, drawMode: 'path', paths: points }]);
+  const drawShape = (ctx, tool, x0, y0, x1, y1) => {
+    ctx.beginPath();
+    ctx.strokeStyle = tool === 'eraser' ? '#FAF8F5' : strokeColor;
+    ctx.lineWidth = strokeWidth;
+    ctx.lineCap = 'round';
+    if (tool === 'rectangle') {
+      ctx.strokeRect(x0, y0, x1 - x0, y1 - y0);
+    } else if (tool === 'circle') {
+      const radius = Math.sqrt(Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2));
+      ctx.arc(x0, y0, radius, 0, 2 * Math.PI);
+      ctx.stroke();
+    } else if (tool === 'line') {
+      ctx.moveTo(x0, y0);
+      ctx.lineTo(x1, y1);
+      ctx.stroke();
     }
   };
 
-  const handleDownload = () => {
-    canvasRef.current.exportImage('png').then(data => {
-      const link = document.createElement('a');
-      link.href = data;
-      link.download = 'my-sketch.png';
-      link.click();
-    });
+  const onMouseDown = (e) => {
+    isDrawingRef.current = true;
+    const pos = getPos(e);
+    startPosRef.current = pos;
+    lastPosRef.current = pos;
+
+    if (activeTool === 'pencil' || activeTool === 'eraser') {
+      saveHistory();
+      const ctx = mainCanvasRef.current.getContext('2d');
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    } else {
+      saveHistory();
+    }
   };
+
+  const onMouseMove = (e) => {
+    if (!isDrawingRef.current) return;
+    const pos = getPos(e);
+    const mainCtx = mainCanvasRef.current.getContext('2d');
+
+    if (activeTool === 'pencil') {
+      mainCtx.strokeStyle = strokeColor;
+      mainCtx.lineWidth = strokeWidth;
+      mainCtx.lineCap = 'round';
+      mainCtx.lineJoin = 'round';
+      mainCtx.lineTo(pos.x, pos.y);
+      mainCtx.stroke();
+    } else if (activeTool === 'eraser') {
+      mainCtx.globalCompositeOperation = 'destination-out';
+      mainCtx.strokeStyle = 'rgba(0,0,0,1)';
+      mainCtx.lineWidth = strokeWidth * 3;
+      mainCtx.lineCap = 'round';
+      mainCtx.lineJoin = 'round';
+      mainCtx.lineTo(pos.x, pos.y);
+      mainCtx.stroke();
+      mainCtx.globalCompositeOperation = 'source-over';
+    } else {
+      // preview on overlay
+      const ovCtx = overlayCanvasRef.current.getContext('2d');
+      ovCtx.clearRect(0, 0, overlayCanvasRef.current.width, overlayCanvasRef.current.height);
+      drawShape(ovCtx, activeTool, startPosRef.current.x, startPosRef.current.y, pos.x, pos.y);
+    }
+    lastPosRef.current = pos;
+  };
+
+  const onMouseUp = (e) => {
+    if (!isDrawingRef.current) return;
+    isDrawingRef.current = false;
+    const pos = getPos(e);
+
+    if (activeTool !== 'pencil' && activeTool !== 'eraser') {
+      // clear preview
+      overlayCanvasRef.current.getContext('2d').clearRect(0, 0, overlayCanvasRef.current.width, overlayCanvasRef.current.height);
+      // commit to main canvas
+      const mainCtx = mainCanvasRef.current.getContext('2d');
+      drawShape(mainCtx, activeTool, startPosRef.current.x, startPosRef.current.y, pos.x, pos.y);
+    }
+  };
+
+  const undo = () => {
+    if (!historyRef.current.length) return;
+    const ctx = mainCanvasRef.current.getContext('2d');
+    redoStackRef.current.push(ctx.getImageData(0, 0, mainCanvasRef.current.width, mainCanvasRef.current.height));
+    const prev = historyRef.current.pop();
+    ctx.putImageData(prev, 0, 0);
+  };
+
+  const redo = () => {
+    if (!redoStackRef.current.length) return;
+    const ctx = mainCanvasRef.current.getContext('2d');
+    historyRef.current.push(ctx.getImageData(0, 0, mainCanvasRef.current.width, mainCanvasRef.current.height));
+    const next = redoStackRef.current.pop();
+    ctx.putImageData(next, 0, 0);
+  };
+
+  const clearCanvas = () => {
+    saveHistory();
+    const ctx = mainCanvasRef.current.getContext('2d');
+    ctx.clearRect(0, 0, mainCanvasRef.current.width, mainCanvasRef.current.height);
+  };
+
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = mainCanvasRef.current.toDataURL('image/png');
+    link.download = 'my-sketch.png';
+    link.click();
+  };
+
+  const cursor = activeTool === 'eraser' ? 'cell' : (activeTool === 'pencil' ? 'crosshair' : 'crosshair');
 
   return (
     <div className="w-full h-full relative bg-[#FAF8F5] overflow-hidden">
@@ -77,13 +174,14 @@ export default function SketchCanvas() {
         style={{ backgroundImage: `linear-gradient(to right, #d1cfc9 1px, transparent 1px), linear-gradient(to bottom, #d1cfc9 1px, transparent 1px)`, backgroundSize: '25px 25px', pointerEvents: 'none' }}
       />
 
-      {/* Wrapper to capture Shape events */}
-      <div className="absolute inset-0 z-20" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-        <ReactSketchCanvas
-          ref={canvasRef}
-          style={{ width: "100%", height: "100%", position: 'absolute' }}
-          strokeWidth={strokeWidth}
-          strokeColor={strokeColor}
+      <div className="absolute inset-0 z-20">
+        <canvas ref={mainCanvasRef} className="absolute inset-0" />
+        <canvas ref={overlayCanvasRef} className="absolute inset-0"
+          style={{ cursor, pointerEvents: 'all' }}
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseUp}
         />
       </div>
 
@@ -91,7 +189,8 @@ export default function SketchCanvas() {
         {showSubMenu && (
           <div className="bg-[#F3F1ED] p-2 rounded-2xl border border-gray-300 shadow-xl flex flex-col gap-1">
             {tools.map((t) => (
-              <button key={t.id} onClick={() => handleToolSelect(t.id)} className={`p-2 rounded-lg ${activeTool === t.id ? 'bg-white' : 'hover:bg-white/50'}`}>
+              <button key={t.id} onClick={() => { setActiveTool(t.id); setShowSubMenu(false); }}
+                className={`p-2 rounded-lg ${activeTool === t.id ? 'bg-white' : 'hover:bg-white/50'}`}>
                 {t.icon}
               </button>
             ))}
@@ -126,9 +225,9 @@ export default function SketchCanvas() {
           </button>
           <ToolBtn icon={<Download size={16} />} onClick={handleDownload} />
           <div className="h-px w-full bg-gray-300 my-1" />
-          <ToolBtn icon={<RotateCcw size={16} />} onClick={() => canvasRef.current.undo()} />
-          <ToolBtn icon={<RotateCw size={16} />} onClick={() => canvasRef.current.redo()} />
-          <ToolBtn icon={<Trash2 size={16} />} onClick={() => canvasRef.current.clearCanvas()} />
+          <ToolBtn icon={<RotateCcw size={16} />} onClick={undo} />
+          <ToolBtn icon={<RotateCw size={16} />} onClick={redo} />
+          <ToolBtn icon={<Trash2 size={16} />} onClick={clearCanvas} />
         </div>
       </div>
     </div>
