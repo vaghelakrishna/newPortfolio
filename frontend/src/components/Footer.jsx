@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, Mail, Copy, Check, ArrowUp } from 'lucide-react'; // यहाँ ArrowUp फिक्स किया
 
-export default function Footer() {
+export default React.forwardRef(function Footer(props, ref) {
   const [time, setTime] = useState('');
   const [isCopied, setIsCopied] = useState(false);
   const emailAddress = "krishnawork2606@gmail.com"; // आपकी पूरी ईमेल आईडी
@@ -45,7 +45,7 @@ export default function Footer() {
 
   return (
     <>
-      <div className="w-full pt-20 pb-16 flex flex-col items-center justify-center relative bg-[#FDFBF7] rounded-xl mb-8">
+      <div  className="w-full pt-20 pb-16 flex flex-col items-center justify-center relative bg-[#FDFBF7] rounded-xl mb-8">
       {/* Google Font for Cursive Look */}
       <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');
@@ -93,7 +93,10 @@ export default function Footer() {
         </div>
         <ArrowUp size={32} className="text-[#E25C1D]" /> {/* यहाँ ArrowUp फिक्स किया */}
       </button>
-    </div><footer className="w-full bg-[#1e1a17] text-[#e8e4df] font-sans px-6 md:px-16 py-8 flex flex-col justify-between min-h-[500px] select-none">
+      </div>
+      
+      
+      <footer ref={ref} className="w-full bg-[#1e1a17] text-[#e8e4df] font-sans px-6 md:px-16 py-8 flex flex-col justify-between min-h-[500px] select-none">
 
 
         {/* Top Bar */}
@@ -188,4 +191,4 @@ export default function Footer() {
 
       </footer></>
   );
-}
+});
