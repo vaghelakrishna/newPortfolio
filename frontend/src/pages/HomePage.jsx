@@ -11,6 +11,8 @@ import LogoMarquee from '../components/LogoMarquee'
 import Footer from '../components/Footer'
 import WalkingRobot from '../components/WalkingRobot'
 import Navbar from '../components/Navbar'
+import CatLoader from '../components/CatLoader'
+import Folder from '../components/Folder'
 
 // import BookFlip from '../components/BookFlip'
 // import ImageScroll from '../components/ImageScroll'
@@ -19,13 +21,16 @@ import Navbar from '../components/Navbar'
 export default function HomePage() {
   return (
     <>
-      <Navbar />
-
-      <WalkingRobot />
-      <HeroSection />
       <CommunityGarden />
-      <AboutMe />
+      <WalkingRobot />
 
+
+      <Navbar />
+      <HeroSection />
+    <Folder/>
+      <AboutMe />
+      <HeresHowSection />
+{/* <CatLoader /> */}
       <Me />
       <MetricsSection />
       {/* <WorkSection /> */}
@@ -35,7 +40,6 @@ export default function HomePage() {
       {/* <ImageScroll /> */}
       {/* <BookFlip /> */}
       <CustomCursor />
-      <HeresHowSection />
       {/* <Testimonials /> */}
       <Footer />
     </>
