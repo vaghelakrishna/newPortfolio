@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Folder from './Folder'; // Ensure this path is correct based on your project structure
 export default function MacWorkWindow({ onClose, onFolderClick }) {
   const [activeTab, setActiveTab] = useState('Work projects');
   const text = "SELECTED WORK";
@@ -42,7 +43,7 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
           ))}
         </h1>
 
-        <p className="text-xl text-[#7D7870] max-w-2xl leading-relaxed">
+        <p className="text-xs text-[#7D7870] max-w-2xl leading-relaxed">
           A selection of work I've led or contributed to significantly,
           each with context on the problem, my process, and what we built.
         </p>
@@ -78,77 +79,65 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
         <aside className="w-53 bg-[#E3DFD7] border-r border-gray-300/40 p-5 flex flex-col gap-6">
           {/* Favourites Section */}
           <div>
-            <span className="text-[10px] font-bold text-gray-400 tracking-wider uppercase block mb-2">
+            <span className="text-[10px] font-bold text-gray-400 tracking-wider uppercase block mb-2 text-left">
               Favourites
             </span>
-            <button
-              onClick={() => setActiveTab('Work projects')}
-              className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'Work projects' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
-                }`}
-            >
-              <span className="text-sm opacity-70">📁</span> Work projects
-            </button>
+              <button
+                onClick={() => setActiveTab('Work projects')}
+                className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'Work projects' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
+                  }`}
+              >
+                {/* Custom Folder Icon SVG instead of Emoji */}
+                <svg className="w-4 h-4 text-[#69C1EE]" fill="currentColor" viewBox="0 0 24 20">
+                  <path d="M2 3a2 2 0 012-2h4l2 3h10a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" />
+                </svg>
+                Work projects
+              </button>
           </div>
 
           {/* Explore Section */}
           <div>
-            <span className="text-[10px] font-bold text-gray-400 tracking-wider uppercase block mb-2">
+              <span className="text-[10px] font-bold text-gray-400 tracking-wider uppercase block mb-2 text-left">
               Explore
             </span>
-            <button
-              onClick={() => {
-                setActiveTab('Personal Project');
-                if (onFolderClick) onFolderClick('garden'); // Trigger garden view directly if needed
-              }}
-              className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'leave a sketch' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
-                }`}
-            >
-              <span className="text-sm opacity-70">📁</span> Personal Project
-            </button>
+              <button
+                onClick={() => setActiveTab('Work projects')}
+                className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'Work projects' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
+                  }`}
+              >
+                {/* Custom Folder Icon SVG instead of Emoji */}
+                <svg className="w-4 h-4 text-[#69C1EE]" fill="currentColor" viewBox="0 0 24 20">
+                  <path d="M2 3a2 2 0 012-2h4l2 3h10a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" />
+                </svg>
+                Work projects
+              </button>
           </div>
         </aside>
 
-        {/* 3. RIGHT CONTENT GRID AREA */}
-        <main className="flex-1 bg-[#FAF8F5] p-10 overflow-y-auto">
-          {activeTab === 'Work projects' ? (
-            <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-5 gap-10">
-              {folders.map((folder) => (
-                <div
-                  key={folder.id}
-                  onClick={() => folder.id === 'others' && onFolderClick ? onFolderClick('garden') : null}
-                  className="flex flex-col items-center gap-2 group cursor-pointer"
-                >
-                  {/* Folder Icon Frame */}
-                  <div className="relative w-20 h-16 flex items-center justify-center transition-transform group-hover:scale-105 active:scale-95">
-                    {/* Apple Standard Cyan Folder SVG */}
-                    <svg className="w-full h-full text-[#69C1EE] filter drop-shadow-sm" fill="currentColor" viewBox="0 0 24 20">
-                      <path d="M2 3a2 2 0 012-2h4l2 3h10a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" />
-                    </svg>
 
-                    {/* Conditional 'WIP' badge inside folder layer */}
-                    {folder.isWip && (
-                      <div className="absolute inset-0 top-3 flex items-center justify-center pointer-events-none">
-                        <span className="text-[11px] font-black text-[#E05C1A] tracking-wider font-sans uppercase">
-                          WIP
-                        </span>
-                      </div>
-                    )}
+          {/* 3. RIGHT CONTENT GRID AREA */}
+          <main className="flex-1 bg-[#FAF8F5] p-10 overflow-y-auto">
+            {activeTab === 'Work projects' ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 justify-items-center">
+                {folders.map((folder) => (
+                  <div key={folder.id} className="flex flex-col items-center gap-2">
+
+                    {/* Yaha humne aapka naya 'Folder' component use kiya hai */}
+                    <Folder />
+
+                    {/* Label text ko folder ke neeche align kiya */}
+                    <span className="text-[11px] font-semibold text-gray-600 tracking-wide text-center">
+                      {folder.name}
+                    </span>
                   </div>
-
-                  {/* Folder Label text */}
-                  <span className="text-[11px] font-semibold text-gray-600 tracking-wide text-center px-2 group-hover:text-gray-900 transition-colors">
-                    {folder.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          ) : (
-            /* Fallback empty view or alternate state for explorer tabs */
-            <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 font-mono text-xs">
-              📂 Folder Content Area Empty
-            </div>
-          )}
-        </main>
+                ))}
+              </div>
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 font-mono text-xs">
+                📂 Folder Content Area Empty
+              </div>
+            )}
+          </main>
 
       </div>
     </div>
