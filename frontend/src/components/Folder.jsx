@@ -17,7 +17,7 @@ export default function Folder() {
 
           {/* Card 1 (Left) - width/height and peek adjusted */}
           <div
-            className="absolute w-16 h-10 bg-cover bg-center rounded shadow-md transition-all duration-500 ease-out z-0
+            className="absolute w-16 h-14 bg-cover bg-center rounded shadow-md transition-all duration-500 ease-out z-0
             -rotate-[8deg] -translate-x-3 -translate-y-3
             group-hover:-translate-y-7"
             style={{ backgroundImage: `url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97')` }}
@@ -25,7 +25,7 @@ export default function Folder() {
 
           {/* Card 2 (Center) - width/height and peek adjusted */}
           <div
-            className="absolute w-16 h-10 bg-cover bg-center rounded shadow-md transition-all duration-500 ease-out z-10
+            className="absolute w-16 h-14 bg-cover bg-center rounded shadow-md transition-all duration-500 ease-out z-10
             -translate-y-4
             group-hover:-translate-y-8"
             style={{ backgroundImage: `url('https://images.unsplash.com/photo-1498050108023-c5249f4df085')` }}
@@ -33,7 +33,7 @@ export default function Folder() {
 
           {/* Card 3 (Right) - width/height and peek adjusted */}
           <div
-            className="absolute w-16 h-10 bg-cover bg-center rounded shadow-md transition-all duration-500 ease-out z-20
+            className="absolute w-16 h-14 bg-cover bg-center rounded shadow-md transition-all duration-500 ease-out z-20
             rotate-[8deg] translate-x-3 -translate-y-3
             group-hover:-translate-y-7"
             style={{ backgroundImage: `url('https://images.unsplash.com/photo-1555066931-4365d14bab8c')` }}
