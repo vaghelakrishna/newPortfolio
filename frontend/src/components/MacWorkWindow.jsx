@@ -101,15 +101,15 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
               Explore
             </span>
               <button
-                onClick={() => setActiveTab('Work projects')}
-                className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'Work projects' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
+                onClick={() => setActiveTab('Personal projects')}
+                className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'Personal projects' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
                   }`}
               >
                 {/* Custom Folder Icon SVG instead of Emoji */}
                 <svg className="w-4 h-4 text-[#69C1EE]" fill="currentColor" viewBox="0 0 24 20">
                   <path d="M2 3a2 2 0 012-2h4l2 3h10a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" />
                 </svg>
-                Work projects
+                Personal projects
               </button>
           </div>
         </aside>
