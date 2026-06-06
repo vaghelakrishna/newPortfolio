@@ -1,0 +1,105 @@
+<svg width="120" height="120" viewBox="0 0 120 120"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <style>
+    .eye {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: blink 4s infinite steps(1,end);
+    }
+
+    .leg-left {
+      transform-origin: top center;
+      animation: leftWalk 0.8s infinite ease-in-out;
+    }
+
+    .leg-right {
+      transform-origin: top center;
+      animation: rightWalk 0.8s infinite ease-in-out;
+    }
+
+    @keyframes blink {
+      0%, 92%, 100% {
+        transform: scaleY(1);
+      }
+
+      95% {
+        transform: scaleY(0.1);
+      }
+    }
+
+    @keyframes leftWalk {
+      0%,100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes rightWalk {
+      0%,100% {
+        transform: translateY(-6px);
+      }
+
+      50% {
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <!-- Body -->
+
+
+  <!-- Brim -->
+  <rect
+    x="28"
+    y="12"
+    width="64"
+    height="6"
+    rx="2"
+    fill="#E8B92F"
+  />
+  <rect
+    x="25"
+    y="10"
+    width="70"
+    height="75"
+    rx="10"
+    fill="#1f1f23"
+  />
+
+  <!-- Left Eye -->
+  <g class="eye">
+    <rect x="42" y="38" width="10" height="10" fill="#F5F1E8"/>
+  </g>
+
+  <!-- Right Eye -->
+  <g class="eye">
+    <rect x="68" y="38" width="10" height="10" fill="#F5F1E8"/>
+  </g>
+
+  <!-- Left Leg -->
+  <g class="leg-left">
+    <rect
+      x="42"
+      y="85"
+      width="14"
+      height="24"
+      fill="#1f1f23"
+    />
+  </g>
+
+  <!-- Right Leg -->
+  <g class="leg-right">
+    <rect
+      x="64"
+      y="85"
+      width="14"
+      height="24"
+      fill="#1f1f23"
+    />
+  </g>
+
+</svg>
