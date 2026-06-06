@@ -1,0 +1,76 @@
+<svg width="34" height="30" viewBox="-2 -2 34 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="hold-outline" x="-2" y="-2" width="34" height="30" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded"/>
+<feFlood flood-color="white" result="outline-color"/>
+<feComposite in="outline-color" in2="expanded" operator="in" result="outline"/>
+<feMerge>
+<feMergeNode in="outline"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+</filter>
+<style>
+.hold-ear-left,
+.hold-ear-right,
+.hold-eye {
+  transform-box: fill-box;
+}
+
+.hold-ear-left {
+  transform-origin: 72% 90%;
+  animation: hold-ear-left-twitch 2.4s steps(1, end) infinite;
+}
+
+.hold-ear-right {
+  transform-origin: 28% 90%;
+  animation: hold-ear-right-twitch 2.4s steps(1, end) infinite;
+}
+
+.hold-eye {
+  transform-origin: center;
+  animation: hold-blink 2.8s steps(1, end) infinite;
+}
+
+@keyframes hold-blink {
+  0%, 87%, 93%, 100% { transform: scaleY(1); opacity: 1; }
+  88%, 92% { transform: scaleY(0.16); opacity: 0.8; }
+}
+
+@keyframes hold-ear-left-twitch {
+  0%, 68%, 76%, 100% { transform: rotate(0deg); }
+  70% { transform: rotate(-4deg); }
+  72% { transform: rotate(3deg); }
+}
+
+@keyframes hold-ear-right-twitch {
+  0%, 68%, 76%, 100% { transform: rotate(0deg); }
+  70% { transform: rotate(4deg); }
+  72% { transform: rotate(-3deg); }
+}
+</style>
+</defs>
+<g filter="url(#hold-outline)">
+<path d="M25 22H24V25H25V26H29V25H30V22H29V21H25V22Z" fill="black"/>
+<path d="M8 6H6V8H5V10H4V15H5V19H7V20H8V21H10V22H20V21H22V20H23V19H24V18H25V15H26V11H25V8H24V7H23V6H21V5H19V4H11V5H8V6Z" fill="black"/>
+<rect width="5" height="1.02083" transform="translate(1 12)" fill="black"/>
+<rect width="5" height="1.02083" transform="translate(24 12)" fill="black"/>
+<rect width="6" height="1.02083" transform="translate(0 15)" fill="black"/>
+<rect width="6" height="1.02083" transform="translate(24 15)" fill="black"/>
+<path class="hold-ear-left" d="M6 7V4H7V2H8V1H9V0H10V2H11V3H12V7H11V8H7V7H6Z" fill="black"/>
+<path class="hold-ear-right" d="M19 3H18V7H19V8H22V7H23V2H22V1H21V0H20V1H19V3Z" fill="black"/>
+<path d="M22 22H8V20H22V22Z" fill="black"/>
+<g class="hold-eye hold-eye-right">
+<rect width="1" height="3.0625" transform="translate(17 11.0205)" fill="white"/>
+<rect width="1" height="3.0625" transform="translate(21 11.0205)" fill="white"/>
+<rect width="3" height="5.10417" transform="translate(18 10)" fill="white"/>
+<rect width="3" height="3.0625" transform="translate(18 11.0205)" fill="black"/>
+</g>
+<g class="hold-eye hold-eye-left">
+<rect width="1" height="3.0625" transform="translate(8 11.0205)" fill="white"/>
+<rect width="1" height="3.0625" transform="translate(12 11.0205)" fill="white"/>
+<rect width="3" height="5.10417" transform="translate(9 10)" fill="white"/>
+<rect width="3" height="3.0625" transform="translate(9 11.0205)" fill="black"/>
+</g>
+<path d="M1 22H0V25H1V26H5V25H6V22H5V21H1V22Z" fill="black"/>
+</g>
+</svg>
