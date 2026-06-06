@@ -7,6 +7,7 @@ import { FiMapPin, FiClock, FiDownload } from 'react-icons/fi';
 import { ImAttachment } from 'react-icons/im';
 import { FcFolder } from 'react-icons/fc';
 import KrishnaIDCard from '../assets/krishna-id.png'; 
+import avatar from '../assets/avatar.png';
 export default function InteractiveHero() {
   const constraintsRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
