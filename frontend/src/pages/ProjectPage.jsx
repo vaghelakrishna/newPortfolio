@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Sparkles, Eye } from "lucide-react";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 // प्रत्येक प्रोजेक्ट कार्ड के लिए अलग सब-कंपोनेंट
 const ProjectCard = ({ item, index }) => {
@@ -141,7 +142,9 @@ const ProjectPage = () => {
   });
 
   return (
-    <><section className="w-full min-h-screen bg-[#F9F6F0] py-20 px-6 md:px-12 relative overflow-hidden select-none font-sans-clean">
+    <>
+      <Navbar />
+      <section className="w-full min-h-screen bg-[#F9F6F0] py-20 px-6 md:px-12 relative overflow-hidden select-none font-sans-clean">
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght=700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
