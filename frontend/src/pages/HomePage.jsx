@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import HeroSection from '../components/MakeSenseLogo'
 import AboutMe from '../components/AboutMe'
 import CustomCursor from '../components/CustomCursor'
@@ -19,10 +19,11 @@ import CatLoader from '../components/CatLoader'
 // import Testimonials from '../components/TestimonialSection'
 
 export default function HomePage() {
+  const footerRef = useRef(null);
   return (
     <>
       <CommunityGarden />
-      <WalkingRobot />
+      <WalkingRobot footerRef={footerRef} />
 
 
       <Navbar />
@@ -41,7 +42,7 @@ export default function HomePage() {
       {/* <BookFlip /> */}
       <CustomCursor />
       {/* <Testimonials /> */}
-      <Footer />
+      <Footer ref={footerRef} />
     </>
   )
 }
