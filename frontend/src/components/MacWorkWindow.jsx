@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Folder from './Folder'; // Ensure this path is correct based on your project structure
+import SketchCanvas from './SketchCanvas'; // Ensure this path is correct based on your project structure
 export default function MacWorkWindow({ onClose, onFolderClick }) {
   const [activeTab, setActiveTab] = useState('Work projects');
   const text = "SELECTED WORK";
@@ -50,7 +51,7 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
       </div>
 
     <div
-      className="w-full max-w-4xl aspect-[20/10] bg-[#FAF8F5] rounded-2xl shadow-xs border border-gray-300/70 overflow-hidden flex flex-col font-sans select-none text-center"
+      className="w-full max-w-5xl aspect-[20/10] bg-[#FAF8F5] rounded-2xl shadow-xs border border-gray-300/70 overflow-hidden flex flex-col font-sans select-none text-center"
       onClick={(e) => e.stopPropagation()}
     >
       {/* ========================================================
@@ -81,7 +82,8 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
           <div>
             <span className="text-[10px] font-bold text-gray-400 tracking-wider uppercase block mb-2 text-left">
               Favourites
-            </span>
+              </span>
+              
               <button
                 onClick={() => setActiveTab('Work projects')}
                 className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'Work projects' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
@@ -92,6 +94,18 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
                   <path d="M2 3a2 2 0 012-2h4l2 3h10a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" />
                 </svg>
                 Work projects
+              </button>
+
+              <button
+                onClick={() => setActiveTab('Personal projects')}
+                className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors text-left ${activeTab === 'Personal projects' ? 'bg-gray-400/20 text-gray-800' : 'text-gray-600 hover:bg-gray-400/10'
+                  }`}
+              >
+                {/* Custom Folder Icon SVG instead of Emoji */}
+                <svg className="w-4 h-4 text-[#69C1EE]" fill="currentColor" viewBox="0 0 24 20">
+                  <path d="M2 3a2 2 0 012-2h4l2 3h10a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" />
+                </svg>
+                Personal projects
               </button>
           </div>
 
@@ -109,32 +123,33 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
                 <svg className="w-4 h-4 text-[#69C1EE]" fill="currentColor" viewBox="0 0 24 20">
                   <path d="M2 3a2 2 0 012-2h4l2 3h10a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" />
                 </svg>
-                Personal projects
+                Leave a Sketch
               </button>
           </div>
         </aside>
 
 
           {/* 3. RIGHT CONTENT GRID AREA */}
-          <main className="flex-1 bg-[#FAF8F5] p-10 overflow-y-auto">
+          <main className="flex-1 bg-[#FAF8F5] p-0 overflow-hidden relative">
             {activeTab === 'Work projects' ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 justify-items-center">
+              // WORK PROJECTS VIEW
+              <div className="p-10 grid grid-cols-4 gap-10">
                 {folders.map((folder) => (
                   <div key={folder.id} className="flex flex-col items-center gap-2">
-
-                    {/* Yaha humne aapka naya 'Folder' component use kiya hai */}
                     <Folder />
-
-                    {/* Label text ko folder ke neeche align kiya */}
                     <span className="text-[11px] font-semibold text-gray-600 tracking-wide text-center">
                       {folder.name}
                     </span>
                   </div>
                 ))}
               </div>
+            ) : activeTab === 'Personal projects' ? (
+              // PERSONAL PROJECT / SKETCH CANVAS VIEW
+              <SketchCanvas />
             ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 font-mono text-xs">
-                📂 Folder Content Area Empty
+              // FALLBACK VIEW (Optional)
+              <div className="w-full h-full flex items-center justify-center text-gray-400">
+                Select a folder
               </div>
             )}
           </main>
