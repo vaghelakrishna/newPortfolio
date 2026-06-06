@@ -1,8 +1,8 @@
-import React from 'react';
+import holdSvg from '../assets/hold.svg';
 import { FaLinkedin } from "react-icons/fa";
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-
+import avatar from '../assets/avatar.png';
 export default function ContactUsPage() {
   return (
     <>
@@ -21,7 +21,9 @@ export default function ContactUsPage() {
       <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-8">
 
         {/* FORM SIDE (Flex-grow 2 - Matlab bada hissa) */}
-        <div className="flex-[2] border border-gray-100 rounded-3xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.05)] bg-white">
+        <div className="flex-[2] border border-gray-100 rounded-3xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.05)] bg-white relative">
+          {/* hold.svg sitting on top border */}
+          <img src={holdSvg} alt="hold" className="absolute -top-16 left-1/2 -translate-x-1/2 w-20 h-20" />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <input type="text" placeholder="What should I call you?" className="bg-gray-100 p-4 rounded-xl outline-none" />
             <input type="email" placeholder="Email" className="bg-gray-100 p-4 rounded-xl outline-none" />
@@ -35,7 +37,7 @@ export default function ContactUsPage() {
         {/* PROFILE SIDE (Flex-grow 1 - Matlab chhota hissa) */}
         <div className="flex-1 bg-[#FDFBF7] border border-gray-100 rounded-3xl p-8 flex flex-col items-center text-center">
           <img
-            src="/your-avatar.png"
+            src={avatar}
             alt="Avatar"
             className="w-32 h-32 rounded-full mb-6 object-cover"
           />
