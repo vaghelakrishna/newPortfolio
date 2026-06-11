@@ -7,7 +7,7 @@ export default function ContactUsPage() {
   return (
     <>
       <Navbar />
-    <section className="w-full min-h-screen bg-white py-20 px-6 md:px-12 font-sans">
+    <section className="w-full min-h-screen bg-white py-34 px-6 md:px-12 font-sans">
 
       {/* Header Section */}
       <div className="max-w-3xl mx-auto text-center mb-16">
@@ -43,7 +43,7 @@ export default function ContactUsPage() {
           />
           <div className="w-full text-left mb-6">
             <p className="text-sm text-gray-500 mb-1">Email</p>
-            <p className="font-bold text-gray-900 text-lg">visheshxgupta@gmail.com</p>
+            <p className="font-bold text-gray-900 text-lg">krishnawork2606@gmail.com</p>
           </div>
           <div className="w-full text-left">
             <p className="text-sm text-gray-500 mb-3">More options</p>
