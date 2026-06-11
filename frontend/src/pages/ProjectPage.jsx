@@ -144,7 +144,7 @@ const ProjectPage = () => {
   return (
     <>
       <Navbar />
-      <section className="w-full min-h-screen bg-[#F9F6F0] py-20 px-6 md:px-12 relative overflow-hidden select-none font-sans-clean">
+      <section className="w-full min-h-screen bg-[#F9F6F0] py-32 px-6 md:px-12 relative overflow-hidden select-none font-sans-clean">
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght=700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
@@ -163,8 +163,8 @@ const ProjectPage = () => {
       <div className="relative z-10 max-w-5xl mx-auto">
 
         {/* Header Badge */}
-        <div className="mb-4 flex w-fit items-center gap-1.5 text-[#E25C1D]">
-          <Sparkles className="w-4 h-4 fill-[#E25C1D]/10" />
+        <div className="mb-2 flex w-fit items-center gap-1.5 text-[#E25C1D]">
+          {/* <Sparkles className="w-4 h-4 fill-[#E25C1D]/10" /> */}
           <p className="uppercase text-xs font-bold tracking-widest font-sans-clean">My Work</p>
         </div>
 
