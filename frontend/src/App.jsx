@@ -37,9 +37,7 @@ export default function App() {
 
         <Route to="/contact" element={<ContactUsPage />} />
 
-      <Route
-      
-        path="visitor-gallery" element={<VisitorGallery />} />
+      <Route path="/visitor-gallery" element={<VisitorGallery />} />
 
       <Route path="/project" element={<ProjectPage />} />
       <Route path="/project/:id" element={<ProjectDetail />} />
