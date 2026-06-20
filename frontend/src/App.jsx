@@ -33,7 +33,7 @@ export default function App() {
         path="/contact"
           element={<ContactUsPage />} />
         
-        <Route to="/work" element={<WorkPage />} />
+        <Route path="/work" element={<WorkPage />} />
 
         <Route to="/contact" element={<ContactUsPage />} />
 
@@ -42,7 +42,7 @@ export default function App() {
         path="visitor-gallery" element={<VisitorGallery />} />
 
       <Route path="/project" element={<ProjectPage />} />
-      <Route path="/project-detail" element={<ProjectDetail />} />
+      <Route path="/project/:id" element={<ProjectDetail />} />
     </Routes></>
   );
 }
