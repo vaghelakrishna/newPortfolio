@@ -1,166 +1,152 @@
-// src/pages/VisitorGallery.jsx
-
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Pencil,
-  Shuffle,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
+import { Pencil, Shuffle, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
+const themes = {
+  blue: "#1594A8",
+  green: "#238C48",
+  pink: "#BE5B83",
+  orange: "#CC7A35",
+};
+
+function VisitorCard({ card }) {
+  return (
+    <motion.div
+      whileHover={{ y: -6, scale: 1.01 }}
+      transition={{ duration: 0.2 }}
+      className="relative h-[280px] rounded-[20px] overflow-hidden text-white cursor-pointer"
+      style={{ backgroundColor: themes[card.theme] || themes.blue }}
+    >
+      {/* Dot pattern background */}
+      <div
+        className="absolute inset-0 opacity-20 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.9) 1.5px, transparent 1.5px)",
+          backgroundSize: "10px 10px",
+        }}
+      />
+
+      {/* Doodle drawing */}
+      {card.doodle && (
+        <img
+          src={card.doodle}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10 opacity-80"
+        />
+      )}
+
+      {/* Card content */}
+      <div className="relative z-20 p-6 h-full flex flex-col justify-between">
+        <div>
+          <h2 className="font-serif text-[28px] leading-tight">Megan's World</h2>
+
+          <div className="mt-5">
+            <p className="text-white/60 text-[10px] tracking-[2px] uppercase font-mono">Visitor</p>
+            <h3 className="mt-1 text-[15px] tracking-[2px] uppercase font-mono font-bold">{card.name}</h3>
+          </div>
+
+          <div className="mt-4">
+            <p className="text-white/60 text-[10px] tracking-[2px] uppercase font-mono">Issued On</p>
+            <p className="mt-1 text-[15px] font-mono">{card.date}</p>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <p className="text-white/50 text-xs font-mono tracking-widest">NO. {String(card.id).slice(-4)}</p>
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-sm">X</span>
+            <div className="w-28 border-b border-white/70" />
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function VisitorGallery() {
   const navigate = useNavigate();
-
   const [cards, setCards] = useState([]);
   const [statsOpen, setStatsOpen] = useState(false);
 
-  const themes = {
-    blue: "#1594A8",
-    green: "#238C48",
-    pink: "#BE5B83",
-    orange: "#CC7A35",
-  };
-
   useEffect(() => {
-    const savedCards =
-      JSON.parse(
-        localStorage.getItem("visitorCards")
-      ) || [];
-
-    setCards(savedCards);
+    const saved = JSON.parse(localStorage.getItem("visitorCards")) || [];
+    setCards(saved);
   }, []);
 
-  const shuffleCards = () => {
-    setCards((prev) =>
-      [...prev].sort(
-        () => Math.random() - 0.5
-      )
-    );
-  };
+  const shuffleCards = () => setCards(prev => [...prev].sort(() => Math.random() - 0.5));
 
-  const latestVisitor =
-    cards.length > 0
-      ? cards[0].name
-      : "None";
-
-  const colorCounts = cards.reduce(
-    (acc, card) => {
-      acc[card.theme] =
-        (acc[card.theme] || 0) + 1;
-      return acc;
-    },
-    {}
-  );
-
-  const mostUsedColor =
-    Object.keys(colorCounts).length > 0
-      ? Object.keys(colorCounts).reduce(
-        (a, b) =>
-          colorCounts[a] >
-            colorCounts[b]
-            ? a
-            : b
-      )
-      : "None";
+  const colorCounts = cards.reduce((acc, c) => { acc[c.theme] = (acc[c.theme] || 0) + 1; return acc; }, {});
+  const mostUsedColor = Object.keys(colorCounts).length > 0
+    ? Object.keys(colorCounts).reduce((a, b) => colorCounts[a] > colorCounts[b] ? a : b)
+    : "None";
 
   return (
-    <div className="min-h-screen bg-[#efede8] px-6 md:px-12 xl:px-16 pt-16 pb-24">
+    <div className="min-h-screen bg-[#efede8] px-6 md:px-12 xl:px-16 pt-12 pb-24 font-mono">
+
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-10">
-        <div>
-          <h1 className="font-serif text-[56px] md:text-[72px] leading-none text-[#232323]">
+      <div className="flex items-start justify-between gap-6 mb-4">
+        <div className="flex items-baseline gap-5 flex-wrap">
+          <h1 className="font-serif text-[52px] md:text-[64px] leading-none text-[#232323] tracking-tight" style={{ fontFamily: 'Georgia, serif' }}>
             Visitor Gallery
           </h1>
-
-          <p className="mt-8 text-[18px] md:text-[22px] tracking-[4px] uppercase text-[#68707b]">
+          <span className="text-[11px] tracking-[4px] uppercase text-[#8a8a80] mt-2">
             Add a doodle to join the gallery
-          </p>
+          </span>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-3 shrink-0 mt-3">
           <button
-            onClick={() =>
-              navigate("/visitor-pass")
-            }
-            className="bg-[#e7decd] hover:bg-[#ddd3c1] transition-all rounded-md px-5 py-3 flex items-center gap-3 text-[18px] tracking-[3px] text-[#7c786f]"
+            onClick={() => navigate("/visitor-pass")}
+            className="bg-[#e8e3d9] hover:bg-[#ddd5c5] transition-all rounded-md px-5 py-3 flex items-center gap-2 text-[11px] tracking-[3px] text-[#7c786f] uppercase border border-[#d4cfc5]"
           >
-            EDIT MY CARD
-            <Pencil size={22} />
+            EDIT MY CARD <Pencil size={14} />
           </button>
-
           <button
             onClick={shuffleCards}
-            className="bg-[#e7decd] hover:bg-[#ddd3c1] transition-all rounded-md px-5 py-3 flex items-center gap-3 text-[18px] tracking-[3px] text-[#7c786f]"
+            className="bg-[#e8e3d9] hover:bg-[#ddd5c5] transition-all rounded-md px-5 py-3 flex items-center gap-2 text-[11px] tracking-[3px] text-[#7c786f] uppercase border border-[#d4cfc5]"
           >
-            SHUFFLE
-            <Shuffle size={22} />
+            SHUFFLE <Shuffle size={14} />
           </button>
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="mt-14">
-        <button
-          onClick={() =>
-            setStatsOpen(!statsOpen)
-          }
-          className="w-full bg-[#e7decd] rounded-md px-5 py-4 flex justify-between items-center text-[18px] md:text-[20px] tracking-[4px] text-[#7c786f]"
-        >
-          <span>STATS FOR NERDS</span>
+      {/* Orange dot */}
+      <div className="flex justify-center mb-4">
+        <div className="w-3 h-3 rounded-full bg-[#CC7A35]" />
+      </div>
 
-          {statsOpen ? (
-            <ChevronUp size={22} />
-          ) : (
-            <ChevronDown size={22} />
-          )}
+      {/* Stats bar */}
+      <div className="mb-8">
+        <button
+          onClick={() => setStatsOpen(!statsOpen)}
+          className="w-full bg-[#e8e3d9] border border-[#d4cfc5] rounded-md px-5 py-4 flex justify-between items-center text-[11px] tracking-[4px] text-[#7c786f] uppercase"
+        >
+          <span>Stats for nerds</span>
+          <ChevronDown size={16} className={`transition-transform duration-300 ${statsOpen ? 'rotate-180' : ''}`} />
         </button>
 
         <AnimatePresence>
           {statsOpen && (
             <motion.div
-              initial={{
-                height: 0,
-                opacity: 0,
-              }}
-              animate={{
-                height: "auto",
-                opacity: 1,
-              }}
-              exit={{
-                height: 0,
-                opacity: 0,
-              }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
               className="overflow-hidden"
             >
-              <div className="bg-[#e7decd]/50 rounded-b-md p-6 text-[#666] mt-1">
-                <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-[#e8e3d9]/60 border border-t-0 border-[#d4cfc5] rounded-b-md p-6">
+                <div className="grid md:grid-cols-3 gap-6 text-[#666]">
                   <div>
-                    <p className="text-sm uppercase opacity-70">
-                      Total Visitors
-                    </p>
-                    <h3 className="text-3xl mt-2">
-                      {cards.length}
-                    </h3>
+                    <p className="text-[10px] uppercase tracking-widest opacity-70">Total Visitors</p>
+                    <h3 className="text-3xl mt-2 font-serif">{cards.length}</h3>
                   </div>
-
                   <div>
-                    <p className="text-sm uppercase opacity-70">
-                      Most Used Color
-                    </p>
-                    <h3 className="text-3xl mt-2 capitalize">
-                      {mostUsedColor}
-                    </h3>
+                    <p className="text-[10px] uppercase tracking-widest opacity-70">Most Used Color</p>
+                    <h3 className="text-3xl mt-2 font-serif capitalize">{mostUsedColor}</h3>
                   </div>
-
                   <div>
-                    <p className="text-sm uppercase opacity-70">
-                      Latest Visitor
-                    </p>
-                    <h3 className="text-3xl mt-2">
-                      {latestVisitor}
-                    </h3>
+                    <p className="text-[10px] uppercase tracking-widest opacity-70">Latest Visitor</p>
+                    <h3 className="text-3xl mt-2 font-serif">{cards[0]?.name || "None"}</h3>
                   </div>
                 </div>
               </div>
@@ -169,100 +155,23 @@ export default function VisitorGallery() {
         </AnimatePresence>
       </div>
 
-      {/* Empty State */}
+      {/* Empty state */}
       {cards.length === 0 && (
         <div className="mt-24 text-center">
-          <h2 className="text-3xl text-[#666]">
-            No visitor cards yet.
-          </h2>
-
-          <p className="mt-3 text-[#888]">
-            Create your first visitor pass.
-          </p>
+          <h2 className="text-2xl text-[#888] tracking-widest">NO VISITOR CARDS YET.</h2>
+          <p className="mt-3 text-[#aaa] text-sm tracking-widest">CREATE YOUR FIRST VISITOR PASS.</p>
+          <button
+            onClick={() => navigate("/visitor-pass")}
+            className="mt-6 bg-[#1f1f1f] text-white px-8 py-3 rounded-xl text-xs tracking-[3px] hover:opacity-80 transition"
+          >
+            CREATE CARD →
+          </button>
         </div>
       )}
 
-      {/* Gallery Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mt-10">
-        {cards.map((card) => (
-          <motion.div
-            key={card.id}
-            whileHover={{
-              y: -8,
-              scale: 1.02,
-            }}
-            transition={{
-              duration: 0.2,
-            }}
-            className="relative h-[265px] rounded-[28px] overflow-hidden text-white"
-            style={{
-              backgroundColor:
-                themes[card.theme] ||
-                themes.blue,
-            }}
-          >
-            {/* Pattern */}
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle, rgba(255,255,255,.9) 1.5px, transparent 1.5px)",
-                backgroundSize:
-                  "12px 12px",
-              }}
-            />
-
-            {/* Doodle */}
-            {card.doodle && (
-              <img
-                src={card.doodle}
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10"
-              />
-            )}
-
-            {/* Content */}
-            <div className="relative z-20 p-7 h-full">
-              <h2 className="font-serif text-[34px]">
-                Megan's World
-              </h2>
-
-              <div className="mt-7">
-                <p className="text-white/60 text-xs tracking-[2px]">
-                  VISITOR
-                </p>
-
-                <h3 className="mt-2 text-[18px] tracking-[2px] uppercase">
-                  {card.name}
-                </h3>
-              </div>
-
-              <div className="mt-5">
-                <p className="text-white/60 text-xs tracking-[2px]">
-                  ISSUED ON
-                </p>
-
-                <p className="mt-2 text-[18px] tracking-[2px]">
-                  {card.date}
-                </p>
-              </div>
-
-              <div className="absolute bottom-8 left-7 right-7 flex items-center justify-between">
-                <p className="text-white/45 text-sm">
-                  NO. {String(card.id).slice(-4)}
-                </p>
-
-                <div className="flex items-center gap-3">
-                  <span className="text-lg">
-                    X
-                  </span>
-
-                  <div className="w-[120px] border-b border-white" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+      {/* Gallery grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {cards.map(card => <VisitorCard key={card.id} card={card} />)}
       </div>
     </div>
   );
