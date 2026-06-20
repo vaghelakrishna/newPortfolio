@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { RefreshCw, PenTool, Eraser } from "lucide-react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
-import {Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function App() {
   const canvasRef = useRef(null);
+  const navigate = useNavigate();
+  const [showDialog, setShowDialog] = useState(false);
   useEffect(() => {
     const moveCursor = (e) => {
       setMousePosition({
@@ -60,10 +62,26 @@ export default function App() {
     setName(random);
   };
 
-  const clearEverything = () => {
+  const clearEverything = () => canvasRef.current?.clearCanvas();
 
-  canvasRef.current?.clearCanvas();
-
+  const handleEnter = async () => {
+    // Check if canvas has any drawing (sign)
+    const paths = await canvasRef.current?.exportPaths();
+    if (!paths || paths.length === 0) {
+      setShowDialog(true);
+      return;
+    }
+    const doodle = await canvasRef.current?.exportImage('png');
+    const newCard = {
+      id: Date.now(),
+      name,
+      theme,
+      date: new Date().toLocaleDateString('en-GB').replace(/\//g, '/'),
+      doodle,
+    };
+    const existing = JSON.parse(localStorage.getItem('visitorCards')) || [];
+    localStorage.setItem('visitorCards', JSON.stringify([newCard, ...existing]));
+    navigate('/visitor-gallery');
   };
 
   
@@ -390,36 +408,46 @@ export default function App() {
         </div>
       </div>
 
+      {/* Dialog: sign required */}
+      <AnimatePresence>
+        {showDialog && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+            onClick={() => setShowDialog(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              onClick={e => e.stopPropagation()}
+              className="bg-[#efede8] rounded-2xl p-8 max-w-sm w-full mx-4 text-center shadow-xl border border-[#d4cfc5]"
+            >
+              <p className="text-2xl mb-2">✍️</p>
+              <h3 className="font-mono tracking-[2px] text-[#2d2d2d] text-sm uppercase font-bold mb-2">Enter a sign</h3>
+              <p className="text-[#888] text-xs tracking-widest mb-6">PLEASE DRAW YOUR SIGNATURE ON THE CARD BEFORE ENTERING.</p>
+              <button
+                onClick={() => setShowDialog(false)}
+                className="bg-[#1f1f1f] text-white px-6 py-2.5 rounded-xl text-xs tracking-[2px] hover:opacity-80 transition"
+              >
+                OK, GOT IT
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* enter button */}
-      <Link to="/home" >
-        <motion.button
-        whileHover={{
-          scale: 1.05,
-          y: -2,
-        }}
-        whileTap={{
-          scale: 0.95,
-        }}
-        className="
-          mt-10
-          bg-[#1f1f1f]
-          text-white
-          px-8
-          py-4
-          rounded-2xl
-          tracking-[2px]
-          text-sm
-          font-semibold
-        "
-        onClick={() => {
-          alert(
-            `Visitor Card Created!\n\nName: ${name}`
-          );
-        }}
+      <motion.button
+        whileHover={{ scale: 1.05, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        className="mt-10 bg-[#1f1f1f] text-white px-8 py-4 rounded-2xl tracking-[2px] text-sm font-semibold"
+        onClick={handleEnter}
       >
         ENTER →
-        </motion.button>
-      </Link>
+      </motion.button>
 
 
       {/* footer */}
