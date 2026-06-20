@@ -1,6 +1,17 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, ArrowUp, ArrowRight } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
+const projectsData = {
+  "aora": { title: "Aora", category: "Development", year: "2024", img: "/projects/aora.webp", color: "#C46A86", desc: "A video sharing mobile app built with React Native and Appwrite. Features AI-generated video prompts, user authentication, and a smooth content feed.", role: "Full Stack Developer", team: "Solo", timeline: "2024", skills: "React Native, Appwrite, Expo" },
+  "code-screenshot": { title: "Code Screenshot", category: "Development", year: "2024", img: "/projects/codescreenshot.webp", color: "#4A7C8C", desc: "A beautiful code screenshot generator with custom themes, fonts, and export options.", role: "Frontend Developer", team: "Solo", timeline: "2024", skills: "React, Tailwind CSS" },
+  "iphone-15-pro": { title: "iPhone 15 Pro", category: "Development", year: "2024", img: "/projects/iphone.webp", color: "#5A5A7A", desc: "Apple iPhone 15 Pro website clone with GSAP animations and Three.js 3D model.", role: "Frontend Developer", team: "Solo", timeline: "2024", skills: "React, GSAP, Three.js" },
+  "ochi-design": { title: "Ochi Design", category: "Development & Design", year: "2024", img: "/projects/ochidesign.webp", color: "#7A6A3A", desc: "A pixel-perfect clone of the award-winning Ochi design agency website with smooth scroll animations.", role: "Design Engineer", team: "Solo", timeline: "2024", skills: "React, Framer Motion, GSAP" },
+  "snapalyzer": { title: "Snapalyzer", category: "Development & Design", year: "2024", img: "/projects/snapalyzer.webp", color: "#3A7A5A", desc: "An AI-powered image analysis tool that extracts insights and generates descriptions from photos.", role: "Full Stack Developer", team: "Solo", timeline: "2024", skills: "React, OpenAI API, Node.js" },
+  "veni-labs": { title: "Veni Labs", category: "Development", year: "2024", img: "/projects/veni-labs.webp", color: "#E25C1D", desc: "A startup landing page with bold typography, smooth animations and dark aesthetic.", role: "Frontend Developer", team: "Solo", timeline: "2024", skills: "React, Tailwind CSS, Framer Motion" },
+};
 
 const features = [
   {
@@ -28,7 +39,20 @@ const features = [
     img: "/images/stats-view.png"
   }
 ];
+const toc = [
+  { id: 'context', label: '01. Context' },
+  { id: 'solution', label: '02. The solution' },
+  { id: 'features', label: '03. Features' },
+  { id: 'interaction', label: '04. Interaction design' },
+  { id: 'onboarding', label: '05. Onboarding' },
+  { id: 'reflection', label: '06. Reflection' },
+];
+
 const ProjectDetail = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const project = projectsData[id] || projectsData["aora"];
+  const [activeSection, setActiveSection] = useState('context');
 
   const insights = [
     {
@@ -47,7 +71,27 @@ const ProjectDetail = () => {
 
   const [activeFeature, setActiveFeature] = useState(features[0]);
 
+  useEffect(() => {
+    const observers = toc.map(({ id: sectionId }) => {
+      const el = document.getElementById(sectionId);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(sectionId); },
+        { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach(o => o?.disconnect());
+  }, []);
+
+  const scrollTo = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
+    <>
+      <Navbar />
     <div className="min-h-screen bg-[#F9F6F0] text-[#2D2D2D] font-sans px-4 py-10 md:px-10">
 
       {/* Container - Sidebar & Content */}
@@ -56,16 +100,24 @@ const ProjectDetail = () => {
         {/* LEFT SIDEBAR (Sticky on scroll) */}
         <aside className="w-full md:w-74 flex-shrink-0">
           <div className="sticky top-10">
-            <button className="flex items-center gap-2 text-sm font-semibold mb-10 hover:opacity-70">
-              <ArrowLeft size={16} /> HOME
+            <button onClick={() => navigate('/project')} className="flex items-center gap-2 text-sm font-semibold mb-10 hover:opacity-70">
+              <ArrowLeft size={16} /> ALL PROJECTS
             </button>
 
             <div className="bg-[#EFECE3] p-6 rounded-2xl border border-[#DBD6C9]">
               <h3 className="text-xs font-bold uppercase tracking-widest text-[#7C7667] mb-4">Table of Contents</h3>
               <ul className="space-y-3">
-                {['01. Context', '02. The solution', '03. Features', '04. Interaction design', '05. Onboarding', '06. Reflection'].map((item, i) => (
-                  <li key={i} className={`text-sm font-medium cursor-pointer ${i === 0 ? 'text-[#E25C1D] font-bold' : 'text-[#635F55]'}`}>
-                    {item}
+                {toc.map(({ id: sectionId, label }) => (
+                  <li
+                    key={sectionId}
+                    onClick={() => scrollTo(sectionId)}
+                    className={`text-sm cursor-pointer transition-all duration-200 ${
+                      activeSection === sectionId
+                        ? 'text-[#E25C1D] font-bold'
+                        : 'text-[#635F55] font-medium hover:text-[#2D2D2D]'
+                    }`}
+                  >
+                    {label}
                   </li>
                 ))}
               </ul>
@@ -80,40 +132,28 @@ const ProjectDetail = () => {
         {/* MAIN CONTENT AREA */}
         <main className="flex-1 max-w-3xl">
 
-          {/* Hero Banner */}
           <div className="w-full h-72 bg-white rounded-3xl border border-[#DBD6C9] mb-8 overflow-hidden shadow-sm">
-            <img src="/lingofable-banner.jpg" alt="Lingofable Banner" className="w-full h-full object-cover" />
+            <img src={project.img} alt={project.title} className="w-full h-full object-cover" />
           </div>
 
-          {/* Badges */}
           <div className="flex gap-2 mb-6">
-            <span className="px-3 py-1 bg-[#E3DEC0]/50 rounded text-[10px] font-bold uppercase tracking-wider">Side Project</span>
+            <span className="px-3 py-1 bg-[#E3DEC0]/50 rounded text-[10px] font-bold uppercase tracking-wider">{project.category}</span>
             <span className="px-3 py-1 bg-[#E3DEC0]/50 rounded text-[10px] font-bold uppercase tracking-wider">Shipped</span>
           </div>
 
-          {/* Title & Intro */}
           <h1 className="text-4xl md:text-5xl font-serif font-medium mb-6">
-            <span className="text-purple-400 mr-2">*</span>Building Lingofable from 0-1
+            <span className="text-[#E25C1D] mr-2">*</span>{project.title}
           </h1>
-          <p className="text-lg text-[#635F55] leading-relaxed mb-10">
-            I designed & built Lingofable together with <a href="#" className="underline font-medium">@Simon Ilincev</a> as a passion project. It is a language app focused on learning through stories — we launched on the App Store in March 2026, pitched to Pinterest's ex-CPO, and were featured on Cornell's Speaking of Language podcast!
-          </p>
+          <p className="text-lg text-[#635F55] leading-relaxed mb-10">{project.desc}</p>
 
-          {/* Final CTA */}
-          <div className="my-16">
-            <button className="w-full py-4 bg-[#EFECE3] border border-[#DBD6C9] rounded-xl font-medium hover:bg-[#E3DEC0] transition-all">
-              Visit Lingofable →
-            </button>
-          </div>
-          {/* Pink Meta Info Box (New Section) */}
-          <section className="bg-[#C46A86] text-white rounded-2xl p-8 mb-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+          <section className="rounded-2xl p-8 mb-12 grid grid-cols-2 md:grid-cols-4 gap-8" style={{ backgroundColor: project.color }}>
             {[
-              { label: "Role", value: "Founder, Design Engineer, Marketing" },
-              { label: "Team", value: "Simon Ilincev (Co-Founder)" },
-              { label: "Timeline", value: "Oct 2025 – Apr 2026" },
-              { label: "Skills", value: "Vibe coding, Interaction design" }
+              { label: "Role", value: project.role },
+              { label: "Team", value: project.team },
+              { label: "Timeline", value: project.timeline },
+              { label: "Skills", value: project.skills },
             ].map((meta, i) => (
-              <div key={i}>
+              <div key={i} className="text-white">
                 <h4 className="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-2">{meta.label}</h4>
                 <p className="text-sm font-medium">{meta.value}</p>
               </div>
@@ -122,8 +162,7 @@ const ProjectDetail = () => {
 
           {/* Context & Solution Sections */}
           <div className="space-y-12">
-            <section>
-              <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#7C7667] mb-3">Context</h3>
+            <section id="context">
               <h2 className="text-3xl font-serif text-[#2D2D2D] mb-4">Language learning is tricky</h2>
               <p className="text-lg text-[#635F55] leading-relaxed">
                 Having learned Mandarin Chinese over the pandemic, I know from experience that language learning is tough.
@@ -132,8 +171,7 @@ const ProjectDetail = () => {
               </p>
             </section>
 
-            <section>
-              <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#7C7667] mb-3">The Solution</h3>
+            <section id="solution">
               <h2 className="text-3xl font-serif text-[#2D2D2D] mb-6">Comprehensible input at scale, delivered through stories</h2>
               <p className="text-lg text-[#635F55] leading-relaxed mb-4">
                 The main thing that prevents learners from reading books in their target language is that most of the time, content is either:
@@ -145,7 +183,7 @@ const ProjectDetail = () => {
             </section>
 
 
-            <section className="py-16 space-y-8">
+            <section id="features" className="py-16 space-y-8">
               {/* सेक्शन हेडर */}
               <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#7C7667]">03. Features</h3>
 
@@ -186,7 +224,7 @@ const ProjectDetail = () => {
             </section>
 
 
-            <section className="py-16 px-6 max-w-4xl mx-auto bg-[#F9F6F0]">
+            <section id="interaction" className="py-16 px-6 max-w-4xl mx-auto bg-[#F9F6F0]">
               {/* Header Section */}
               <div className="mb-10">
                 <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#7C7667] mb-3">
@@ -291,7 +329,7 @@ const ProjectDetail = () => {
 
 
               {/* ऑनबोर्डिंग और प्रोग्रेस सेक्शन */}
-              <section className="flex flex-col gap-12">
+            <section id="onboarding" className="flex flex-col gap-12">
                 <div className="space-y-6">
                   <h3 className="text-sm font-bold uppercase tracking-widest text-[#7C7667]">Onboarding & Conversion</h3>
                   <h4 className="text-3xl font-serif">Crafting the perfect onboarding</h4>
@@ -310,7 +348,7 @@ const ProjectDetail = () => {
             </div>
 
 
-            <section className="max-w-6xl mx-auto py-16 px-6">
+            <section id="reflection" className="max-w-6xl mx-auto py-16 px-6">
               {/* Section Header */}
               <div className="mb-10">
                 <h3 className="text-xs font-bold uppercase tracking-widest text-[#7C7667] mb-3">Reflection</h3>
@@ -349,6 +387,8 @@ const ProjectDetail = () => {
         </main>
       </div>
     </div>
+      <Footer />
+    </>
   );
 };
 
