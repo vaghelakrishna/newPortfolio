@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
-import { Sparkles, Eye } from "lucide-react";
+import { Eye } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 // प्रत्येक प्रोजेक्ट कार्ड के लिए अलग सब-कंपोनेंट
-const ProjectCard = ({ item, index }) => {
+const ProjectCard = ({ item, index, onClick }) => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef(null);
@@ -31,7 +32,8 @@ const ProjectCard = ({ item, index }) => {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="w-full bg-[#EFECE3] border border-[#DBD6C9] rounded-[28px] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.012)] hover:shadow-[0_24px_50px_rgba(0,0,0,0.06)] relative flex flex-col sm:even:mt-20 overflow-hidden transition-all duration-500 ease-in-out max-h-[380px] hover:max-h-[650px]"
+      onClick={onClick}
+      className="w-full bg-[#EFECE3] border border-[#DBD6C9] rounded-[28px] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.012)] hover:shadow-[0_24px_50px_rgba(0,0,0,0.06)] relative flex flex-col sm:even:mt-20 overflow-hidden transition-all duration-500 ease-in-out max-h-[380px] hover:max-h-[650px] cursor-pointer"
     >
 
       {/* Top Meta Details Row */}
@@ -124,14 +126,15 @@ const ProjectCard = ({ item, index }) => {
 
 const ProjectPage = () => {
   const [filter, setFilter] = useState("All");
+  const navigate = useNavigate();
 
   const projects = [
-    { title: "Aora", category: "Development", year: "2024", img: "/projects/aora.webp", bg: "bg-[#FFF2EB]" },
-    { title: "Code Screenshot", category: "Development", year: "2024", img: "/projects/codescreenshot.webp", bg: "bg-gray-100" },
-    { title: "iPhone 15 Pro", category: "Development", year: "2024", img: "/projects/iphone.webp", bg: "bg-[#F0F5FF]" },
-    { title: "Ochi Design", category: "Development & Design", year: "2024", img: "/projects/ochidesign.webp", bg: "bg-[#FFFDE0]" },
-    { title: "Snapalyzer", category: "Development & Design", year: "2024", img: "/projects/snapalyzer.webp", bg: "bg-gray-100" },
-    { title: "Veni Labs", category: "Development", year: "2024", img: "/projects/veni-labs.webp", bg: "bg-[#FFF2EB]" },
+    { id: "aora", title: "Aora", category: "Development", year: "2024", img: "/projects/aora.webp", bg: "bg-[#FFF2EB]" },
+    { id: "code-screenshot", title: "Code Screenshot", category: "Development", year: "2024", img: "/projects/codescreenshot.webp", bg: "bg-gray-100" },
+    { id: "iphone-15-pro", title: "iPhone 15 Pro", category: "Development", year: "2024", img: "/projects/iphone.webp", bg: "bg-[#F0F5FF]" },
+    { id: "ochi-design", title: "Ochi Design", category: "Development & Design", year: "2024", img: "/projects/ochidesign.webp", bg: "bg-[#FFFDE0]" },
+    { id: "snapalyzer", title: "Snapalyzer", category: "Development & Design", year: "2024", img: "/projects/snapalyzer.webp", bg: "bg-gray-100" },
+    { id: "veni-labs", title: "Veni Labs", category: "Development", year: "2024", img: "/projects/veni-labs.webp", bg: "bg-[#FFF2EB]" },
   ];
 
   const filteredProjects = projects.filter((p) => {
@@ -193,7 +196,7 @@ const ProjectPage = () => {
         {/* Project Grid Layout */}
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-y-12 gap-x-10 items-start">
           {filteredProjects.map((item, i) => (
-            <ProjectCard key={item.title} item={item} index={i} />
+            <ProjectCard key={item.title} item={item} index={i} onClick={() => navigate(`/project/${item.id}`)} />
           ))}
         </div>
 
