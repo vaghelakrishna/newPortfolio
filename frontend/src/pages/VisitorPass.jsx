@@ -81,7 +81,7 @@ export default function App() {
     };
     const existing = JSON.parse(localStorage.getItem('visitorCards')) || [];
     localStorage.setItem('visitorCards', JSON.stringify([newCard, ...existing]));
-    navigate('/visitor-gallery');
+    navigate('/home');
   };
 
   
