@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function IntroScreen({ onExplore }) {
+  const navigate = useNavigate();
   const [time, setTime] = useState("");
 
   useEffect(() => {
@@ -118,6 +119,7 @@ export default function IntroScreen({ onExplore }) {
         </Link>
 
         <button
+          onClick={() => navigate('/home')}
           className="mt-5 text-gray-600 text-xs tracking-[0.2em] uppercase hover:text-gray-400 transition"
           style={{ fontFamily: "Space Mono, monospace" }}
         >
