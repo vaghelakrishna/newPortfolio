@@ -2,7 +2,7 @@ import holdSvg from '../assets/hold.svg';
 import { FaLinkedin } from "react-icons/fa";
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import avatar from '../assets/avatar.png';
+import avatar from '../assets/cutie.png';
 export default function ContactUsPage() {
   return (
     <>
