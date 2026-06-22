@@ -139,7 +139,7 @@ export default React.forwardRef(function Footer(props, ref) {
               {['Home', 'Work', 'About', 'Resume', 'Contact'].map((item) => (
                 <a
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  href={`/${item.toLowerCase()}`}
                   className="flex items-center justify-between text-2xl md:text-2xl font-black uppercase tracking-wider border-b border-transparent hover:border-zinc-700/50 py-1 transition-all duration-300 group"
                 >
                   <span className="group-hover:text-orange-400 transition-colors duration-300">{item}</span>
