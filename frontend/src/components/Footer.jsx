@@ -9,8 +9,6 @@ export default React.forwardRef(function Footer(props, ref) {
   const socialLinks = [
     { name: 'LINKEDIN', color: 'text-[#0A66C2]' },
     { name: 'INSTAGRAM', color: 'text-[#E4405F]' },
-    { name: 'BEHANCE', color: 'text-[#0057FF]' },
-    { name: 'TWITTER', color: 'text-[#555555]' },
   ];
 
   // लाइव क्लॉक (Live Clock)
