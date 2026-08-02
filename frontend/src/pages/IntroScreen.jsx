@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function IntroScreen({ onExplore }) {
@@ -36,8 +36,42 @@ export default function IntroScreen({ onExplore }) {
     }));
   }, []);
 
+  const [sparkles, setSparkles] = useState([]);
+
+  const handleDoubleClick = (e) => {
+    const newSparkles = Array.from({ length: 20 }).map((_, i) => ({
+      id: Date.now() + i,
+      x: e.pageX,
+      y: e.pageY,
+      angle: Math.random() * 360,
+      distance: Math.random() * 40 + 30, // 30 to 70
+      scale: Math.random() * 0.6 + 0.5, // 0.5 to 1.1
+      duration: Math.random() * 0.6 + 0.7, // 0.7s to 1.3s
+    }));
+
+    setSparkles((prev) => [...prev, ...newSparkles]);
+  };
+
+  const Sparkle = ({ id, x, y, angle, distance, scale, duration }) => (
+    <motion.div
+      key={id}
+      className="absolute z-50 rounded-full bg-white"
+      style={{ left: x, top: y, width: 8, height: 8, transform: 'translate(-50%, -50%)' }}
+      initial={{ scale: 0, opacity: 1 }}
+      animate={{ x: Math.cos(angle * (Math.PI / 180)) * distance, y: Math.sin(angle * (Math.PI / 180)) * distance, scale, opacity: 0 }}
+      transition={{ duration, ease: "easeOut" }}
+      onAnimationComplete={() => setSparkles(prev => prev.filter(s => s.id !== id))}
+    />
+  );
+
   return (
-    <section className="relative h-screen overflow-hidden bg-[#1d1d1f] text-white select-none">
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.5 } }}
+      className="relative h-screen overflow-hidden bg-[#1d1d1f] text-white select-none"
+      onDoubleClick={handleDoubleClick}
+    >
 
       {/* Star Field with Smooth Opacity & Scale Animation */}
       <div className="absolute inset-0 pointer-events-none">
@@ -64,6 +98,12 @@ export default function IntroScreen({ onExplore }) {
           />
         ))}
       </div>
+
+      {/* Sparkles on Double Click */}
+      <AnimatePresence>
+        {sparkles.map(sparkle => <Sparkle {...sparkle} />)}
+      </AnimatePresence>
+
 
       {/* Decorative Floating Elements */}
       <motion.div
@@ -202,7 +242,7 @@ export default function IntroScreen({ onExplore }) {
           Why not by you?
         </motion.div>
       </motion.div>
-
+      
       {/* Bottom Left Status */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
@@ -220,6 +260,6 @@ export default function IntroScreen({ onExplore }) {
           All Systems Operational
         </div>
       </motion.div>
-    </section>
+    </motion.section>
   );
 }
