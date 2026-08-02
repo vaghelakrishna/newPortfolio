@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Eye } from "lucide-react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -147,61 +148,68 @@ const ProjectPage = () => {
   return (
     <>
       <Navbar />
-      <section className="w-full min-h-screen bg-[#F9F6F0] py-32 px-6 md:px-12 relative overflow-hidden select-none font-sans-clean">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className="w-full min-h-screen bg-[#F9F6F0] py-32 px-6 md:px-12 relative overflow-hidden select-none font-sans-clean"
+      >
 
-      <style>{`
+        <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght=700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
         .font-cursive { font-family: 'Caveat', cursive; }
         .font-sans-clean { font-family: 'Plus Jakarta Sans', sans-serif; }
       `}</style>
 
-      {/* Grid Matrix Background */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-60"
-        style={{
-          backgroundImage: 'radial-gradient(#E5E0D8 1.5px, transparent 1.5px)',
-          backgroundSize: '24px 24px'
-        }} />
+        {/* Grid Matrix Background */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-60"
+          style={{
+            backgroundImage: 'radial-gradient(#E5E0D8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px'
+          }} />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+        <div className="relative z-10 max-w-5xl mx-auto">
 
-        {/* Header Badge */}
-        <div className="mb-2 flex w-fit items-center gap-1.5 text-[#E25C1D]">
-          {/* <Sparkles className="w-4 h-4 fill-[#E25C1D]/10" /> */}
-          <p className="uppercase text-xs font-bold tracking-widest font-sans-clean">My Work</p>
-        </div>
+          {/* Header Badge */}
+          <div className="mb-2 flex w-fit items-center gap-1.5 text-[#E25C1D]">
+            {/* <Sparkles className="w-4 h-4 fill-[#E25C1D]/10" /> */}
+            <p className="uppercase text-xs font-bold tracking-widest font-sans-clean">My Work</p>
+          </div>
 
-        {/* Section Title */}
-        <h2 className="text-3xl md:text-[42px] font-black tracking-tight text-[#2D2D2D] w-full md:w-2/3 leading-[1.15] uppercase font-sans-clean mb-12">
-          Creating <span className="font-cursive text-[#E25C1D] normal-case text-4xl md:text-[54px] ml-1">next level</span> digital products.
-        </h2>
+          {/* Section Title */}
+          <h2 className="text-3xl md:text-[42px] font-black tracking-tight text-[#2D2D2D] w-full md:w-2/3 leading-[1.15] uppercase font-sans-clean mb-12">
+            Creating <span className="font-cursive text-[#E25C1D] normal-case text-4xl md:text-[54px] ml-1">next level</span> digital products.
+          </h2>
 
-        {/* Filter Buttons */}
-        <div className="flex gap-2.5 w-full overflow-x-auto no-scrollbar sm:justify-end">
-          {["All", "Development", "Design"].map((label) => (
-            <button
-              key={label}
-              onClick={() => setFilter(label)}
-              className={`relative rounded-full px-6 py-2.5 text-xs font-bold tracking-wider transition-all duration-200 uppercase font-sans-clean border
+          {/* Filter Buttons */}
+          <div className="flex gap-2.5 w-full overflow-x-auto no-scrollbar sm:justify-end">
+            {["All", "Development", "Design"].map((label) => (
+              <button
+                key={label}
+                onClick={() => setFilter(label)}
+                className={`relative rounded-full px-6 py-2.5 text-xs font-bold tracking-wider transition-all duration-200 uppercase font-sans-clean border
                 ${filter === label
-                  ? "bg-[#E25C1D] text-white border-[#E25C1D] shadow-md shadow-orange-600/10"
-                  : "bg-[#FFFDF9] text-gray-500 border-gray-200/80 hover:bg-white hover:text-black hover:border-gray-300"}
+                    ? "bg-[#E25C1D] text-white border-[#E25C1D] shadow-md shadow-orange-600/10"
+                    : "bg-[#FFFDF9] text-gray-500 border-gray-200/80 hover:bg-white hover:text-black hover:border-gray-300"}
               `}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+              >
+                {label}
+              </button>
+            ))}
+          </div>
 
-        {/* Project Grid Layout */}
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-y-12 gap-x-10 items-start">
-          {filteredProjects.map((item, i) => (
-            <ProjectCard key={item.title} item={item} index={i} onClick={() => navigate(`/project/${item.id}`)} />
-          ))}
-        </div>
+          {/* Project Grid Layout */}
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-y-12 gap-x-10 items-start">
+            {filteredProjects.map((item, i) => (
+              <ProjectCard key={item.title} item={item} index={i} onClick={() => navigate(`/project/${item.id}`)} />
+            ))}
+          </div>
 
-      </div>
-    </section><Footer /></>
+        </div>
+      </motion.section>
+      <Footer /></>
   );
 };
 
