@@ -84,7 +84,7 @@ export default function App() {
 
 
   return (
-    <div className="min-h-screen bg-[#efede8] flex flex-col items-center px-4 py-8 font-mono relative overflow-hidden select-none cursor-none">
+    <div className="min-h-screen bg-[#efede8] flex flex-col items-center px-4 py-8 font-mono relative overflow-hidden">
 
       {/* Custom Cursor - Instant tracking without spring lag */}
       <div
@@ -112,7 +112,7 @@ export default function App() {
 
       {/* floating dot */}
       <Link to="/visitor-pass" >
-        <div className="absolute top-8 left-16 hover:opacity-70 transition-opacity cursor-none" >Back</div>
+        <div className="absolute top-8 left-16 hover:opacity-70 transition-opacity" >Back</div>
       </Link>
 
       {/* heading */}
@@ -156,7 +156,6 @@ export default function App() {
           transition-all
           focus:ring-2
           focus:ring-black/10
-          cursor-none
         "
         />
 
@@ -173,7 +172,6 @@ export default function App() {
           flex
           items-center
           justify-center
-          cursor-none
           shadow-xs
         "
         >
@@ -199,7 +197,6 @@ export default function App() {
         h-[250px]
         rounded-[28px]
         overflow-hidden
-        cursor-none
         shadow-md
       "
         style={{
@@ -207,7 +204,6 @@ export default function App() {
           transition: "background-color 0.5s ease-in-out",
         }}
       >
-
         {/* dotted world style pattern */}
         <div
           className="
@@ -243,7 +239,6 @@ export default function App() {
           text-white
           font-bold
           z-20
-          cursor-none
         "
         >
           CLEAR
@@ -310,13 +305,11 @@ export default function App() {
           <ReactSketchCanvas
             ref={canvasRef}
             strokeWidth={3}
-            strokeColor={
-              isEraser
-                ? themes[theme]
-                : "white"
-            }
+            strokeColor="white"
             canvasColor="transparent"
+            eraserWidth={20}
             className="w-full h-full cursor-none"
+            onMouseEnter={() => isEraser ? canvasRef.current?.eraseMode(true) : canvasRef.current?.eraseMode(false)}
           />
         </div>
 
@@ -338,7 +331,6 @@ export default function App() {
             w-9 h-9 rounded-full
             border-4
             transition-all
-            cursor-none
             ${theme === "blue"
               ? "border-black scale-110 shadow-md"
               : "border-transparent"
@@ -357,7 +349,6 @@ export default function App() {
             w-9 h-9 rounded-full
             border-4
             transition-all
-            cursor-none
             ${theme === "green"
               ? "border-black scale-110 shadow-md"
               : "border-transparent"
@@ -376,7 +367,6 @@ export default function App() {
             w-9 h-9 rounded-full
             border-4
             transition-all
-            cursor-none
             ${theme === "pink"
               ? "border-black scale-110 shadow-md"
               : "border-transparent"
@@ -395,7 +385,6 @@ export default function App() {
             w-9 h-9 rounded-full
             border-4
             transition-all
-            cursor-none
             ${theme === "orange"
               ? "border-black scale-110 shadow-md"
               : "border-transparent"
@@ -412,7 +401,10 @@ export default function App() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setIsEraser(false)}
+            onClick={() => {
+              setIsEraser(false);
+              canvasRef.current?.eraseMode(false);
+            }}
             className={`
               w-10
               h-10
@@ -422,7 +414,6 @@ export default function App() {
               items-center
               justify-center
               transition
-              cursor-none
               ${!isEraser
                 ? "ring-2 ring-black bg-white"
                 : ""
@@ -435,7 +426,10 @@ export default function App() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setIsEraser(true)}
+            onClick={() => {
+              setIsEraser(true);
+              canvasRef.current?.eraseMode(true);
+            }}
             className={`
               w-10
               h-10
@@ -445,7 +439,6 @@ export default function App() {
               items-center
               justify-center
               transition
-              cursor-none
               ${isEraser
                 ? "ring-2 ring-black bg-white"
                 : ""
@@ -482,7 +475,7 @@ export default function App() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setShowDialog(false)}
-                className="bg-[#1f1f1f] text-white px-6 py-2.5 rounded-xl text-xs tracking-[2px] cursor-none"
+                className="bg-[#1f1f1f] text-white px-6 py-2.5 rounded-xl text-xs tracking-[2px]"
               >
                 OK, GOT IT
               </motion.button>
@@ -498,7 +491,7 @@ export default function App() {
         transition={{ duration: 0.6, delay: 0.3 }}
         whileHover={{ scale: 1.05, y: -2, boxShadow: "0 10px 20px -5px rgba(0,0,0,0.15)" }}
         whileTap={{ scale: 0.95 }}
-        className="mt-10 bg-[#1f1f1f] text-white px-8 py-4 rounded-2xl tracking-[2px] text-sm font-semibold cursor-none shadow-md"
+        className="mt-10 bg-[#1f1f1f] text-white px-8 py-4 rounded-2xl tracking-[2px] text-sm font-semibold shadow-md"
         onClick={handleEnter}
       >
         ENTER →
