@@ -82,7 +82,13 @@ export default function VisitorGallery() {
     : "None";
 
   return (
-    <div className="min-h-screen bg-[#efede8] px-6 md:px-12 xl:px-16 pt-12 pb-24 font-mono">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="min-h-screen bg-[#efede8] px-6 md:px-12 xl:px-16 pt-12 pb-24 font-mono"
+    >
 
       {/* Header */}
       <div className="flex items-start justify-between gap-6 mb-4">
@@ -173,6 +179,6 @@ export default function VisitorGallery() {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {cards.map(card => <VisitorCard key={card.id} card={card} />)}
       </div>
-    </div>
+    </motion.div>
   );
 }
