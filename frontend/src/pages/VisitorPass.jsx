@@ -7,26 +7,20 @@ export default function App() {
   const canvasRef = useRef(null);
   const navigate = useNavigate();
   const [showDialog, setShowDialog] = useState(false);
-  const [mousePosition, setMousePosition] = useState({
-    x: -100,
-    y: -100,
-  });
-
   useEffect(() => {
     const moveCursor = (e) => {
       setMousePosition({
-        x: e.pageX,
-        y: e.pageY,
+        x: e.clientX,
+        y: e.clientY,
       });
     };
 
-    window.addEventListener("mousemove", moveCursor, { passive: true });
+    window.addEventListener("mousemove", moveCursor);
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
     };
   }, []);
-
   const randomNames = [
     "MOONLIT FIREFLY",
     "OCEAN WHISPER",
@@ -50,6 +44,13 @@ export default function App() {
   const [isEraser, setIsEraser] = useState(false);
   const [insideCard, setInsideCard] = useState(false);
 
+  const [mousePosition, setMousePosition] = useState({
+    x: 0,
+    y: 0,
+  });
+
+
+  
   const date = new Date().toLocaleDateString("en-GB");
 
   const visitorId = "5993";
@@ -64,6 +65,7 @@ export default function App() {
   const clearEverything = () => canvasRef.current?.clearCanvas();
 
   const handleEnter = async () => {
+    // Check if canvas has any drawing (sign)
     const paths = await canvasRef.current?.exportPaths();
     if (!paths || paths.length === 0) {
       setShowDialog(true);
@@ -82,46 +84,39 @@ export default function App() {
     navigate('/home');
   };
 
-
+  
   return (
     <div className="min-h-screen bg-[#efede8] flex flex-col items-center px-4 py-8 font-mono relative overflow-hidden">
 
-      {/* Custom Cursor - Instant tracking without spring lag */}
+            {/* Custom Cursor */}
       <div
-        className="fixed pointer-events-none z-[9999] flex items-center justify-center"
+        className="fixed pointer-events-none z-[9999]"
         style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
+          left: mousePosition.x,
+          top: mousePosition.y,
           transform: "translate(-50%, -50%)",
         }}
       >
         {insideCard ? (
-          <div className="text-xs font-bold tracking-widest bg-white/90 backdrop-blur-xs px-2 py-1 rounded shadow-sm text-black">
-            {isEraser ? "ERASE" : "DRAW"}
+          <div className="text-xl">
+            {isEraser ? "🧽" : "✏️"}
           </div>
         ) : (
           <div
-            className="w-4 h-4 rounded-full shadow-sm"
+            className="w-4 h-4 rounded-full"
             style={{
               backgroundColor: themes[theme],
-              transition: "background-color 0.3s ease-in-out",
             }}
           />
         )}
       </div>
-
       {/* floating dot */}
       <Link to="/visitor-pass" >
-        <div className="absolute top-8 left-16 hover:opacity-70 transition-opacity" >Back</div>
+        <div className="absolute top-8 left-16" >Back</div>
       </Link>
 
       {/* heading */}
-      <motion.div
-        initial={{ opacity: 0, y: -15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mt-4"
-      >
+      <div className="text-center mt-4">
         <h2 className="tracking-[3px] text-[#3b3b3b] text-sm md:text-base">
           WELCOME, VISITOR.
         </h2>
@@ -129,15 +124,10 @@ export default function App() {
         <p className="tracking-[3px] text-[#8f8f8f] text-sm mt-2">
           I HOPE YOU ENJOY YOUR TIME HERE.
         </p>
-      </motion.div>
+      </div>
 
       {/* input row */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="flex items-center gap-4 mt-10 flex-wrap justify-center"
-      >
+      <div className="flex items-center gap-4 mt-10 flex-wrap justify-center">
         <span className="tracking-[2px] text-sm">NAME:</span>
 
         <input
@@ -153,16 +143,10 @@ export default function App() {
           outline-none
           tracking-[2px]
           uppercase
-          transition-all
-          focus:ring-2
-          focus:ring-black/10
         "
         />
 
-        <motion.button
-          whileHover={{ scale: 1.08, rotate: 180 }}
-          whileTap={{ scale: 0.92 }}
-          transition={{ type: "spring", stiffness: 400, damping: 15 }}
+        <button
           onClick={generateRandomName}
           className="
           h-11
@@ -172,23 +156,20 @@ export default function App() {
           flex
           items-center
           justify-center
-          shadow-xs
+          hover:scale-105
+          transition
         "
         >
           <RefreshCw size={16} />
-        </motion.button>
-      </motion.div>
+        </button>
+      </div>
 
       {/* card container */}
       <motion.div
-        onMouseEnter={() => setInsideCard(true)}
-        onMouseLeave={() => setInsideCard(false)}
         whileHover={{
           scale: 1.02,
-          rotate: -0.5,
-          boxShadow: "0 20px 30px -10px rgba(0,0,0,0.15)"
+          rotate: -1,
         }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
         className="
         relative
         mt-10
@@ -197,20 +178,18 @@ export default function App() {
         h-[250px]
         rounded-[28px]
         overflow-hidden
-        shadow-md
       "
         style={{
           backgroundColor: themes[theme],
-          transition: "background-color 0.5s ease-in-out",
         }}
       >
+
         {/* dotted world style pattern */}
         <div
           className="
           absolute
           inset-0
           opacity-25
-          pointer-events-none
           bg-[radial-gradient(circle,white_1.6px,transparent_1.6px)]
         "
           style={{
@@ -221,9 +200,7 @@ export default function App() {
         />
 
         {/* clear button */}
-        <motion.button
-          whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.3)" }}
-          whileTap={{ scale: 0.95 }}
+        <button
           onClick={clearEverything}
           className="
           absolute
@@ -235,17 +212,16 @@ export default function App() {
           py-1
           rounded-lg
           bg-white/20
-          backdrop-blur-xs
           text-white
           font-bold
           z-20
         "
         >
           CLEAR
-        </motion.button>
+        </button>
 
         {/* card content */}
-        <div className="relative z-10 p-7 text-white h-full pointer-events-none">
+        <div className="relative z-10 p-7 text-white h-full">
 
           {/* title */}
           <h2
@@ -300,39 +276,36 @@ export default function App() {
           </div>
         </div>
 
+     
+
         {/* drawing canvas */}
         <div className="absolute inset-0 z-[15]">
           <ReactSketchCanvas
             ref={canvasRef}
             strokeWidth={3}
-            strokeColor="white"
+            strokeColor={
+              isEraser
+                ? themes[theme]
+                : "white"
+            }
             canvasColor="transparent"
-            eraserWidth={20}
-            className="w-full h-full cursor-none"
-            onMouseEnter={() => isEraser ? canvasRef.current?.eraseMode(true) : canvasRef.current?.eraseMode(false)}
+            className="w-full h-full"
           />
         </div>
 
       </motion.div>
-
+    
       {/* theme selector */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="flex items-center gap-4 mt-10"
-      >
+      <div className="flex items-center gap-4 mt-10">
 
-        <motion.button
-          whileHover={{ scale: 1.15 }}
-          whileTap={{ scale: 0.9 }}
+        <button
           onClick={() => setTheme("blue")}
           className={`
             w-9 h-9 rounded-full
             border-4
             transition-all
             ${theme === "blue"
-              ? "border-black scale-110 shadow-md"
+              ? "border-black scale-110"
               : "border-transparent"
             }
           `}
@@ -341,16 +314,14 @@ export default function App() {
           }}
         />
 
-        <motion.button
-          whileHover={{ scale: 1.15 }}
-          whileTap={{ scale: 0.9 }}
+        <button
           onClick={() => setTheme("green")}
           className={`
             w-9 h-9 rounded-full
             border-4
             transition-all
             ${theme === "green"
-              ? "border-black scale-110 shadow-md"
+              ? "border-black scale-110"
               : "border-transparent"
             }
           `}
@@ -359,16 +330,14 @@ export default function App() {
           }}
         />
 
-        <motion.button
-          whileHover={{ scale: 1.15 }}
-          whileTap={{ scale: 0.9 }}
+        <button
           onClick={() => setTheme("pink")}
           className={`
             w-9 h-9 rounded-full
             border-4
             transition-all
             ${theme === "pink"
-              ? "border-black scale-110 shadow-md"
+              ? "border-black scale-110"
               : "border-transparent"
             }
           `}
@@ -377,16 +346,14 @@ export default function App() {
           }}
         />
 
-        <motion.button
-          whileHover={{ scale: 1.15 }}
-          whileTap={{ scale: 0.9 }}
+        <button
           onClick={() => setTheme("orange")}
           className={`
             w-9 h-9 rounded-full
             border-4
             transition-all
             ${theme === "orange"
-              ? "border-black scale-110 shadow-md"
+              ? "border-black scale-110"
               : "border-transparent"
             }
           `}
@@ -398,13 +365,8 @@ export default function App() {
         {/* draw + eraser */}
         <div className="flex gap-2 ml-4">
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              setIsEraser(false);
-              canvasRef.current?.eraseMode(false);
-            }}
+          <button
+            onClick={() => setIsEraser(false)}
             className={`
               w-10
               h-10
@@ -415,21 +377,16 @@ export default function App() {
               justify-center
               transition
               ${!isEraser
-                ? "ring-2 ring-black bg-white"
+                ? "ring-2 ring-black"
                 : ""
               }
             `}
           >
             <PenTool size={16} />
-          </motion.button>
+          </button>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              setIsEraser(true);
-              canvasRef.current?.eraseMode(true);
-            }}
+          <button
+            onClick={() => setIsEraser(true)}
             className={`
               w-10
               h-10
@@ -440,16 +397,16 @@ export default function App() {
               justify-center
               transition
               ${isEraser
-                ? "ring-2 ring-black bg-white"
+                ? "ring-2 ring-black"
                 : ""
               }
             `}
           >
             <Eraser size={16} />
-          </motion.button>
+          </button>
 
         </div>
-      </motion.div>
+      </div>
 
       {/* Dialog: sign required */}
       <AnimatePresence>
@@ -458,27 +415,25 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
             onClick={() => setShowDialog(false)}
           >
             <motion.div
-              initial={{ scale: 0.85, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.85, opacity: 0, y: 20 }}
-              transition={{ type: "spring", stiffness: 350, damping: 25 }}
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
               onClick={e => e.stopPropagation()}
               className="bg-[#efede8] rounded-2xl p-8 max-w-sm w-full mx-4 text-center shadow-xl border border-[#d4cfc5]"
             >
+              <p className="text-2xl mb-2">✍️</p>
               <h3 className="font-mono tracking-[2px] text-[#2d2d2d] text-sm uppercase font-bold mb-2">Enter a sign</h3>
               <p className="text-[#888] text-xs tracking-widest mb-6">PLEASE DRAW YOUR SIGNATURE ON THE CARD BEFORE ENTERING.</p>
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+              <button
                 onClick={() => setShowDialog(false)}
-                className="bg-[#1f1f1f] text-white px-6 py-2.5 rounded-xl text-xs tracking-[2px]"
+                className="bg-[#1f1f1f] text-white px-6 py-2.5 rounded-xl text-xs tracking-[2px] hover:opacity-80 transition"
               >
                 OK, GOT IT
-              </motion.button>
+              </button>
             </motion.div>
           </motion.div>
         )}
@@ -486,12 +441,9 @@ export default function App() {
 
       {/* enter button */}
       <motion.button
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        whileHover={{ scale: 1.05, y: -2, boxShadow: "0 10px 20px -5px rgba(0,0,0,0.15)" }}
+        whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
-        className="mt-10 bg-[#1f1f1f] text-white px-8 py-4 rounded-2xl tracking-[2px] text-sm font-semibold shadow-md"
+        className="mt-10 bg-[#1f1f1f] text-white px-8 py-4 rounded-2xl tracking-[2px] text-sm font-semibold"
         onClick={handleEnter}
       >
         ENTER →
@@ -499,10 +451,7 @@ export default function App() {
 
 
       {/* footer */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
+      <p
         className="
         mt-10
         text-[#9f9f9f]
@@ -512,7 +461,7 @@ export default function App() {
       "
       >
         Your card will appear in the visitor gallery after review.
-      </motion.p>
+      </p>
 
     </div>
   );
