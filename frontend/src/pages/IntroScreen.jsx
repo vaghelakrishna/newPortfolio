@@ -1,10 +1,104 @@
-import { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+
+function RepelWord({ word, bold, mouseX, mouseY }) {
+  const ref = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 100, damping: 15 });
+  const sy = useSpring(y, { stiffness: 100, damping: 15 });
+
+  useEffect(() => {
+    const update = () => {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = cx - mouseX.get();
+      const dy = cy - mouseY.get();
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const radius = 100;
+      if (dist < radius && dist > 0) {
+        const force = (radius - dist) / radius;
+        x.set((dx / dist) * force * 40);
+        y.set((dy / dist) * force * 40);
+      } else {
+        x.set(0);
+        y.set(0);
+      }
+    };
+    const unsub = mouseX.on("change", update);
+    const unsub2 = mouseY.on("change", update);
+    return () => { unsub(); unsub2(); };
+  }, [mouseX, mouseY, x, y]);
+
+  return (
+    <motion.span
+      ref={ref}
+      style={{ x: sx, y: sy }}
+      className={`inline-block mx-1 ${bold ? "text-white font-bold" : ""}`}
+    >
+      {word}
+    </motion.span>
+  );
+}
+
+function ExploreButton({ mouseX, mouseY }) {
+  const ref = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 100, damping: 15 });
+  const sy = useSpring(y, { stiffness: 100, damping: 15 });
+
+  useEffect(() => {
+    const update = () => {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = cx - mouseX.get();
+      const dy = cy - mouseY.get();
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const radius = 120;
+      if (dist < radius && dist > 0) {
+        const force = (radius - dist) / radius;
+        x.set((dx / dist) * force * 30);
+        y.set((dy / dist) * force * 30);
+      } else {
+        x.set(0);
+        y.set(0);
+      }
+    };
+    const unsub = mouseX.on("change", update);
+    const unsub2 = mouseY.on("change", update);
+    return () => { unsub(); unsub2(); };
+  }, [mouseX, mouseY, x, y]);
+
+  return (
+    <motion.button
+      ref={ref}
+      className="relative mt-8 bg-[#ECE8DF] text-[#2b2b2b] px-7 py-3 rounded-full text-sm tracking-wide shadow-lg cursor-pointer"
+      style={{ x: sx, y: sy, fontFamily: "Space Mono, monospace" }}
+    >
+      EXPLORE →
+    </motion.button>
+  );
+}
 
 export default function IntroScreen({ onExplore }) {
   const navigate = useNavigate();
   const [time, setTime] = useState("");
+  const mouseX = useMotionValue(-999);
+  const mouseY = useMotionValue(-999);
+  const cursorX = useSpring(mouseX, { stiffness: 200, damping: 20 });
+  const cursorY = useSpring(mouseY, { stiffness: 200, damping: 20 });
+
+  useEffect(() => {
+    const onMove = (e) => { mouseX.set(e.clientX); mouseY.set(e.clientY); };
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
 
   useEffect(() => {
     const updateClock = () => {
@@ -36,44 +130,44 @@ export default function IntroScreen({ onExplore }) {
     }));
   }, []);
 
+  const [ripples, setRipples] = useState([]);
   const [sparkles, setSparkles] = useState([]);
 
-  const handleDoubleClick = (e) => {
-    const newSparkles = Array.from({ length: 20 }).map((_, i) => ({
-      id: Date.now() + i,
-      x: e.pageX,
-      y: e.pageY,
-      angle: Math.random() * 360,
-      distance: Math.random() * 40 + 30, // 30 to 70
-      scale: Math.random() * 0.6 + 0.5, // 0.5 to 1.1
-      duration: Math.random() * 0.6 + 0.7, // 0.7s to 1.3s
-    }));
-
-    setSparkles((prev) => [...prev, ...newSparkles]);
+  const createRipple = (e) => {
+    const newRipple = { id: Date.now(), x: e.clientX, y: e.clientY };
+    setRipples((prev) => [...prev, newRipple]);
+    setTimeout(() => setRipples((prev) => prev.filter(r => r.id !== newRipple.id)), 800);
   };
 
-  const Sparkle = ({ id, x, y, angle, distance, scale, duration }) => (
-    <motion.div
-      key={id}
-      className="absolute z-50 rounded-full bg-white"
-      style={{ left: x, top: y, width: 8, height: 8, transform: 'translate(-50%, -50%)' }}
-      initial={{ scale: 0, opacity: 1 }}
-      animate={{ x: Math.cos(angle * (Math.PI / 180)) * distance, y: Math.sin(angle * (Math.PI / 180)) * distance, scale, opacity: 0 }}
-      transition={{ duration, ease: "easeOut" }}
-      onAnimationComplete={() => setSparkles(prev => prev.filter(s => s.id !== id))}
-    />
-  );
+  const createSparkles = (e) => {
+    const newSparkles = Array.from({ length: 12 }).map((_, i) => ({
+      id: Date.now() + i,
+      x: e.clientX,
+      y: e.clientY,
+      angle: (360 / 12) * i + Math.random() * 20,
+      distance: Math.random() * 50 + 30,
+      duration: Math.random() * 0.3 + 0.4,
+    }));
+    setSparkles((prev) => [...prev, ...newSparkles]);
+  };
 
   return (
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.5 } }}
-      className="relative h-screen overflow-hidden bg-[#1d1d1f] text-white select-none"
-      onDoubleClick={handleDoubleClick}
+      className="relative h-screen overflow-hidden bg-[#1d1d1f] text-white select-none cursor-none"
+      onClick={createSparkles}
+      onDoubleClick={createSparkles}
     >
 
-      {/* Star Field with Smooth Opacity & Scale Animation */}
+      {/* Glowing Moon Cursor */}
+      <motion.div
+        className="fixed pointer-events-none z-[9999]"
+        style={{ x: cursorX, y: cursorY, translateX: "-50%", translateY: "-50%" }}
+      >
+        <div className="w-5 h-5 rounded-full bg-white shadow-[0_0_12px_4px_rgba(255,255,255,0.6)]" />
+      </motion.div>
       <div className="absolute inset-0 pointer-events-none">
         {stars.map((star) => (
           <motion.span
@@ -99,10 +193,37 @@ export default function IntroScreen({ onExplore }) {
         ))}
       </div>
 
-      {/* Sparkles on Double Click */}
-      <AnimatePresence>
-        {sparkles.map(sparkle => <Sparkle {...sparkle} />)}
-      </AnimatePresence>
+      {/* Ripple on Click */}
+      {ripples.map(r => (
+        <motion.div
+          key={r.id}
+          className="fixed pointer-events-none z-50 rounded-full border border-white"
+          style={{ left: r.x, top: r.y, translateX: "-50%", translateY: "-50%" }}
+          initial={{ width: 0, height: 0, opacity: 0.8 }}
+          animate={{ width: 120, height: 120, opacity: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        />
+      ))}
+
+      {/* Sparkles on Click */}
+      {sparkles.map(s => (
+        <motion.div
+          key={s.id}
+          className="fixed pointer-events-none z-50 text-white text-xs"
+          style={{ left: s.x, top: s.y }}
+          initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+          animate={{
+            x: Math.cos(s.angle * Math.PI / 180) * s.distance,
+            y: Math.sin(s.angle * Math.PI / 180) * s.distance,
+            opacity: 0,
+            scale: 0,
+          }}
+          transition={{ duration: s.duration, ease: "easeOut" }}
+          onAnimationComplete={() => setSparkles(p => p.filter(sp => sp.id !== s.id))}
+        >
+          ✦
+        </motion.div>
+      ))}
 
 
       {/* Decorative Floating Elements */}
@@ -187,9 +308,11 @@ export default function IntroScreen({ onExplore }) {
             visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
           }}
           className="mt-3 text-[3rem] md:text-[5rem] leading-none tracking-tight font-medium"
-          style={{ fontFamily: "Cormorant Garamond, serif" }}
+          style={{ fontFamily: "Gelica, serif" }}
         >
-          Krishna's World
+          {["Krishna's", "World"].map((word, i) => (
+            <RepelWord key={i} word={word} mouseX={mouseX} mouseY={mouseY} />
+          ))}
         </motion.h1>
 
         <motion.div
@@ -199,15 +322,7 @@ export default function IntroScreen({ onExplore }) {
           }}
         >
           <Link to="visitor-pass">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className="mt-8 bg-[#ECE8DF] text-[#2b2b2b] px-7 py-3 rounded-full text-sm tracking-wide shadow-lg cursor-pointer"
-              style={{ fontFamily: "Space Mono, monospace" }}
-            >
-              EXPLORE →
-            </motion.button>
+            <ExploreButton mouseX={mouseX} mouseY={mouseY} />
           </Link>
         </motion.div>
 
@@ -234,12 +349,22 @@ export default function IntroScreen({ onExplore }) {
           className="mt-16 max-w-xl text-center text-gray-400 uppercase text-base md:text-lg leading-relaxed"
           style={{ fontFamily: "Space Mono, monospace" }}
         >
-          <span className="text-white font-bold">
-            Discoveries
-          </span>{" "}
-          are out there, waiting to be made.
-          <br />
-          Why not by you?
+          {[
+            { word: "Discoveries", bold: true },
+            { word: "are" },
+            { word: "out" },
+            { word: "there," },
+            { word: "waiting" },
+            { word: "to" },
+            { word: "be" },
+            { word: "made." },
+            { word: "Why" },
+            { word: "not" },
+            { word: "by" },
+            { word: "you?", bold: true },
+          ].map(({ word, bold }, i) => (
+            <RepelWord key={i} word={word} bold={bold} mouseX={mouseX} mouseY={mouseY} />
+          ))}
         </motion.div>
       </motion.div>
       
