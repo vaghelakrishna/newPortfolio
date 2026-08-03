@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // --- Sub-Component: Rolling Eyes Logo ---
 const MakeSenseLogo = ({ eyePos }) => {
   return (
-    <div className="inline-flex items-center cursor-default select-none relative ml-2">
+    <div className="inline-flex items-center cursor-default select-none relative ml-2 mt-2">
       <div className="relative flex items-center">
         {/* Organic Brush Stroke Background */}
         <svg viewBox="0 0 300 60" className="absolute inset-0 w-[115%] h-[130%] -left-[7.5%] -top-[18%] z-0" preserveAspectRatio="none">
@@ -98,10 +98,10 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       className="relative min-h-screen w-full flex flex-col items-center justify-center bg-[#FAF9F6] px-4 sm:px-6 lg:px-10 py-16 md:py-20 overflow-hidden"
-      style={{
-        backgroundImage: 'radial-gradient(#E5E0D8 1.5px, transparent 1.5px)',
-        backgroundSize: '24px 24px'
-      }}
+      // style={{
+      //   backgroundImage: 'radial-gradient(#E5E0D8 1.5px, transparent 1.5px)',
+      //   backgroundSize: '24px 24px'
+      // }}
     >
 
       {/* Top Left: Krishna Intro with Doodles */}
@@ -151,7 +151,7 @@ const HeroSection = () => {
             onMouseLeave={() => setIsHovered(false)}
             onMouseMove={handleWordMouseMove}
           >
-            <span className="absolute inset-0 text-gray-200 transition-transform duration-300 translate-y-2 group-hover:translate-y-5 select-none opacity-60">
+            <span className="absolute inset-0 text-gray-300 transition-transform duration-300 translate-y-2 group-hover:translate-y-5 select-none opacity-60">
               product design
             </span>
             <span className="relative z-10 text-[#161515]">
