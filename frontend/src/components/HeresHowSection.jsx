@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Me from '../assets/me2.png';
+import Me from '../assets/Me2.png';
 const HeresHowSection = () => {
   return (
     <div className="relative w-full flex flex-col items-center justify-center py-32 bg-[#FAF9F6] overflow-hidden">
