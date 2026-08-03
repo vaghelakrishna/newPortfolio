@@ -125,6 +125,9 @@ const ProjectCard = ({ item, index, onClick }) => {
   );
 };
 
+const rotations = [-2.1, 1.4, -1.2, 2.3, -1.8, 1.1, -2.5, 1.7];
+const offsets   = [0, 30, 10, 45, 5, 35, 15, 40];
+
 const ProjectPage = () => {
   const [filter, setFilter] = useState("All");
   const navigate = useNavigate();
@@ -201,9 +204,16 @@ const ProjectPage = () => {
           </div>
 
           {/* Project Grid Layout */}
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-y-12 gap-x-10 items-start">
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-y-16 gap-x-10 items-start">
             {filteredProjects.map((item, i) => (
-              <ProjectCard key={item.title} item={item} index={i} onClick={() => navigate(`/project/${item.id}`)} />
+              <motion.div
+                key={item.title}
+                initial={{ rotate: rotations[i % rotations.length], y: offsets[i % offsets.length] }}
+                whileHover={{ rotate: 0, y: 0 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              >
+                <ProjectCard item={item} index={i} onClick={() => navigate(`/project/${item.id}`)} />
+              </motion.div>
             ))}
           </div>
 
