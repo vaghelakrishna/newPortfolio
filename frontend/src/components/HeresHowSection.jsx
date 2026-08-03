@@ -1,21 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Me from '../assets/me.png';
+import Me from '../assets/me2.png';
 const HeresHowSection = () => {
   return (
     <div className="relative w-full flex flex-col items-center justify-center py-32 bg-[#FAF9F6] overflow-hidden">
 
       {/* 1. Illustration & Rays */}
-      <div className="relative mb-8">
+      <div className="relative">
         <div className="absolute inset-0 -m-20 pointer-events-none opacity-20">
-          <svg viewBox="0 0 200 200" className="w-full h-full stroke-black stroke-[1.5] fill-none" strokeLinecap="round">
+          <svg viewBox="0 0 200 200" className="w-full h-full stroke-black stroke-[1.5px] fill-none" strokeLinecap="round">
             <path d="M100,20 L100,5" />
             <path d="M145,45 L170,20" />
             <path d="M180,100 L205,95" />
             <path d="M55,45 L30,20" />
             <path d="M20,100 L-5,95" />
-            <path d="M45,150 Q25,160 15,190" />
-            <path d="M155,150 Q175,160 185,190" />
+            {/* <path d="M45,150 Q25,160 15,190" />
+            <path d="M155,150 Q175,160 185,190" /> */}
           </svg>
         </div>
 
@@ -26,7 +26,7 @@ const HeresHowSection = () => {
           </span>
         </div>
 
-        <div className="relative w-40 h-40 md:w-40 md:h-40">
+        <div className="relative w-40 h-40 md:w-50 md:h-50">
           <img
             src={Me}
             alt="Arjun Illustration"
@@ -36,7 +36,7 @@ const HeresHowSection = () => {
       </div>
 
       {/* 3. Heading with One-Time Animation */}
-      <div className="text-center mt-4">
+      <div className="text-center">
         <h2 className="text-4xl md:text-7xl font-bold text-[#222] tracking-tighter flex flex-wrap justify-center items-center gap-x-4">
           <span>Here's</span>
           <span className="relative inline-block">
