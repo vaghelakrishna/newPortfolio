@@ -39,7 +39,7 @@ function VisitorCard({ card }) {
       {/* Card content */}
       <div className="relative z-20 p-6 h-full flex flex-col justify-between">
         <div>
-          <h2 className="font-serif text-[28px] leading-tight">Megan's World</h2>
+          <h2 className="font-serif text-[28px] leading-tight">Krishna's World</h2>
 
           <div className="mt-5">
             <p className="text-white/60 text-[10px] tracking-[2px] uppercase font-mono">Visitor</p>
