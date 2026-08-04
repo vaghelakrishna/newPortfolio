@@ -100,21 +100,21 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="w-full bg-[#F7F7F4] py-24 px-6 md:px-12">
+    <section className="w-full bg-[#F7F7F4] py-16 px-5 md:py-24 md:px-12">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="flex justify-between items-center mb-16">
+        <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center mb-10 md:mb-16">
           <span className="uppercase tracking-[0.2em] text-sm text-gray-500">
             About
           </span>
 
-          <div className="flex items-center gap-1 bg-[#ECECEA] p-1 rounded-2xl">
+          <div className="flex items-center gap-1 bg-[#ECECEA] p-1 rounded-2xl self-start">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setMode(tab.id)}
-                className={`flex items-center gap-2 px-5 py-2 rounded-xl text-sm transition-all duration-300 ${mode === tab.id
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm transition-all duration-300 ${mode === tab.id
                   ? "bg-white shadow-sm text-black"
                   : "text-gray-500 hover:text-black"
                   }`}
@@ -140,7 +140,7 @@ export default function AboutSection() {
               {storyParagraphs.map((item, index) => (
                 <p
                   key={index}
-                  className="text-xl md:text-[1rem] leading-[1.8] text-[#444]"
+                  className="text-base md:text-[1rem] leading-[1.8] text-[#444]"
                 >
                   {item.full}
                 </p>
@@ -166,7 +166,7 @@ export default function AboutSection() {
                 return (
                   <p
                     key={index}
-                    className="text-xl md:text-[1rem] leading-[1.8]"
+                    className="text-base md:text-[1rem] leading-[1.8]"
                   >
                     <span className="text-[#CFCFCF]">
                       {fadedText}
