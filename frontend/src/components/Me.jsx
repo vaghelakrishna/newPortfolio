@@ -23,44 +23,53 @@ export default function InteractiveHero() {
   return (
     <div
       ref={constraintsRef}
-      className="relative w-full min-h-screen bg-[#F9F6F0] overflow-hidden p-0 select-none cursor-none group"
-      style={{
-        backgroundImage: 'radial-gradient(#E5E0D8 1.5px, transparent 1.5px)',
-        backgroundSize: '24px 24px'
-      }}
+      className="relative w-full min-h-[80vh] bg-[#F9F6F0] overflow-hidden p-0 select-none cursor-none group"
+      style={{ backgroundImage: 'radial-gradient(#E5E0D8 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}
     >
-      {/* Google Font Stylesheet for Handdrawn Feel */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
         .font-cursive { font-family: 'Caveat', cursive; }
         .font-sans-clean { font-family: 'Plus Jakarta Sans', sans-serif; }
       `}</style>
 
-      {/* ========================================================
-          CUSTOM CURSOR
-          ======================================================== */}
+      {/* Custom Cursor - desktop only */}
       <div
-        className="fixed pointer-events-none z-50 hidden group-hover:flex items-center justify-center bg-white px-3 py-1.5 rounded-full shadow-md border border-gray-200/80 transition-transform duration-75 ease-out"
-        style={{
-          left: `${mousePos.x}px`,
-          top: `${mousePos.y}px`,
-          transform: 'translate(-10px, -50%)',
-        }}
+        className="fixed pointer-events-none z-50 hidden md:group-hover:flex items-center justify-center bg-white px-3 py-1.5 rounded-full shadow-md border border-gray-200/80 transition-transform duration-75 ease-out"
+        style={{ left: `${mousePos.x}px`, top: `${mousePos.y}px`, transform: 'translate(-10px, -50%)' }}
       >
-        <span className="text-[10px] font-bold text-gray-500 tracking-wider mr-2 uppercase font-sans-clean">
-          Scroll Down
-        </span>
+        <span className="text-[10px] font-bold text-gray-500 tracking-wider mr-2 uppercase font-sans-clean">Scroll Down</span>
         <div className="w-2.5 h-2.5 bg-[#E05C1A] rotate-45 rounded-[1px]" />
       </div>
 
-      {/* ========================================================
-          FIXED TOP NAVIGATION BAR
-          ======================================================== */}
+      {/* MOBILE LAYOUT */}
+      <div className="flex flex-col items-center justify-center gap-4 px-4 py-10 md:hidden">
+        <img src={KrishnaIDCard} alt="Krishna ID Card" className="w-[260px] drop-shadow-xl" />
+        <div className="bg-[#FFFDF9] rounded-md shadow-lg border border-gray-200/50 p-4 w-full max-w-xs">
+          <p className="text-[13px] font-bold text-[#E25C1D] font-cursive mb-2">My current to do list</p>
+          {["Deploy Blubeez feature updates", "Map user flows", "Work on community garden", "Finish case studies"].map((t, i) => (
+            <div key={i} className="flex items-start gap-1.5 mb-1">
+              <BiCheckDouble size={12} className="text-orange-500 shrink-0 mt-0.5" />
+              <span className="text-[10px] line-through opacity-40">{t}</span>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-3 w-full max-w-xs">
+          <div className="flex-1 bg-[#FAFDFB] border-[2px] border-dashed border-[#2E5A44] rounded-sm p-3 text-[#2E5A44] font-mono">
+            <span className="text-[8px] block font-bold opacity-60 uppercase tracking-widest">India</span>
+            <span className="text-sm font-extrabold tracking-tight block text-[#1B3B2B]">Gujarat</span>
+          </div>
+          <div className="flex-1 bg-[#FFFCEB] rounded-sm shadow border border-amber-200/50 p-3">
+            <h3 className="text-lg font-extrabold text-[#E25C1D]">3+ Years</h3>
+            <p className="text-[9px] text-gray-500 font-semibold leading-relaxed">Consumer, fintech, AI, ed tech</p>
+          </div>
+        </div>
+        <button className="px-5 py-2.5 border border-[#E25C1D]/30 bg-[#FFFDF9] text-[#E25C1D] rounded-full text-[10px] font-bold shadow-md hover:bg-[#E25C1D] hover:text-white transition-all uppercase tracking-widest flex items-center gap-1.5">
+          Download Resume <FiDownload size={11} />
+        </button>
+      </div>
 
-
-      {/* ========================================================
-          1. MAIN ID CARD IMAGE (Exactly Centered & Focal Point)
-          ======================================================== */}
+      {/* DESKTOP LAYOUT */}
+      <div className="hidden md:block w-full" style={{ minHeight: '80vh', position: 'relative' }}>
       <motion.div
         drag
         dragConstraints={constraintsRef}
@@ -209,6 +218,7 @@ export default function InteractiveHero() {
         </button>
       </div>
 
+      </div>{/* end desktop */}
     </div>
   );
 }
