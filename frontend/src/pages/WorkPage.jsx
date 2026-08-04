@@ -152,7 +152,7 @@ const WorkCard = ({ item, index }) => {
 
 export default function WorkPage() {
   const [filter, setFilter] = useState("All");
-  const filters = ["All", "Job","Internship", "Freelance"];
+  const filters = ["All", "Job","Internship"];
 
   const filtered = experiences.filter((e) => filter === "All" || e.type === filter);
 
