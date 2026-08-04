@@ -6,52 +6,52 @@ import Navbar from "../components/Navbar";
 const experiences = [
   {
     id: 1,
-    company: "Kattalyx",
-    role: "Product Design Intern",
-    type: "Internship",
-    duration: "Jan 2025 – Present",
+    company: "Kattalyx Labs",
+    role: "Full-Stack Web Developer",
+    type: "Job",
+    duration: "Jan 2026 – Present",
     location: "Remote",
     logo: "/logos/kattalyx.png",
     bg: "bg-[#FFF2EB]",
-    desc: "Leading end-to-end product design for B2B SaaS tools. Worked closely with founders to define UX strategy, design systems, and high-fidelity prototypes.",
-    skills: ["Figma", "UX Research", "Design Systems"],
+    desc: "Developed full-stack web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver scalable solutions.",
+    skills: ["React", "Node.js", "MongoDB", "Tailwind", "Figma", "Git", "REST APIs","Mongoose"],
   },
   {
     id: 2,
-    company: "Freelance",
-    role: "UI/UX Designer",
-    type: "Freelance",
-    duration: "2024 – Present",
+    company: "Curio.ai",
+    role: "Frontend Developer",
+    type: "Internship",
+    duration: "July 2025 – October 2025",
     location: "Remote",
     logo: null,
     bg: "bg-[#F0F5FF]",
     desc: "Designed and delivered end-to-end digital products for startups and indie makers — from landing pages to full app flows.",
-    skills: ["Figma", "Branding", "Prototyping"],
+    skills: ["React.js", "Next.js", "Tailwind", "Figma", "Framer Motion", "JavaScript", "TypeScript"],
   },
   {
     id: 3,
-    company: "College Projects",
-    role: "Full Stack Developer",
-    type: "Academic",
-    duration: "2023 – 2024",
+    company: "GemBank",
+    role: "Frontend Developer",
+    type: "Internship",
+    duration: "2025 – 2025",
     location: "On-site",
     logo: null,
     bg: "bg-[#FFFDE0]",
     desc: "Built multiple full-stack projects using React, Node.js and MongoDB. Focused on real-world problem solving and clean UI implementation.",
-    skills: ["React", "Node.js", "MongoDB"],
+    skills: ["React", "Node.js", "MongoDB", "Tailwind", "Figma", "Git", "REST APIs","Mongoose"],
   },
-  {
-    id: 4,
-    company: "Open Source",
-    role: "Contributor",
-    type: "Open Source",
-    duration: "2024",
-    location: "Remote",
-    logo: null,
-    bg: "bg-gray-100",
-    desc: "Contributed UI fixes and component improvements to open-source React projects on GitHub.",
-    skills: ["React", "Tailwind", "GitHub"],
-  },
+  // {
+  //   id: 4,
+  //   company: "Open Source",
+  //   role: "Contributor",
+  //   type: "Open Source",
+  //   duration: "2024",
+  //   location: "Remote",
+  //   logo: null,
+  //   bg: "bg-gray-100",
+  //   desc: "Contributed UI fixes and component improvements to open-source React projects on GitHub.",
+  //   skills: ["React", "Tailwind", "GitHub"],
+  // },
 ];
 
 const WorkCard = ({ item, index }) => {
@@ -152,7 +152,7 @@ const WorkCard = ({ item, index }) => {
 
 export default function WorkPage() {
   const [filter, setFilter] = useState("All");
-  const filters = ["All", "Internship", "Freelance", "Academic", "Open Source"];
+  const filters = ["All", "Job","Internship", "Freelance"];
 
   const filtered = experiences.filter((e) => filter === "All" || e.type === filter);
 
