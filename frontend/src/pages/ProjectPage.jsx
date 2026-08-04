@@ -133,12 +133,12 @@ const ProjectPage = () => {
   const navigate = useNavigate();
 
   const projects = [
-    { id: "aora", title: "Aora", category: "Development", year: "2024", img: "/projects/aora.webp", bg: "bg-[#FFF2EB]" },
-    { id: "code-screenshot", title: "Code Screenshot", category: "Development", year: "2024", img: "/projects/codescreenshot.webp", bg: "bg-gray-100" },
-    { id: "iphone-15-pro", title: "iPhone 15 Pro", category: "Development", year: "2024", img: "/projects/iphone.webp", bg: "bg-[#F0F5FF]" },
-    { id: "ochi-design", title: "Ochi Design", category: "Development & Design", year: "2024", img: "/projects/ochidesign.webp", bg: "bg-[#FFFDE0]" },
-    { id: "snapalyzer", title: "Snapalyzer", category: "Development & Design", year: "2024", img: "/projects/snapalyzer.webp", bg: "bg-gray-100" },
-    { id: "veni-labs", title: "Veni Labs", category: "Development", year: "2024", img: "/projects/veni-labs.webp", bg: "bg-[#FFF2EB]" },
+    { id: "EliteVerseSolutions", title: "EliteVerse Solutions", category: "Design", year: "2026", img: "/projects/eliteverseportfolio.jpg", bg: "bg-[#FFF2EB]" },
+    { id: "carovii", title: "Carovii", category: "Development", year: "2026", img: "/projects/carovii.jpg", bg: "bg-gray-100" },
+    { id: "Kattalyx Labs", title: "Kattalyx Labs", category: "Development & Design", year: "2024", img: "/projects/kattalyxlabs.jpg", bg: "bg-[#F0F5FF]" },
+    // { id: "ochi-design", title: "Ochi Design", category: "Development & Design", year: "2024", img: "/projects/ochidesign.webp", bg: "bg-[#FFFDE0]" },
+    // { id: "snapalyzer", title: "Snapalyzer", category: "Development & Design", year: "2024", img: "/projects/snapalyzer.webp", bg: "bg-gray-100" },
+    // { id: "veni-labs", title: "Veni Labs", category: "Development", year: "2024", img: "/projects/veni-labs.webp", bg: "bg-[#FFF2EB]" },
   ];
 
   const filteredProjects = projects.filter((p) => {
