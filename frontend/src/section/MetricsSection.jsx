@@ -72,8 +72,7 @@ export default function BlueprintCanvasBox() {
             <ExperienceMetrics />
             <LogoMarquee />
 
-            {/* Yahan wrapper add karein */}
-            <div className="w-full flex justify-center mt-10">
+            <div className="w-full flex justify-center mt-10 px-4">
               <MacWorkWindow />
             </div>
           </div>
