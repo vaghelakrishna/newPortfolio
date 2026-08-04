@@ -8,7 +8,7 @@ import CommunityGarden from '../components/CommunityGarden'
 import PhotoStrip from '../components/PhotoStrip'
 import FilmStripSection from '../components/FilmStripSection'
 import VisitorPassScroll from '../components/VisitorPassScroll'
-import MetricsSection from '../section/MetricsSection';
+// import MetricsSection from '../section/MetricsSection';
 import LogoMarquee from '../components/LogoMarquee'
 import Footer from '../components/Footer'
 import WalkingRobot from '../components/WalkingRobot'
@@ -19,6 +19,7 @@ import HeroBoard from '../components/HeroBoard'
 // import BookFlip from '../components/BookFlip'
 // import ImageScroll from '../components/ImageScroll'
 // import Testimonials from '../components/TestimonialSection'
+import MacWorkWindow from "../components/MacWorkWindow";
 
 export default function HomePage() {
   const footerRef = useRef(null);
@@ -39,7 +40,8 @@ export default function HomePage() {
       {/* <CatLoader /> */}
       <Me/>
       <HeroBoard />
-      <MetricsSection />
+      <MacWorkWindow />
+      {/* <MetricsSection /> */}
       {/* <WorkSection /> */}
       {/* <LogoMarquee /> */}
       {/* <FilmStrip /> */}
