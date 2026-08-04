@@ -307,7 +307,7 @@ export default function IntroScreen({ onExplore }) {
             hidden: { opacity: 0, y: 25 },
             visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
           }}
-          className="mt-3 text-[3rem] md:text-[5rem] leading-none tracking-tight font-medium"
+          className="mt-3 text-[2.5rem] md:text-[3.5rem] leading-none tracking-tight font-medium"
           style={{ fontFamily: "Gelica, serif" }}
         >
           {["Krishna's", "World"].map((word, i) => (
@@ -346,7 +346,7 @@ export default function IntroScreen({ onExplore }) {
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
           }}
-          className="mt-16 max-w-xl text-center text-gray-400 uppercase text-base md:text-lg leading-relaxed"
+          className="mt-16 max-w-xl text-center text-gray-400 uppercase text-sm md:text-base leading-relaxed"
           style={{ fontFamily: "Space Mono, monospace" }}
         >
           {[
