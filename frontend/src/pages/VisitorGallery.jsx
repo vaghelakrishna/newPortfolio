@@ -117,10 +117,7 @@ export default function VisitorGallery() {
         </div>
       </div>
 
-      {/* Orange dot */}
-      <div className="flex justify-center mb-4">
-        <div className="w-3 h-3 rounded-full bg-[#CC7A35]" />
-      </div>
+
 
       {/* Stats bar */}
       <div className="mb-8">
