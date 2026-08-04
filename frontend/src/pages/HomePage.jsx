@@ -7,6 +7,7 @@ import Me from '../components/Me'
 import CommunityGarden from '../components/CommunityGarden'
 import PhotoStrip from '../components/PhotoStrip'
 import FilmStripSection from '../components/FilmStripSection'
+import VisitorPassScroll from '../components/VisitorPassScroll'
 import MetricsSection from '../section/MetricsSection';
 import LogoMarquee from '../components/LogoMarquee'
 import Footer from '../components/Footer'
@@ -33,6 +34,7 @@ export default function HomePage() {
       <AboutMe />
       <PhotoStrip />
       <FilmStripSection />
+      <VisitorPassScroll />
       <HeresHowSection />
       {/* <CatLoader /> */}
       <Me/>
