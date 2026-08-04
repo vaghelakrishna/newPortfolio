@@ -43,7 +43,7 @@ export default React.forwardRef(function Footer(props, ref) {
 
   return (
     <>
-      <div  className="w-full pt-20 pb-16 flex flex-col items-center justify-center relative bg-[#FDFBF7] rounded-xl mb-8">
+      <div className="w-full pt-14 pb-20 md:pt-20 md:pb-16 flex flex-col items-center justify-center relative bg-[#FDFBF7] rounded-xl mb-8">
       {/* Google Font for Cursive Look */}
       <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');
@@ -53,9 +53,9 @@ export default React.forwardRef(function Footer(props, ref) {
         `}</style>
 
       {/* Header Section */}
-      <div className="text-center mb-10">
+      <div className="text-center mb-10 px-6">
         <p className="text-[#E25C1D] text-2xl font-cursive mb-1">& That's a wrap!</p>
-        <h2 className="text-[44px] font-black text-[#2D2D2D] tracking-tight leading-none">
+        <h2 className="text-[28px] md:text-[44px] font-black text-[#2D2D2D] tracking-tight leading-none">
           GLAD YOU MADE IT HERE.
         </h2>
       </div>
@@ -79,7 +79,7 @@ export default React.forwardRef(function Footer(props, ref) {
       {/* Go to Top Button */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="absolute bottom-10 right-10 w-20 h-20 flex items-center justify-center group"
+        className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center group"
       >
         <div className="absolute w-full h-full animate-spin-slow">
           <svg viewBox="0 0 100 100" className="w-full h-full text-[#333]">
@@ -107,7 +107,7 @@ export default React.forwardRef(function Footer(props, ref) {
           <div className="flex items-center gap-4 font-mono tracking-wider text-xs">
             <span>{time || "5:51:31 PM"}</span>
             <span className="text-zinc-600">|</span>
-            <span>Thursday, June 4, 2026</span>
+            <span>{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
           </div>
         </div>
 
@@ -148,43 +148,31 @@ export default React.forwardRef(function Footer(props, ref) {
           </div>
         </div>
 
-        {/* Bottom Bar: Smart Expanding Mail Button */}
-        <div className="border-t border-zinc-700/50 pt-6 flex justify-end">
+        {/* Bottom Bar */}
+        <div className="border-t border-zinc-700/50 pt-6 flex items-center justify-between">
+          {/* Left: Copy Email */}
           <div
             className="group relative flex items-center bg-zinc-900/50 border border-zinc-700/80 hover:border-zinc-500 h-12 rounded-lg overflow-hidden transition-all duration-500 ease-out p-1 w-44 hover:w-80"
           >
-            {/* Default Text State */}
             <div className="absolute inset-0 flex items-center gap-2.5 px-4 transition-all duration-300 ease-in-out group-hover:opacity-0 group-hover:translate-x-4">
               <Mail className="w-4 h-4 text-zinc-400 shrink-0" />
               <span className="text-zinc-300 text-xs font-medium whitespace-nowrap">Copy my mail</span>
             </div>
-
-            {/* Hover State: ईमेल आईडी + बटन */}
             <div className="w-full flex items-center justify-between pl-3 pr-1 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out pointer-events-none group-hover:pointer-events-auto">
-              <span className="text-zinc-300 text-xs font-mono select-all truncate pr-2">
-                {emailAddress}
-              </span>
-
+              <span className="text-zinc-300 text-xs font-mono select-all truncate pr-2">{emailAddress}</span>
               <button
                 onClick={handleCopyMail}
-                className={`flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider h-9 px-3.5 rounded-md transition-all duration-300 shrink-0 ${isCopied
-                  ? 'bg-emerald-600 text-white scale-100'
-                  : 'bg-zinc-800 hover:bg-orange-600 text-white active:scale-95'}`}
+                className={`flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider h-9 px-3.5 rounded-md transition-all duration-300 shrink-0 ${isCopied ? 'bg-emerald-600 text-white' : 'bg-zinc-800 hover:bg-orange-600 text-white active:scale-95'}`}
               >
-                {isCopied ? (
-                  <>
-                    <Check className="w-3.5 h-3.5" />
-                    <span className="animate-fade-in">Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>Copy</span>
-                  </>
-                )}
+                {isCopied ? <><Check className="w-3.5 h-3.5" /><span>Copied!</span></> : <><Copy className="w-3.5 h-3.5" /><span>Copy</span></>}
               </button>
             </div>
           </div>
+
+          {/* Right: Copyright */}
+          <span className="text-zinc-500 text-xs font-mono">
+            © {new Date().getFullYear()} All rights reserved. KV
+          </span>
         </div>
 
       </footer></>
