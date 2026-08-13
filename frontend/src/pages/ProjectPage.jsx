@@ -136,6 +136,7 @@ const ProjectPage = () => {
     { id: "EliteVerseSolutions", title: "EliteVerse Solutions", category: "Design", year: "2026", img: "/projects/eliteverseportfolio.jpg", bg: "bg-[#FFF2EB]" },
     { id: "carovii", title: "Carovii", category: "Development", year: "2026", img: "/projects/carovii.jpg", bg: "bg-gray-100" },
     { id: "Kattalyx Labs", title: "Kattalyx Labs", category: "Development & Design", year: "2024", img: "/projects/kattalyxlabs.jpg", bg: "bg-[#F0F5FF]" },
+    { id: "Sugra Jewels", title: "Sugra Jewels", category: "Freelance", year: "2024", img: "/projects/SugraJewels.jpg", bg: "bg-[#F0F5FF]" },
     // { id: "ochi-design", title: "Ochi Design", category: "Development & Design", year: "2024", img: "/projects/ochidesign.webp", bg: "bg-[#FFFDE0]" },
     // { id: "snapalyzer", title: "Snapalyzer", category: "Development & Design", year: "2024", img: "/projects/snapalyzer.webp", bg: "bg-gray-100" },
     // { id: "veni-labs", title: "Veni Labs", category: "Development", year: "2024", img: "/projects/veni-labs.webp", bg: "bg-[#FFF2EB]" },
@@ -145,6 +146,7 @@ const ProjectPage = () => {
     if (filter === "All") return true;
     if (filter === "Development") return p.category.includes("Development");
     if (filter === "Design") return p.category.includes("Design");
+        if (filter === "Freelance") return p.category.includes("Freelance");
     return true;
   });
 
@@ -188,7 +190,7 @@ const ProjectPage = () => {
 
           {/* Filter Buttons */}
           <div className="flex gap-2.5 w-full overflow-x-auto no-scrollbar sm:justify-end">
-            {["All", "Development", "Design"].map((label) => (
+            {["All", "Development", "Design","Freelance"].map((label) => (
               <button
                 key={label}
                 onClick={() => setFilter(label)}
