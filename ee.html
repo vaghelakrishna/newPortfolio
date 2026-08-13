@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Scrapbook Fold</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fdf2f4;
+      perspective: 2500px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 900px;
+      height: 550px;
+    }
+
+    .book {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .panel {
+      position: absolute;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      backface-visibility: hidden;
+      transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      overflow: hidden;
+      padding: 15px;
+    }
+
+    /* Left Panel Styling mimicking the reference image */
+    .left {
+      left: 0;
+      transform-origin: right center;
+      z-index: 3;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Center Panel */
+    .center {
+      left: 300px;
+      z-index: 2;
+      background: #ffffff;
+      padding: 10px;
+    }
+
+    /* Right Panel Styling */
+    .right {
+      left: 600px;
+      transform-origin: left center;
+      z-index: 3;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Opening / Closing states */
+    .open .left {
+      transform: rotateY(-180deg);
+    }
+
+    .open .right {
+      transform: rotateY(180deg);
+    }
+
+    /* Collage & Decorative Elements */
+    .collage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      opacity: 0.85;
+      transform: scale(1.05);
+    }
+
+    .collage-grid img {
+      width: 100%;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 3px;
+    }
+
+    .badge-heading {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #3b3b3b;
+      margin: 10px 0;
+      text-shadow: 1px 1px 0px #ff6a95;
+    }
+
+    .balloon-number {
+      font-size: 90px;
+      font-weight: bold;
+      color: #e07a93;
+      text-align: center;
+      line-height: 1;
+      text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 15px 0;
+    }
+
+    .tulip-border {
+      width: 100%;
+      height: 60px;
+      background-image: url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=400&q=80');
+      background-size: cover;
+      background-position: center;
+      border-radius: 5px;
+    }
+
+    .ribbon-overlay {
+      position: absolute;
+      top: 50%;
+      left: -10%;
+      width: 120%;
+      height: 50px;
+      background: linear-gradient(90deg, #ffb6c1, #ffc0cb, #ffb6c1);
+      transform: translateY(-50%) rotate(-3deg);
+      z-index: 20;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .bow {
+      position: absolute;
+      top: 43%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 55px;
+      z-index: 25;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+      pointer-events: none;
+    }
+
+    button {
+      position: absolute;
+      bottom: -65px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      background: #ff6a95;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(255, 106, 149, 0.4);
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #ff477e;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <div class="book" id="book">
+
+      <!-- LEFT PANEL -->
+      <div class="panel left">
+        <div class="collage-grid">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80">
+          <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&q=80">
+        </div>
+        <div class="badge-heading">💖 HAP PPY 💖</div>
+        <div class="balloon-number">2</div>
+        <div class="tulip-border"></div>
+      </div>
+
+      <!-- CENTER PANEL (Inside) -->
+      <div class="panel center"
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center; background: #fff5f7;">
+        <h2 style="color: #ff6a95; margin-bottom: 10px;">✨ Memories ✨</h2>
+        <p style="font-size: 14px; color: #666; text-align: center; padding: 0 20px;">
+          "Wishing you a day filled with happiness and a year filled with joy. Happy Birthday!"
+        </p>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="panel right">
+        <div class="collage-grid">
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=150&q=80">
+          <img src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=150&q=80">
+          <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=150&q=80">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80">
+          <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80">
+        </div>
+        <div class="badge-heading">🎉 BIRTHDAY 🎉</div>
+        <div class="balloon-number">1</div>
+        <div class="tulip-border"></div>
+      </div>
+
+    </div>
+
+    <!-- Decorative Ribbon & Bow Overlay -->
+    <div class="ribbon-overlay"></div>
+    <div class="bow">🎀</div>
+
+    <button onclick="toggleBook()">Open / Close</button>
+  </div>
+
+  <script>
+    const book = document.getElementById("book");
+    function toggleBook() {
+      book.classList.toggle("open");
+    }
+  </script>
+
+</body>
+
+</html>
