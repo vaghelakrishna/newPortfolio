@@ -5,7 +5,7 @@ import AboutPage from "./pages/AboutPage";
 import { Routes, Route } from "react-router-dom";
 import VisitorGallery from './pages/VisitorGallery'
 import ProjectPage from "./pages/ProjectPage";
-import ProjectDetail from "../../ProjectDetail";
+import ProjectDetail from "./pages/ProjectDetail";
 import ContactUsPage from "./pages/ContactUsPage";
 import WorkPage from "./pages/WorkPage";
 // import FooterNavigation from "./components/WalkingRobot";
