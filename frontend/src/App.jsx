@@ -5,7 +5,7 @@ import AboutPage from "./pages/AboutPage";
 import { Routes, Route } from "react-router-dom";
 import VisitorGallery from './pages/VisitorGallery'
 import ProjectPage from "./pages/ProjectPage";
-import ProjectDetail from "./pages/ProjectDetail";
+import ProjectDetail from "../../ProjectDetail";
 import ContactUsPage from "./pages/ContactUsPage";
 import WorkPage from "./pages/WorkPage";
 // import FooterNavigation from "./components/WalkingRobot";
@@ -15,33 +15,33 @@ export default function App() {
     <>
       {/* <FooterNavigation /> */}
       <Routes>
-      <Route path="/" element={<IntroScreen />} />
+        <Route path="/" element={<IntroScreen />} />
 
-      <Route
-        path="/visitor-pass"
-        element={<VisitorPass />} />
+        <Route
+          path="/visitor-pass"
+          element={<VisitorPass />} />
 
-      <Route
-        path="/home"
+        <Route
+          path="/home"
           element={<HomePage />} />
-        
+
         <Route
           path="/about"
           element={<AboutPage />} />
-        
-        <Route 
-        path="/contact"
+
+        <Route
+          path="/contact"
           element={<ContactUsPage />} />
-        
+
         <Route path="/work" element={<WorkPage />} />
 
         <Route to="/contact" element={<ContactUsPage />} />
 
-      <Route path="/visitor-gallery" element={<VisitorGallery />} />
+        <Route path="/visitor-gallery" element={<VisitorGallery />} />
 
-      <Route path="/project" element={<ProjectPage />} />
-      <Route path="/project/:id" element={<ProjectDetail />} />
-    </Routes></>
+        <Route path="/project" element={<ProjectPage />} />
+        <Route path="/project/:id" element={<ProjectDetail />} />
+      </Routes></>
   );
 }
 
