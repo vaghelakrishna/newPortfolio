@@ -34,7 +34,7 @@ export default function HomePage() {
 
       <AboutMe />
       <PhotoStrip />
-      <FilmStripSection />
+      {/* <FilmStripSection /> */}
       <VisitorPassScroll />
       <HeresHowSection />
       {/* <CatLoader /> */}
