@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import HeroSection from '../components/MakeSenseLogo'
+import ScrollRevealHero from '../components/ScrollRevealHero'
 import AboutMe from '../components/AboutMe'
 import CustomCursor from '../components/CustomCursor'
 import HeresHowSection from '../components/HeresHowSection'
@@ -14,12 +14,15 @@ import Footer from '../components/Footer'
 import WalkingRobot from '../components/WalkingRobot'
 import Navbar from '../components/Navbar'
 import CatLoader from '../components/CatLoader'
+import ProjectsSection from '../section/ProjectsSection'
 
 import HeroBoard from '../components/HeroBoard'
 // import BookFlip from '../components/BookFlip'
 // import ImageScroll from '../components/ImageScroll'
 // import Testimonials from '../components/TestimonialSection'
 import MacWorkWindow from "../components/MacWorkWindow";
+import MacProjectsDesktop from "../components/MacProjectsDesktop";
+import ProjectShowcase from "../components/ProjectShowcase";
 
 export default function HomePage() {
   const footerRef = useRef(null);
@@ -30,18 +33,16 @@ export default function HomePage() {
 
 
       <Navbar />
-      <HeroSection />
+      <ScrollRevealHero />
 
       <AboutMe />
-      <PhotoStrip />
+      {/* <PhotoStrip /> */}
       {/* <FilmStripSection /> */}
       <VisitorPassScroll />
       <HeresHowSection />
+      <ProjectShowcase />
+      {/* <MacProjectsDesktop /> */}
       {/* <CatLoader /> */}
-      <Me/>
-      <HeroBoard />
-      <MacWorkWindow />
-      {/* <MetricsSection /> */}
       {/* <WorkSection /> */}
       {/* <LogoMarquee /> */}
       {/* <FilmStrip /> */}
