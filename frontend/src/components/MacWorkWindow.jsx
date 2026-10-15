@@ -13,10 +13,11 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
   };
 
   const folders = [
-    { id: 'khyaal', name: 'Khyaal', isWip: false },
-    { id: 'blubees', name: 'Blubees', isWip: true },
-    { id: 'nonlinear', name: 'Nonlinear', isWip: true },
-    { id: 'others', name: 'Others', isWip: true },
+    { id: 'craftoria', name: 'Craftoria', link: '/project/craftoria', tech: 'React • Typesense • MongoDB', isWip: false },
+    { id: 'sugra-jewels', name: 'Sugra Jewels', link: '/project/sugra-jewels', tech: 'React • Node • Cloudinary', isWip: false },
+    { id: 'onlyloop', name: 'OnlyLoop', link: '/project/onlyloop', tech: 'Full-Stack • D2C E-Commerce', isWip: false },
+    { id: 'kattalyx', name: 'KattalyxLabs', link: '/project/kattalyx-labs', tech: 'Multi-Portal Web Apps', isWip: false },
+    { id: 'curio', name: 'Curio.ai CMS', link: '/project/curio-ai', tech: 'Enterprise Admin CMS', isWip: false },
   ];
 
   const FolderIcon = () => (
@@ -39,15 +40,20 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
         </div>
         <div className="flex flex-col gap-3">
           {folders.map((folder) => (
-            <div key={folder.id} className="flex items-center gap-3 bg-[#FAF8F5] rounded-xl p-4 border border-gray-200">
+            <a
+              key={folder.id}
+              href={folder.link}
+              className="flex items-center gap-3 bg-[#FAF8F5] rounded-xl p-4 border border-gray-200 hover:border-orange-500 transition-colors"
+            >
               <svg className="w-8 h-8 text-[#69C1EE] flex-shrink-0" fill="currentColor" viewBox="0 0 24 20">
                 <path d="M2 3a2 2 0 012-2h4l2 3h10a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" />
               </svg>
-              <span className="text-sm font-semibold text-gray-700">{folder.name}</span>
-              {folder.isWip && (
-                <span className="ml-auto text-[9px] bg-amber-100 text-amber-600 px-2 py-0.5 rounded-full font-mono">WIP</span>
-              )}
-            </div>
+              <div className="flex flex-col text-left">
+                <span className="text-sm font-semibold text-gray-700">{folder.name}</span>
+                <span className="text-[10px] text-gray-400 font-mono">{folder.tech}</span>
+              </div>
+              <span className="ml-auto text-[10px] text-orange-600 font-semibold">View →</span>
+            </a>
           ))}
         </div>
       </div>
@@ -133,14 +139,21 @@ export default function MacWorkWindow({ onClose, onFolderClick }) {
             {/* Content */}
             <main className="flex-1 bg-[#FAF8F5] overflow-hidden relative">
               {activeTab === 'Work projects' && (
-                <div className="p-10 grid grid-cols-4 gap-10">
+                <div className="p-8 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6">
                   {folders.map((folder) => (
-                    <div key={folder.id} className="flex flex-col items-center gap-2">
+                    <a
+                      key={folder.id}
+                      href={folder.link}
+                      className="flex flex-col items-center gap-2 p-2 rounded-xl hover:bg-black/5 transition-colors group cursor-pointer"
+                    >
                       <Folder />
-                      <span className="text-[11px] font-semibold text-gray-600 tracking-wide text-center">
+                      <span className="text-[11px] font-semibold text-gray-700 tracking-wide text-center group-hover:text-orange-600">
                         {folder.name}
                       </span>
-                    </div>
+                      <span className="text-[9px] text-gray-400 font-mono text-center truncate max-w-full">
+                        {folder.tech}
+                      </span>
+                    </a>
                   ))}
                 </div>
               )}
