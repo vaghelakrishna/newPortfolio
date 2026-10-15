@@ -6,12 +6,104 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const projectsData = {
-  "aora": { title: "Aora", category: "Development", year: "2024", img: "/projects/aora.webp", color: "#C46A86", desc: "A video sharing mobile app built with React Native and Appwrite. Features AI-generated video prompts, user authentication, and a smooth content feed.", role: "Full Stack Developer", team: "Solo", timeline: "2024", skills: "React Native, Appwrite, Expo" },
-  "code-screenshot": { title: "Code Screenshot", category: "Development", year: "2024", img: "/projects/codescreenshot.webp", color: "#4A7C8C", desc: "A beautiful code screenshot generator with custom themes, fonts, and export options.", role: "Frontend Developer", team: "Solo", timeline: "2024", skills: "React, Tailwind CSS" },
-  "iphone-15-pro": { title: "iPhone 15 Pro", category: "Development", year: "2024", img: "/projects/iphone.webp", color: "#5A5A7A", desc: "Apple iPhone 15 Pro website clone with GSAP animations and Three.js 3D model.", role: "Frontend Developer", team: "Solo", timeline: "2024", skills: "React, GSAP, Three.js" },
-  "ochi-design": { title: "Ochi Design", category: "Development & Design", year: "2024", img: "/projects/ochidesign.webp", color: "#7A6A3A", desc: "A pixel-perfect clone of the award-winning Ochi design agency website with smooth scroll animations.", role: "Design Engineer", team: "Solo", timeline: "2024", skills: "React, Framer Motion, GSAP" },
-  "snapalyzer": { title: "Snapalyzer", category: "Development & Design", year: "2024", img: "/projects/snapalyzer.webp", color: "#3A7A5A", desc: "An AI-powered image analysis tool that extracts insights and generates descriptions from photos.", role: "Full Stack Developer", team: "Solo", timeline: "2024", skills: "React, OpenAI API, Node.js" },
-  "veni-labs": { title: "Veni Labs", category: "Development", year: "2024", img: "/projects/veni-labs.webp", color: "#E25C1D", desc: "A startup landing page with bold typography, smooth animations and dark aesthetic.", role: "Frontend Developer", team: "Solo", timeline: "2024", skills: "React, Tailwind CSS, Framer Motion" },
+  "craftoria": {
+    title: "Craftoria",
+    category: "Full-Stack Development",
+    year: "2026",
+    img: "/projects/eliteverseportfolio.jpg",
+    color: "#4f46e5",
+    desc: "A digital asset discovery & search platform supporting multi-format downloads (PNG/SVG/WebP), persistent bookmark collections, and sub-50ms typo-tolerant search.",
+    role: "Full Stack Developer",
+    team: "Solo / Creator",
+    timeline: "2026",
+    skills: "React.js, TypeScript, Tailwind CSS, Node.js, Express.js, MongoDB, Typesense, Cloudinary, Framer Motion, JWT",
+    context: "Creative designers and developers frequently struggle with cluttered asset libraries that lack fast, typo-tolerant search and high-speed image rendering.",
+    solution: "Engineered a production platform integrating Typesense for faceted search across semantic tags, dynamic Masonry layouts with Cloudinary on-the-fly transformations, and a secure Admin CMS for bulk asset uploads.",
+    highlights: [
+      "Typo-tolerant sub-50ms faceted search across tags, styles, and color palettes with Typesense.",
+      "Optimized UI render latency by ~45% via dynamic Masonry grid and automated Cloudinary transformations.",
+      "Protected Admin CMS with JWT authentication managing bulk uploads and indexing pipelines.",
+      "Support for multi-format downloads (PNG, SVG, WebP) and persistent user collections."
+    ]
+  },
+  "sugra-jewels": {
+    title: "Sugra Jewels",
+    category: "E-Commerce Platform",
+    year: "2026",
+    img: "/projects/SugraJewels.jpg",
+    color: "#ec4899",
+    desc: "A production-grade luxury jewelry storefront engineered with React, TypeScript, and Node.js featuring persistent cart state, real-time inventory checks, and an admin management suite.",
+    role: "Full Stack Developer",
+    team: "Client / Freelance",
+    timeline: "2026",
+    skills: "React.js, TypeScript, Node.js, Express.js, MongoDB, JWT, Cloudinary, Tailwind CSS, Framer Motion",
+    context: "Fine jewelry sales require high-trust visuals, frictionless shopping carts, and strict real-time stock integrity to avoid accidental zero-stock checkouts.",
+    solution: "Architected a full-stack platform with RBAC authentication separating customer storefronts from management portals, automated stock validation, and 90+ Lighthouse mobile performance.",
+    highlights: [
+      "Role-Based Access Control (RBAC) via JWT isolating customers and administrative managers.",
+      "Full CRUD Admin Dashboard for collections, product catalog, dynamic price tiers, and stock alerts.",
+      "Edge-case automated checkout locks restricting zero-stock purchases across concurrent sessions.",
+      "Cloudinary f_auto/q_auto optimization reducing image payload by 60% and achieving 90+ Lighthouse score."
+    ]
+  },
+  "onlyloop": {
+    title: "OnlyLoop",
+    category: "D2C E-Commerce",
+    year: "2026",
+    img: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=600&auto=format&fit=crop&q=80",
+    color: "#f59e0b",
+    desc: "An end-to-end Direct-to-Consumer e-commerce storefront with dynamic multi-category filtering, debounced catalog search, and protected operational fulfillment consoles.",
+    role: "Full Stack Engineer",
+    team: "Independent Project",
+    timeline: "2026",
+    skills: "React.js, Node.js, Express.js, MongoDB, Mongoose, JWT, Tailwind CSS, REST APIs",
+    context: "High-volume D2C catalogs experience performance bottlenecks when unfiltered search triggers heavy database read loads on every keystroke.",
+    solution: "Engineered client-side custom debounce logic and MongoDB compound indexing that cut redundant API calls by 40% while ensuring transactional consistency during simultaneous checkouts.",
+    highlights: [
+      "Dynamic multi-category filtering and responsive checkout user flows.",
+      "RBAC across Express middleware protecting inventory fulfillment and order lifecycle tracking.",
+      "Real-time stock validation at checkout to ensure transactional consistency across concurrent sessions.",
+      "Compound MongoDB indexing + client debounce trimming redundant backend calls by 40%."
+    ]
+  },
+  "kattalyx-labs": {
+    title: "KattalyxLabs",
+    category: "Full-Stack Development",
+    year: "2026",
+    img: "/projects/kattalyxlabs.jpg",
+    color: "#0284c7",
+    desc: "Architected multi-portal enterprise web applications (Admin, School, and Speaker dashboards) supporting hybrid learning and automated batch operations.",
+    role: "Full-Stack Developer",
+    team: "KattalyxLabs Team",
+    timeline: "Jan 2026 - Aug 2026",
+    skills: "React.js, Node.js, Express.js, MongoDB, RESTful APIs, Excel Parsing, Microservices",
+    context: "Managing physical-digital hybrid educational sessions required distinct portals for schools, administrators, and guest speakers without data overlap.",
+    solution: "Engineered scalable REST microservices and automated an Excel-driven certificate generation pipeline saving over 90% of manual processing time.",
+    highlights: [
+      "Multi-portal architecture: unified Admin, School, and Speaker dashboards.",
+      "Automated bulk certificate engine parsing spreadsheets to generate custom certificates and one-click ZIP exports.",
+      "Redesigned the official company web presence with high-performance responsive UI components."
+    ]
+  },
+  "curio-ai": {
+    title: "Curio.ai Admin CMS",
+    category: "Frontend Development",
+    year: "2025",
+    img: "/projects/carovii.jpg",
+    color: "#10b981",
+    desc: "An enterprise Admin CMS enabling centralized management of multi-tier educational curriculums across subjects, chapters, topics, and subtopics.",
+    role: "Frontend Developer Intern",
+    team: "Curio.ai Team",
+    timeline: "July 2025 - Oct 2025",
+    skills: "React.js, RBAC, RESTful APIs, Form Validation, State Optimization",
+    context: "Authoring and maintaining hundreds of modular learning curriculums was error-prone and lacked granular access control between institutions.",
+    solution: "Engineered dynamic multi-step form workflows with validation states and RBAC filtering to enforce data privacy and low-latency dashboard tables.",
+    highlights: [
+      "Centralized curriculum management hierarchy: Subjects -> Chapters -> Topics -> Subtopics.",
+      "Role-Based Access Control and multi-criteria client-side search guaranteeing institution-level privacy.",
+      "Optimized state management for low-latency rendering across data-heavy dashboard tables."
+    ]
+  }
 };
 
 const features = [
@@ -52,7 +144,7 @@ const toc = [
 const ProjectDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const project = projectsData[id] || projectsData["aora"];
+  const project = projectsData[id] || projectsData["craftoria"];
   const [activeSection, setActiveSection] = useState('context');
 
   const insights = [
@@ -169,23 +261,27 @@ const ProjectDetail = () => {
             {/* Context & Solution Sections */}
             <div className="space-y-12">
               <section id="context">
-                <h2 className="text-3xl font-serif text-[#2D2D2D] mb-4">Language learning is tricky</h2>
+                <h2 className="text-3xl font-serif text-[#2D2D2D] mb-4">Context & The Challenge</h2>
                 <p className="text-lg text-[#635F55] leading-relaxed">
-                  Having learned Mandarin Chinese over the pandemic, I know from experience that language learning is tough.
-                  Engaging in native media is no doubt the best way to learn, but it’s really difficult to find media
-                  that is both interesting and at your level.
+                  {project.context || "Delivering high-performance, maintainable user experiences requires deep understanding of system architecture, responsive UI mechanics, and tight feedback loops."}
                 </p>
               </section>
 
               <section id="solution">
-                <h2 className="text-3xl font-serif text-[#2D2D2D] mb-6">Comprehensible input at scale, delivered through stories</h2>
+                <h2 className="text-3xl font-serif text-[#2D2D2D] mb-6">Engineered Solution</h2>
                 <p className="text-lg text-[#635F55] leading-relaxed mb-4">
-                  The main thing that prevents learners from reading books in their target language is that most of the time, content is either:
+                  {project.solution || "Architected a scalable production full-stack solution with optimal performance and seamless ergonomics."}
                 </p>
-                <ul className="list-decimal pl-5 space-y-2 text-[#635F55] leading-relaxed">
-                  <li>Interesting but written for native speakers (and therefore linguistically complex), or</li>
-                  <li>Boring and written for children.</li>
-                </ul>
+                {project.highlights && project.highlights.length > 0 && (
+                  <div className="bg-[#EFECE3] border border-[#DBD6C9] p-6 rounded-2xl">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-[#7C7667] mb-4">Key Technical Highlights</h3>
+                    <ul className="list-disc pl-5 space-y-2 text-[#444] text-sm md:text-base leading-relaxed">
+                      {project.highlights.map((item, idx) => (
+                        <li key={idx}><span className="font-medium text-[#222]">{item}</span></li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </section>
 
 
