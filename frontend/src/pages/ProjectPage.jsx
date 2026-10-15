@@ -98,7 +98,7 @@ const ProjectCard = ({ item, index, onClick }) => {
       >
         {/* Short Description */}
         <p className="text-[13px] text-[#635F55] font-medium leading-relaxed">
-          A high-fidelity premium digital product designed and engineered to deliver top-notch performance and absolute pixel-perfect user experience.
+          {item.desc || "A high-fidelity premium digital product designed and engineered to deliver top-notch performance and absolute pixel-perfect user experience."}
         </p>
 
         {/* Divider Dash Line */}
@@ -133,13 +133,51 @@ const ProjectPage = () => {
   const navigate = useNavigate();
 
   const projects = [
-    { id: "EliteVerseSolutions", title: "EliteVerse Solutions", category: "Design", year: "2026", img: "/projects/eliteverseportfolio.jpg", bg: "bg-[#FFF2EB]" },
-    { id: "carovii", title: "Carovii", category: "Development", year: "2026", img: "/projects/carovii.jpg", bg: "bg-gray-100" },
-    { id: "Kattalyx Labs", title: "Kattalyx Labs", category: "Development & Design", year: "2024", img: "/projects/kattalyxlabs.jpg", bg: "bg-[#F0F5FF]" },
-    { id: "Sugra Jewels", title: "Sugra Jewels", category: "Freelance", year: "2024", img: "/projects/SugraJewels.jpg", bg: "bg-[#F0F5FF]" },
-    // { id: "ochi-design", title: "Ochi Design", category: "Development & Design", year: "2024", img: "/projects/ochidesign.webp", bg: "bg-[#FFFDE0]" },
-    // { id: "snapalyzer", title: "Snapalyzer", category: "Development & Design", year: "2024", img: "/projects/snapalyzer.webp", bg: "bg-gray-100" },
-    // { id: "veni-labs", title: "Veni Labs", category: "Development", year: "2024", img: "/projects/veni-labs.webp", bg: "bg-[#FFF2EB]" },
+    {
+      id: "craftoria",
+      title: "Craftoria",
+      category: "Development",
+      year: "2026",
+      img: "/projects/eliteverseportfolio.jpg",
+      bg: "bg-[#FFF2EB]",
+      desc: "Digital Asset Discovery & Search Platform built with React, Typesense, MongoDB, and Cloudinary."
+    },
+    {
+      id: "sugra-jewels",
+      title: "Sugra Jewels",
+      category: "Development & Freelance",
+      year: "2026",
+      img: "/projects/SugraJewels.jpg",
+      bg: "bg-[#F0F5FF]",
+      desc: "Production-grade full-stack jewelry storefront with RBAC, persistent cart, real-time inventory, and 90+ Lighthouse score."
+    },
+    {
+      id: "onlyloop",
+      title: "OnlyLoop",
+      category: "Development",
+      year: "2026",
+      img: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=600&auto=format&fit=crop&q=80",
+      bg: "bg-gray-100",
+      desc: "D2C E-Commerce storefront featuring compound indexing, debounced search, and transactional stock validation."
+    },
+    {
+      id: "kattalyx-labs",
+      title: "KattalyxLabs",
+      category: "Development & Design",
+      year: "2026",
+      img: "/projects/kattalyxlabs.jpg",
+      bg: "bg-[#F0F5FF]",
+      desc: "Multi-portal architecture (Admin, School, Speaker) with automated bulk certificate processing and RESTful microservices."
+    },
+    {
+      id: "curio-ai",
+      title: "Curio.ai Admin CMS",
+      category: "Development",
+      year: "2025",
+      img: "/projects/carovii.jpg",
+      bg: "bg-[#FFFDE0]",
+      desc: "Enterprise Admin CMS in React.js for hierarchical curriculum management, RBAC, and low-latency dashboard tables."
+    },
   ];
 
   const filteredProjects = projects.filter((p) => {
