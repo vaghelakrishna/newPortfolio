@@ -1,39 +1,6 @@
-
-        // {/* Content */}
-        // <div className="max-w-5xl">
-        //   <p className="text-[32px] leading-[1.9] text-[#4D4D4D]">
-        //     It all started in 2011 when my dad brought home a Samsung Galaxy
-        //     S2. I was just a curious kid, spending hours exploring the Play
-        //     Store, downloading random apps just to see how they looked and
-        //     felt. I didn't know the words for it back then, but I was falling
-        //     in love with <HighlightWord>product design</HighlightWord>.
-        //   </p>
-
-        //   <p className="mt-12 text-[32px] leading-[1.9] text-[#4D4D4D]">
-        //     Before screens took over, I was obsessed with cars and
-        //     photography. I loved how a car looked fast even when standing
-        //     still, or how a photo could freeze a feeling forever.
-        //   </p>
-
-        //   <p className="mt-12 text-[32px] leading-[1.9] text-[#4D4D4D]">
-        //     During the lockdown, I finally connected the dots. I realized that
-        //     building digital products combined everything I loved.
-        //     Now at <HighlightWord>CRED</HighlightWord>, previously at{" "}
-        //     <HighlightWord>District by Zomato</HighlightWord>, I get to do
-        //     exactly that every day.
-        //   </p>
-        // </div>
-     
-
-
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  AlignLeft,
-  List,
-  CalendarDays,
-} from "lucide-react";
+import { AlignLeft, List } from "lucide-react";
 
 const storyParagraphs = [
   {
@@ -50,200 +17,117 @@ const storyParagraphs = [
   },
 ];
 
-const timeline = [
-  {
-    year: "2011",
-    title: "First Android Phone",
-    description: "Discovered the world of apps through Samsung Galaxy S2.",
-  },
-  {
-    year: "2015",
-    title: "Cars & Photography",
-    description: "Obsessed with aesthetics, mechanics and visual storytelling.",
-  },
-  {
-    year: "2020",
-    title: "Found Product Design",
-    description: "Connected creativity, technology and human psychology.",
-  },
-  {
-    year: "2022",
-    title: "Started Designing",
-    description: "Worked on real products and interfaces.",
-  },
-  {
-    year: "Today",
-    title: "Building Experiences",
-    description: "Designing systems that think before they act.",
-  },
-];
-
 export default function AboutSection() {
   const [mode, setMode] = useState("story");
 
   const tabs = [
-    {
-      id: "story",
-      label: "Story",
-      icon: <AlignLeft size={16} />,
-    },
-    {
-      id: "tldr",
-      label: "TL;DR",
-      icon: <List size={16} />,
-    },
-    {
-      id: "timeline",
-      label: "Timeline",
-      icon: <CalendarDays size={16} />,
-    },
+    { id: "story", label: "Story", icon: <AlignLeft size={15} /> },
+    { id: "tldr", label: "TL;DR", icon: <List size={15} /> },
   ];
 
   return (
-    <section className="w-full bg-[#F7F7F4] py-16 px-5 md:py-24 md:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section className="w-full min-h-screen flex items-center bg-[#FAFAF8] text-[#111] py-16 px-6 sm:px-10 lg:px-20">
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
-        {/* Header */}
-        <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center mb-10 md:mb-16">
-          <span className="uppercase tracking-[0.2em] text-sm text-gray-500">
-            About
-          </span>
+          {/* Left Column: Big Editorial Heading & Toggle */}
+          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-8">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-[-0.03em] leading-[1.05] text-black">
+              A little <br /> about me
+            </h2>
 
-          <div className="flex items-center gap-1 bg-[#ECECEA] p-1 rounded-2xl self-start">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setMode(tab.id)}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm transition-all duration-300 ${mode === tab.id
-                  ? "bg-white shadow-sm text-black"
-                  : "text-gray-500 hover:text-black"
-                  }`}
-              >
-                {tab.icon}
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <AnimatePresence mode="wait">
-
-          {/* STORY MODE */}
-          {mode === "story" && (
-            <motion.div
-              key="story"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="space-y-10 max-w-6xl"
-            >
-              {storyParagraphs.map((item, index) => (
-                <p
-                  key={index}
-                  className="text-base md:text-[1rem] leading-[1.8] text-[#444]"
+            {/* Toggle Switch */}
+            <div className="inline-flex items-center gap-1 bg-[#ECECE9] p-1.5 rounded-full border border-black/5 shadow-inner">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setMode(tab.id)}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${mode === tab.id
+                      ? "bg-white text-black shadow-sm"
+                      : "text-neutral-500 hover:text-black"
+                    }`}
                 >
-                  {item.full}
-                </p>
+                  {tab.icon}
+                  {tab.label}
+                </button>
               ))}
-            </motion.div>
-          )}
+            </div>
+          </div>
 
-          {/* TLDR MODE */}
-          {mode === "tldr" && (
-            <motion.div
-              key="tldr"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="space-y-10 max-w-6xl"
-            >
-              {storyParagraphs.map((item, index) => {
-                const fadedText = item.full.replace(
-                  item.highlight,
-                  ""
-                );
+          {/* Right Column: Framed Editorial Content */}
+          <div className="lg:col-span-7 relative p-6 sm:p-10 lg:p-12">
 
-                return (
-                  <p
-                    key={index}
-                    className="text-base md:text-[1rem] leading-[1.8]"
-                  >
-                    <span className="text-[#CFCFCF]">
-                      {fadedText}
-                    </span>{" "}
-                    <span className="text-[#222] font-medium">
-                      {item.highlight}
-                    </span>
-                  </p>
-                );
-              })}
-            </motion.div>
-          )}
+            {/* Top-Right Decorative Bracket */}
+            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-neutral-400 pointer-events-none" />
 
-          {/* TIMELINE MODE */}
-          {mode === "timeline" && (
-            <motion.div
-              key="timeline"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="max-w-4xl"
-            >
-              <div className="border-l-2 border-gray-200 ml-4">
-                {timeline.map((item, index) => (
-                  <div
-                    key={index}
-                    className="relative pl-10 pb-12"
-                  >
-                    <div className="absolute left-[-9px] top-2 w-4 h-4 rounded-full bg-black" />
-
-                    <span className="text-sm text-gray-400">
-                      {item.year}
-                    </span>
-
-                    <h3 className="text-xl font-semibold mt-1 text-[#222]">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-gray-600 mt-2 leading-relaxed">
-                      {item.description}
+            <AnimatePresence mode="wait">
+              {/* STORY MODE */}
+              {mode === "story" && (
+                <motion.div
+                  key="story"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="space-y-8"
+                >
+                  {storyParagraphs.map((item, index) => (
+                    <p
+                      key={index}
+                      className="text-lg sm:text-xl lg:text-[1.28rem] leading-[1.75] font-light text-neutral-800"
+                    >
+                      {item.full}
                     </p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
+                  ))}
+                </motion.div>
+              )}
 
-        </AnimatePresence>
+              {/* TL;DR MODE */}
+              {mode === "tldr" && (
+                <motion.div
+                  key="tldr"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="space-y-8"
+                >
+                  {storyParagraphs.map((item, index) => {
+                    const parts = item.full.split(item.highlight);
+                    return (
+                      <p
+                        key={index}
+                        className="text-lg sm:text-xl lg:text-[1.28rem] leading-[1.75] font-light"
+                      >
+                        <span className="text-neutral-300 transition-colors duration-300">
+                          {parts[0]}
+                        </span>
+                        <span className="text-black font-semibold underline decoration-neutral-300 underline-offset-4 decoration-2">
+                          {item.highlight}
+                        </span>
+                        <span className="text-neutral-300 transition-colors duration-300">
+                          {parts[1]}
+                        </span>
+                      </p>
+                    );
+                  })}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Handwritten Signature Tagline */}
+            <div className="mt-10 pt-4">
+              <span className="font-serif italic text-base sm:text-lg text-neutral-600 tracking-wide">
+                i design for humans, craft is just my playground.
+              </span>
+            </div>
+
+            {/* Bottom-Left Decorative Bracket */}
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-neutral-400 pointer-events-none" />
+          </div>
+
+        </div>
       </div>
     </section>
   );
 }
-
-
-const HighlightWord = ({ children }) => {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <span
-      className="relative inline-block"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <span className="bg-[#F7E89C] px-2 py-1 rounded border border-[#E5D77F]">
-        {children}
-      </span>
-
-      {hovered && (
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="absolute left-1/2 -translate-x-1/2 -top-10 bg-red-500 text-white text-xs px-2 py-1 rounded-md shadow-lg"
-        >
-          You
-        </motion.div>
-      )}
-    </span>
-  );
-};
