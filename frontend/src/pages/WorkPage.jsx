@@ -1,7 +1,8 @@
-import React, { useState, useRef } from "react";
-import { Eye } from "lucide-react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import kattalyxLogo from "../assets/kattalyx_logo.png";
+import curioSvg from "../assets/curio.svg";
 
 const experiences = [
   {
@@ -11,10 +12,10 @@ const experiences = [
     type: "Job",
     duration: "Jan 2026 – Present",
     location: "Remote",
-    logo: "/logos/kattalyx.png",
-    bg: "bg-[#FFF2EB]",
+    logoSrc: kattalyxLogo,
+    logoAlt: "Kattalyx Labs Logo",
     desc: "Developed full-stack web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver scalable solutions.",
-    skills: ["React", "Node.js", "MongoDB", "Tailwind", "Figma", "Git", "REST APIs","Mongoose"],
+    skills: ["React", "Node.js", "MongoDB", "Tailwind", "Figma", "Git", "REST APIs", "Mongoose"],
   },
   {
     id: 2,
@@ -23,8 +24,8 @@ const experiences = [
     type: "Internship",
     duration: "July 2025 – October 2025",
     location: "Remote",
-    logo: null,
-    bg: "bg-[#F0F5FF]",
+    logoSrc: curioSvg,
+    logoAlt: "Curio.ai Logo",
     desc: "Designed and delivered end-to-end digital products for startups and indie makers — from landing pages to full app flows.",
     skills: ["React.js", "Next.js", "Tailwind", "Figma", "Framer Motion", "JavaScript", "TypeScript"],
   },
@@ -35,114 +36,81 @@ const experiences = [
     type: "Internship",
     duration: "2025 – 2025",
     location: "On-site",
-    logo: null,
-    bg: "bg-[#FFFDE0]",
+    logoIcon: "💎",
+    logoAlt: "GemBank Logo",
     desc: "Built multiple full-stack projects using React, Node.js and MongoDB. Focused on real-world problem solving and clean UI implementation.",
-    skills: ["React", "Node.js", "MongoDB", "Tailwind", "Figma", "Git", "REST APIs","Mongoose"],
+    skills: ["React", "Node.js", "MongoDB", "Tailwind", "Figma", "Git", "REST APIs", "Mongoose"],
   },
-  // {
-  //   id: 4,
-  //   company: "Open Source",
-  //   role: "Contributor",
-  //   type: "Open Source",
-  //   duration: "2024",
-  //   location: "Remote",
-  //   logo: null,
-  //   bg: "bg-gray-100",
-  //   desc: "Contributed UI fixes and component improvements to open-source React projects on GitHub.",
-  //   skills: ["React", "Tailwind", "GitHub"],
-  // },
 ];
 
 const WorkCard = ({ item, index }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const containerRef = useRef(null);
   const serialNumber = String(index + 1).padStart(2, "0");
-
-  const handleMouseMove = (e) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    }
-  };
 
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="w-full bg-[#EFECE3] border border-[#DBD6C9] rounded-[28px] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.012)] hover:shadow-[0_24px_50px_rgba(0,0,0,0.06)] relative flex flex-col sm:even:mt-20 overflow-hidden transition-all duration-500 ease-in-out max-h-[340px] hover:max-h-[600px]"
+      className="w-full bg-[#EFECE3] border border-[#DBD6C9] rounded-[24px] sm:rounded-[28px] p-6 sm:p-7 shadow-[0_8px_30px_rgba(0,0,0,0.012)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:border-[#C8C2B3] relative flex flex-col transition-all duration-300"
     >
-      {/* Top Meta Row */}
-      <div className="w-full flex items-center justify-between mb-4 px-1 flex-shrink-0">
-        <div className="w-3.5 h-3.5 rounded-full bg-[#F9F6F0] border border-[#DBD6C9] shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.08)]" />
-        <span className="text-[10px] font-mono font-bold tracking-widest text-[#7C7667]">NO. {serialNumber}</span>
-      </div>
-
-      {/* Company Banner */}
-      <div
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        className={`w-full h-36 overflow-hidden rounded-2xl border border-black/[0.02] flex items-center justify-center relative flex-shrink-0 transition-colors duration-300 ${isHovered ? "cursor-none" : "cursor-pointer"} ${item.bg}`}
-      >
-        {item.logo ? (
-          <img src={item.logo} alt={item.company} className="h-14 object-contain opacity-80" />
-        ) : (
-          <span className="text-4xl font-black tracking-tighter text-black/10 uppercase select-none">
-            {item.company}
-          </span>
-        )}
-
-        {isHovered && (
-          <div
-            className="absolute pointer-events-none z-30 flex items-center gap-1.5 bg-[#E25C1D] text-white px-4 py-2.5 rounded-full shadow-lg border border-orange-400/20 transition-transform duration-75 ease-out"
-            style={{ left: `${mousePos.x}px`, top: `${mousePos.y}px`, transform: "translate(-50%, -50%)" }}
-          >
-            <Eye size={13} className="stroke-[3]" />
-            <span className="text-[10px] font-extrabold uppercase tracking-widest whitespace-nowrap">View Details</span>
-          </div>
-        )}
-      </div>
-
-      {/* Title & Badge */}
-      <div className="mt-5 flex items-start justify-between flex-shrink-0 px-1">
-        <div>
-          <h4 className="text-xl font-extrabold tracking-tight text-[#2B2A27]">{item.role}</h4>
-          <p className="text-sm text-[#7C7667] font-semibold mt-0.5">{item.company}</p>
+      {/* Top Meta Row: Serial Number & Job Type Badge */}
+      <div className="w-full flex items-center justify-between mb-5">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-[#F9F6F0] border border-[#DBD6C9] shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.08)]" />
+          <span className="text-[10px] font-mono font-bold tracking-widest text-[#7C7667]">NO. {serialNumber}</span>
         </div>
-        <span className="text-[9px] font-bold uppercase tracking-wider text-[#7C7667] bg-[#E3DEC0]/40 px-2 py-0.5 rounded border border-[#DBD6C9]/40 mt-1 shrink-0">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-[#7C7667] bg-[#E3DEC0]/50 px-2.5 py-1 rounded-full border border-[#DBD6C9]/60">
           {item.type}
         </span>
       </div>
 
-      {/* Hover Reveal */}
-      <div
-        className={`transition-all duration-500 ease-in-out px-1 overflow-hidden origin-top ${
-          isHovered ? "opacity-100 mt-4 translate-y-0" : "opacity-0 max-h-0 pointer-events-none -translate-y-2"
-        }`}
-      >
-        <p className="text-[13px] text-[#635F55] font-medium leading-relaxed">{item.desc}</p>
+      {/* Role Title */}
+      <h4 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#2B2A27] leading-snug">
+        {item.role}
+      </h4>
 
-        <div className="w-full border-t border-dashed border-[#DBD6C9] my-4" />
+      {/* Company Name with Small Logo Next to it */}
+      <div className="mt-2.5 flex items-center gap-2.5">
+        {item.logoSrc ? (
+          <img
+            src={item.logoSrc}
+            alt={item.logoAlt || item.company}
+            className="w-6 h-6 object-contain rounded-md shrink-0 shadow-xs"
+          />
+        ) : item.logoIcon ? (
+          <span className="w-6 h-6 rounded-md bg-white/70 border border-[#DBD6C9]/60 flex items-center justify-center text-xs shrink-0 shadow-xs">
+            {item.logoIcon}
+          </span>
+        ) : null}
+        <span className="text-base font-bold text-[#4D4940] tracking-tight">{item.company}</span>
+      </div>
 
-        <div className="space-y-2.5 pb-2 text-[11px] font-medium text-[#635F55]">
-          <div className="grid grid-cols-3">
-            <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">Duration</span>
-            <span className="col-span-2 text-[#2B2A27] font-mono font-bold">{item.duration}</span>
-          </div>
-          <div className="grid grid-cols-3">
-            <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">Location</span>
-            <span className="col-span-2 text-[#2B2A27] font-bold">{item.location}</span>
-          </div>
-          <div className="grid grid-cols-3">
-            <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">Skills</span>
-            <div className="col-span-2 flex flex-wrap gap-1">
-              {item.skills.map((s) => (
-                <span key={s} className="bg-[#E3DEC0]/60 text-[#2B2A27] font-bold px-2 py-0.5 rounded text-[10px] border border-[#DBD6C9]/40">
-                  {s}
-                </span>
-              ))}
-            </div>
+      {/* Description */}
+      <p className="text-[13px] sm:text-sm text-[#635F55] font-normal leading-relaxed mt-4">
+        {item.desc}
+      </p>
+
+      {/* Dashed Separator */}
+      <div className="w-full border-t border-dashed border-[#DBD6C9] my-5" />
+
+      {/* Metadata Table */}
+      <div className="space-y-2.5 text-[12px] font-medium text-[#635F55] mt-auto">
+        <div className="grid grid-cols-3 items-center">
+          <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">Duration</span>
+          <span className="col-span-2 text-[#2B2A27] font-mono font-semibold text-xs">{item.duration}</span>
+        </div>
+        <div className="grid grid-cols-3 items-center">
+          <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">Location</span>
+          <span className="col-span-2 text-[#2B2A27] font-semibold text-xs">{item.location}</span>
+        </div>
+        <div className="grid grid-cols-3 items-start pt-1">
+          <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px] pt-1">Skills</span>
+          <div className="col-span-2 flex flex-wrap gap-1.5">
+            {item.skills.map((s) => (
+              <span
+                key={s}
+                className="bg-[#E3DEC0]/70 text-[#2B2A27] font-semibold px-2 py-0.5 rounded text-[11px] border border-[#DBD6C9]/50"
+              >
+                {s}
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -152,7 +120,7 @@ const WorkCard = ({ item, index }) => {
 
 export default function WorkPage() {
   const [filter, setFilter] = useState("All");
-  const filters = ["All", "Job","Internship"];
+  const filters = ["All", "Job", "Internship"];
 
   const filtered = experiences.filter((e) => filter === "All" || e.type === filter);
 
@@ -172,11 +140,12 @@ export default function WorkPage() {
         />
 
         <div className="relative z-10 max-w-5xl mx-auto">
-
+          {/* Section Subtitle */}
           <div className="mb-2 flex w-fit items-center gap-1.5 text-[#E25C1D]">
             <p className="uppercase text-xs font-bold tracking-widest font-sans-clean">Experience</p>
           </div>
 
+          {/* Section Main Title */}
           <h2 className="text-3xl md:text-[42px] font-black tracking-tight text-[#2D2D2D] w-full md:w-2/3 leading-[1.15] uppercase font-sans-clean mb-12">
             Where I've <span className="font-cursive text-[#E25C1D] normal-case text-4xl md:text-[54px] ml-1">worked &amp; grown.</span>
           </h2>
@@ -187,7 +156,7 @@ export default function WorkPage() {
               <button
                 key={label}
                 onClick={() => setFilter(label)}
-                className={`relative rounded-full px-6 py-2.5 text-xs font-bold tracking-wider transition-all duration-200 uppercase font-sans-clean border whitespace-nowrap
+                className={`relative rounded-full px-6 py-2.5 text-xs font-bold tracking-wider transition-all duration-200 uppercase font-sans-clean border whitespace-nowrap cursor-pointer
                   ${filter === label
                     ? "bg-[#E25C1D] text-white border-[#E25C1D] shadow-md shadow-orange-600/10"
                     : "bg-[#FFFDF9] text-gray-500 border-gray-200/80 hover:bg-white hover:text-black hover:border-gray-300"
@@ -198,7 +167,8 @@ export default function WorkPage() {
             ))}
           </div>
 
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-y-12 gap-x-10 items-start">
+          {/* Work Cards Grid */}
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-8 items-stretch">
             {filtered.map((item, i) => (
               <WorkCard key={item.id} item={item} index={i} />
             ))}
