@@ -38,7 +38,7 @@ export default function HomePage() {
       <AboutMe />
       {/* <PhotoStrip /> */}
       {/* <FilmStripSection /> */}
-      <VisitorPassScroll />
+      {/* <VisitorPassScroll /> */}
       <HeresHowSection />
       <ProjectShowcase />
       {/* <MacProjectsDesktop /> */}
