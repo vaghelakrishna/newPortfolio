@@ -34,20 +34,7 @@ const projects = [
       role: 'Lead UX & Frontend',
       skills: 'Design System, Claude, Figma, Prototyping',
     },
-  },
-  {
-    id: 'sugra-jewels',
-    image: sugraImg,
-    video: leaveVideo,
-    link: '/project/sugra-jewels',
-    details: {
-      brand: 'Sugra Jewels, E-Commerce',
-      year: '2026',
-      projectsCount: 'Production Store',
-      role: 'Full Stack Engineer',
-      skills: 'React, Node, Cloudinary, Tailwind',
-    },
-  },
+  }
 ];
 
 export default function ProjectShowcase() {
