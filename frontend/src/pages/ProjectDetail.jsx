@@ -468,14 +468,14 @@ export default function ProjectDetail() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="min-h-screen bg-[#F9F6F0] text-[#2D2D2D] font-sans px-4 py-12 md:px-10 select-none"
+        className="min-h-screen bg-[#F9F6F0] text-[#2D2D2D] font-sans px-4 py-32 md:px-10 select-none"
       >
         <div className="flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
-          
+
           {/* ================= LEFT SIDEBAR (STICKY TOC) ================= */}
           <aside className="w-full md:w-64 flex-shrink-0">
             <div className="sticky top-12 space-y-6">
-              
+
               <button
                 onClick={() => navigate('/project')}
                 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#7C7667] hover:text-[#2D2D2D] transition-colors cursor-pointer"
@@ -492,11 +492,10 @@ export default function ProjectDetail() {
                     <li
                       key={sectionId}
                       onClick={() => scrollTo(sectionId)}
-                      className={`text-xs cursor-pointer transition-all duration-200 py-0.5 ${
-                        activeSection === sectionId
+                      className={`text-xs cursor-pointer transition-all duration-200 py-0.5 ${activeSection === sectionId
                           ? 'text-[#E25C1D] font-bold pl-1 border-l-2 border-[#E25C1D]'
                           : 'text-[#635F55] font-medium hover:text-[#2D2D2D]'
-                      }`}
+                        }`}
                     >
                       {label}
                     </li>
@@ -519,7 +518,7 @@ export default function ProjectDetail() {
 
             {/* 01. OVERVIEW & HERO */}
             <section id="overview" className="space-y-6">
-              
+
               {/* Hero Banner Image */}
               <div className="w-full h-80 sm:h-96 bg-white rounded-3xl border border-[#DBD6C9] overflow-hidden shadow-sm relative">
                 <img
