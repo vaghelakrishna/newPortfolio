@@ -29,9 +29,6 @@ export default function HomePage() {
   return (
     <>
       <CommunityGarden />
-      <WalkingRobot footerRef={footerRef} />
-
-
       <Navbar />
       <ScrollRevealHero />
 
