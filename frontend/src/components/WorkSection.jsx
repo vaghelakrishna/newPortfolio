@@ -20,7 +20,7 @@ const experiences = [
     company: "Curio.ai",
     role: "Frontend Developer",
     type: "Internship",
-    duration: "July 2025 – October 2025",
+    duration: "July 2025 – Oct 2025",
     location: "Remote",
     logoSrc: curioSvg,
     logoAlt: "Curio.ai Logo",
@@ -33,143 +33,86 @@ const experiences = [
     type: "Internship",
     duration: "2025 – 2025",
     location: "On-site",
-    logoIcon: "💎",
+    logoIcon: "",
     logoAlt: "GemBank Logo",
     desc: "Built multiple full-stack projects using React, Node.js and MongoDB. Focused on real-world problem solving and clean UI implementation.",
   },
 ];
 
-const WorkRow = ({ item, index, isLast }) => {
-  const serialNumber = String(index + 1).padStart(2, "0");
-
-  return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className={`relative pl-8 sm:pl-10 pb-12 ${!isLast ? "border-l-2 border-[#E5E0D8]" : ""}`}
-    >
-      {/* Timeline Indicator Dot */}
-      <div className="absolute -left-[9px] top-1.5 flex items-center justify-center">
-        <span className="w-4 h-4 rounded-full bg-[#FAF9F6] border-2 border-[#E25C1D] shadow-sm flex items-center justify-center">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#E25C1D]" />
-        </span>
-      </div>
-
-      <div className="flex flex-col gap-3">
-        {/* Header Row: Left (Role & Company) vs Right (Duration, Type, Location, Serial No) */}
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-
-          {/* Left Side: Role (Top) & Company (Directly below Role) */}
-          <div className="flex flex-col">
-            <h4 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#2B2A27] leading-snug">
-              {item.role}
-            </h4>
-
-            <div className="flex items-center gap-2 mt-1">
-              {item.logoSrc ? (
-                <img
-                  src={item.logoSrc}
-                  alt={item.logoAlt || item.company}
-                  className="w-5 h-5 object-contain rounded shrink-0"
-                />
-              ) : item.logoIcon ? (
-                <span className="w-5 h-5 rounded bg-white/70 border border-[#DBD6C9] flex items-center justify-center text-xs shrink-0">
-                  {item.logoIcon}
-                </span>
-              ) : null}
-              <span className="text-base font-bold text-[#E25C1D] tracking-tight">
-                {item.company}
-              </span>
-            </div>
-          </div>
-
-          {/* Right Side: Meta Info */}
-          <div className="flex flex-wrap sm:flex-col sm:items-end gap-1.5 sm:gap-1 text-right shrink-0">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold tracking-widest text-[#968F7F]">
-                NO. {serialNumber}
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#7C7667] bg-[#EFECE3] px-2.5 py-0.5 rounded-full border border-[#DBD6C9]">
-                {item.type}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-1.5 text-xs font-mono font-medium text-[#7C7667]">
-              <span>{item.duration}</span>
-              <span className="text-[#968F7F]">•</span>
-              <span className="font-sans">{item.location}</span>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Description */}
-        <p className="text-sm sm:text-base text-[#635F55] leading-relaxed max-w-3xl mt-1 font-normal">
-          {item.desc}
-        </p>
-      </div>
-    </motion.div>
-  );
-};
-
 export default function WorkSection() {
-  const [filter] = useState("All");
+  const [filter, setFilter] = useState("All");
 
   const filtered = experiences.filter((e) => filter === "All" || e.type === filter);
 
   return (
-    <section
-      id="work"
-      className="w-full bg-[#FAF9F6] py-24 px-6 md:px-12 relative overflow-hidden select-none font-sans"
-    >
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
-        .font-cursive { font-family: 'Caveat', cursive; }
-      `}</style>
+    <section id="work" className="w-full bg-[#FAF9F6] text-[#111111] py-20 px-6 sm:px-12 md:px-16 font-sans">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
-      {/* Subtle dotted background */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-50"
-        style={{
-          backgroundImage: "radial-gradient(#E5E0D8 1.5px, transparent 1.5px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
-
-      <div className="relative z-10 max-w-4xl mx-auto">
-        {/* Section Header */}
-        <div className="mb-14">
-          <div className="mb-2 flex w-fit items-center gap-1.5 text-[#E25C1D]">
-            <span className="w-2 h-2 rounded-full bg-[#E25C1D] inline-block" />
-            <p className="uppercase text-xs font-bold tracking-widest font-mono">
-              Experience &amp; Career
-            </p>
-          </div>
-
-          <h2 className="text-3xl md:text-[42px] font-black tracking-tight text-[#2D2D2D] leading-[1.15] uppercase">
-            Where I've{" "}
-            <span className="font-cursive text-[#E25C1D] normal-case text-4xl md:text-[54px] ml-1">
-              worked &amp; grown.
-            </span>
+        {/* Left Column (Sticky Heading & Pill Filter) */}
+        <div className="lg:col-span-5 lg:sticky lg:top-24 flex flex-col items-start">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-black leading-[1.08]">
+            Work &amp; <br />
+            experience
           </h2>
+
+
         </div>
 
-        {/* Vertical Timeline List */}
-        <div className="ml-2 sm:ml-4">
+        {/* Right Column (Vertical Minimal List) */}
+        <div className="lg:col-span-7 flex flex-col space-y-12">
           <AnimatePresence mode="popLayout">
             {filtered.map((item, index) => (
-              <WorkRow
+              <motion.div
                 key={item.id}
-                item={item}
-                index={index}
-                isLast={index === filtered.length - 1}
-              />
+                layout
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className={`${index !== 0 ? "pt-12 border-t border-[#E5E2DA]" : ""}`}
+              >
+                {/* Header: Left Role & Company, Right Duration & Location */}
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl font-semibold text-black tracking-tight leading-snug">
+                      {item.role}
+                    </h3>
+
+                    <div className="flex items-center gap-2 mt-1">
+                      {item.logoSrc ? (
+                        <img
+                          src={item.logoSrc}
+                          alt={item.logoAlt || item.company}
+                          className="w-4 h-4 object-contain shrink-0 opacity-80"
+                        />
+                      ) : item.logoIcon ? (
+                        <span className="text-sm shrink-0">{item.logoIcon}</span>
+                      ) : null}
+                      <span className="text-base text-[#55534E] font-medium">
+                        {item.company}
+                      </span>
+                      <span className="text-xs text-[#9E9B93] bg-[#EAE8E3] px-2 py-0.5 rounded-full">
+                        {item.type}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right Meta Info */}
+                  <div className="text-xs sm:text-sm text-[#777571] font-mono shrink-0 sm:text-right mt-1 sm:mt-0">
+                    <div>{item.duration}</div>
+                    <div className="text-[#9E9B93] font-sans text-xs">{item.location}</div>
+                  </div>
+                </div>
+
+                {/* Description (Lightweight Editorial Font Style) */}
+                <p className="mt-5 text-base sm:text-lg text-[#4A4843] leading-relaxed font-light tracking-normal">
+                  {item.desc}
+                </p>
+              </motion.div>
             ))}
           </AnimatePresence>
         </div>
+
       </div>
     </section>
   );
