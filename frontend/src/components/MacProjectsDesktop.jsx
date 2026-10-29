@@ -25,13 +25,13 @@ import leaveVideo from '../assets/leave.webm';
 
 const projectsList = [
   {
-    id: 'flebo',
-    title: 'Re-design Flebo',
-    role: 'UX Designer',
-    stack: 'Figma, Claude',
+    id: 'carovii',
+    title: 'Carovii Platform',
+    role: 'Full-Stack Developer',
+    stack: 'React, HTML5 Canvas, Tailwind',
     year: '2026',
-    url: 'flebo.in',
-    type: 'video', // Shows interactive video or iframe
+    url: 'carovii.app',
+    type: 'video',
     videoSrc: leaveVideo,
     fallbackImg: kattalyxImg,
     badgeColor: '#E11D48',
@@ -48,7 +48,7 @@ const projectsList = [
     badgeColor: '#4F46E5',
   },
   {
-    id: 'sugra',
+    id: 'sugra-jewels',
     title: 'Sugra Jewels Storefront',
     role: 'Frontend Engineer',
     stack: 'React, Tailwind, Cloudinary',
@@ -242,8 +242,8 @@ export default function MacProjectsDesktop() {
               <div className="w-full bg-[#1A1F2C] text-white px-3 sm:px-5 py-2 flex items-center justify-between text-[11px] font-sans">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <span className="font-extrabold text-sm tracking-tight text-white flex items-center gap-1">
-                    {currentProject.id === 'flebo' ? (
-                      <>flebo<span className="text-orange-400">.in</span></>
+                    {currentProject.id === 'carovii' ? (
+                      <>carovii<span className="text-pink-400">.app</span></>
                     ) : (
                       currentProject.title
                     )}
@@ -336,14 +336,14 @@ export default function MacProjectsDesktop() {
             <span className="text-xl">📁</span>
           </div>
 
-          {/* Dock Icon: Flebo (Active) */}
+          {/* Dock Icon: Carovii (Active) */}
           <div 
             onClick={() => { setActiveProjectIndex(0); setIsWindowOpen(true); }}
             className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white flex items-center justify-center shadow-md cursor-pointer hover:-translate-y-2 transition-transform duration-200 border ${
               activeProjectIndex === 0 ? 'ring-2 ring-blue-500 ring-offset-2' : ''
             }`}
           >
-            <span className="text-xs font-bold text-red-500 font-mono">flebo</span>
+            <span className="text-xs font-bold text-pink-500 font-mono">carovii</span>
           </div>
 
           {/* Dock Icon: Craftoria */}
