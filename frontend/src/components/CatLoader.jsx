@@ -1,4 +1,4 @@
-import thinkingDots from "../assets/dot.svg";
+import thinkingDots from "../assets/dot.webp";
 import pixelCat from "../assets/think-cat.svg";
 
 export default function CatLoader() {
