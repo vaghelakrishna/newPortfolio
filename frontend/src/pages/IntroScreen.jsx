@@ -226,54 +226,6 @@ export default function IntroScreen({ onExplore }) {
       ))}
 
 
-      {/* Decorative Floating Elements */}
-      <motion.div
-        animate={{ y: [-5, 5, -5] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute left-[14%] top-[52%] text-pink-400 text-3xl font-light pointer-events-none"
-      >
-        +
-      </motion.div>
-
-      <motion.div
-        animate={{ y: [4, -4, 4] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute left-[17%] top-[53%] text-yellow-300 text-sm pointer-events-none"
-      >
-        +
-      </motion.div>
-
-      <motion.div
-        animate={{ rotate: [0, 15, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute right-[11%] top-[25%] text-yellow-200 pointer-events-none"
-      >
-        ✦
-      </motion.div>
-
-      <motion.div
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute right-[12%] top-[26%] text-orange-400 text-xs pointer-events-none"
-      >
-        ●
-      </motion.div>
-
-      <motion.div
-        animate={{ rotate: [0, -15, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute right-[25%] bottom-[18%] text-yellow-200 pointer-events-none"
-      >
-        ✦
-      </motion.div>
-
-      <motion.div
-        animate={{ scale: [1, 1.3, 1] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute right-[24%] bottom-[17%] text-cyan-400 text-xs pointer-events-none"
-      >
-        ○
-      </motion.div>
 
       {/* Center Content with Staggered Entrance */}
       <motion.div
