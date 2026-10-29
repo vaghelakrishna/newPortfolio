@@ -4,8 +4,8 @@ import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Assets
-import croviiImg from '../assets/carovii.png';
-import canvaelementsImg from '../assets/canvaelements.png';
+import croviiImg from '../assets/carovii.webp';
+import canvaelementsImg from '../assets/canvaelements.webp';
 import sugraImg from '../assets/kattalyx.webp';
 import leaveVideo from '../assets/leave.webm';
 
