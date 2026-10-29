@@ -1,11 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
-// प्रत्येक प्रोजेक्ट कार्ड के लिए अलग सब-कंपोनेंट
 const ProjectCard = ({ item, index, onClick }) => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -21,7 +20,6 @@ const ProjectCard = ({ item, index, onClick }) => {
     }
   };
 
-  // सीरियल नंबर के लिए फ़ॉर्मेटिंग (e.g., 1 -> NO. 01)
   const serialNumber = String(index + 1).padStart(2, "0");
 
   return (
@@ -29,33 +27,33 @@ const ProjectCard = ({ item, index, onClick }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
-      className="w-full bg-[#EFECE3] border border-[#DBD6C9] rounded-[28px] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.012)] hover:shadow-[0_24px_50px_rgba(0,0,0,0.06)] relative flex flex-col sm:even:mt-20 overflow-hidden transition-all duration-500 ease-in-out max-h-[380px] hover:max-h-[650px] cursor-pointer"
+      className="w-full bg-[#EFECE3] border border-[#DBD6C9] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 shadow-[0_8px_30px_rgba(0,0,0,0.012)] hover:shadow-[0_24px_50px_rgba(0,0,0,0.06)] relative flex flex-col sm:even:mt-20 overflow-hidden transition-all duration-500 ease-in-out h-auto sm:max-h-[380px] sm:hover:max-h-[650px] cursor-pointer"
     >
-      {/* Top Meta Details Row */}
+      {/* Top Meta Row */}
       <div className="w-full flex items-center justify-between mb-4 px-1 flex-shrink-0">
-        <div className="w-3.5 h-3.5 rounded-full bg-[#F9F6F0] border border-[#DBD6C9] shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.08)]" />
+        <div className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#F9F6F0] border border-[#DBD6C9] shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.08)]" />
         <span className="text-[10px] font-mono font-bold tracking-widest text-[#7C7667]">
           NO. {serialNumber}
         </span>
       </div>
 
-      {/* IMAGE HOVER ZONE & CUSTOM CURSOR */}
+      {/* Image Preview Container */}
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
-        className={`aspect-[3/2] w-full overflow-hidden rounded-2xl border border-black/[0.02] p-3 flex items-center justify-center relative flex-shrink-0 transition-colors duration-300 ${isHovered ? "cursor-none bg-black/[0.02]" : "cursor-pointer"
+        className={`aspect-[3/2] w-full overflow-hidden rounded-xl sm:rounded-2xl border border-black/[0.02] p-2.5 sm:p-3 flex items-center justify-center relative flex-shrink-0 transition-colors duration-300 ${isHovered ? "sm:cursor-none bg-black/[0.02]" : "cursor-pointer"
           } ${item.bg}`}
       >
         <img
           src={item.img}
           alt={item.title}
-          className="w-full h-full object-cover rounded-xl shadow-sm transition duration-700 ease-out group-hover:scale-[1.02]"
+          className="w-full h-full object-cover rounded-lg sm:rounded-xl shadow-xs transition duration-700 ease-out group-hover:scale-[1.02]"
         />
 
-        {/* CUSTOM "VIEW CASE STUDY" CURSOR */}
+        {/* Custom floating cursor - sirf desktop (sm+) ke liye enable kiya hai */}
         {isHovered && (
           <div
-            className="absolute pointer-events-none z-30 flex items-center gap-1.5 bg-[#E25C1D] text-white px-4 py-2.5 rounded-full shadow-lg border border-orange-400/20 transition-transform duration-75 ease-out"
+            className="hidden sm:flex absolute pointer-events-none z-30 items-center gap-1.5 bg-[#E25C1D] text-white px-4 py-2.5 rounded-full shadow-lg border border-orange-400/20 transition-transform duration-75 ease-out"
             style={{
               left: `${mousePos.x}px`,
               top: `${mousePos.y}px`,
@@ -70,12 +68,12 @@ const ProjectCard = ({ item, index, onClick }) => {
         )}
       </div>
 
-      {/* TITLE AND BADGES */}
-      <div className="mt-5 flex items-start justify-between flex-shrink-0 font-sans-clean px-1">
-        <h4 className="text-xl font-extrabold tracking-tight text-[#2B2A27]">
+      {/* Title & Badges */}
+      <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-between gap-2 flex-shrink-0 font-sans-clean px-1">
+        <h4 className="text-lg sm:text-xl font-extrabold tracking-tight text-[#2B2A27]">
           {item.title}
         </h4>
-        <div className="flex gap-1.5">
+        <div className="flex flex-wrap gap-1.5">
           <span className="text-[9px] font-bold uppercase tracking-wider text-[#7C7667] bg-[#E3DEC0]/40 px-2 py-0.5 rounded border border-[#DBD6C9]/40">
             {item.category.split(" & ")[0]}
           </span>
@@ -85,21 +83,21 @@ const ProjectCard = ({ item, index, onClick }) => {
         </div>
       </div>
 
-      {/* HIDDEN EXTRA DETAILS SECTION */}
+      {/* Details Section: Mobile par hamesha expand rahega, desktop par hover par khulega */}
       <div
-        className={`transition-all duration-500 ease-in-out px-1 overflow-hidden origin-top ${isHovered
-            ? "opacity-100 mt-4 translate-y-0"
-            : "opacity-0 max-h-0 pointer-events-none -translate-y-2"
-          }`}
+        className={`px-1 transition-all duration-500 ease-in-out sm:overflow-hidden ${isHovered
+            ? "sm:opacity-100 sm:mt-4 sm:translate-y-0 sm:max-h-[300px]"
+            : "sm:opacity-0 sm:max-h-0 sm:pointer-events-none sm:-translate-y-2"
+          } mt-3 sm:mt-0`}
       >
-        <p className="text-[13px] text-[#635F55] font-medium leading-relaxed">
+        <p className="text-[12px] sm:text-[13px] text-[#635F55] font-medium leading-relaxed">
           {item.desc ||
             "A high-fidelity premium digital product designed and engineered to deliver top-notch performance and absolute pixel-perfect user experience."}
         </p>
 
-        <div className="w-full border-t border-dashed border-[#DBD6C9] my-4" />
+        <div className="w-full border-t border-dashed border-[#DBD6C9] my-3 sm:my-4" />
 
-        <div className="space-y-2.5 pb-2 text-[11px] font-medium text-[#635F55]">
+        <div className="space-y-2 pb-1 text-[11px] font-medium text-[#635F55]">
           <div className="grid grid-cols-3">
             <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">
               Role
@@ -135,7 +133,16 @@ const offsets = [0, 30, 10, 45, 5, 35, 15, 40];
 
 const ProjectPage = () => {
   const [filter, setFilter] = useState("All");
+  const [isMobile, setIsMobile] = useState(false);
   const navigate = useNavigate();
+
+  // Screen size check for clean rotation disable on mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const projects = [
     {
@@ -201,7 +208,7 @@ const ProjectPage = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="w-full min-h-screen bg-[#F9F6F0] py-32 px-6 md:px-12 relative overflow-hidden select-none font-sans-clean"
+        className="w-full min-h-screen bg-[#F9F6F0] py-24 sm:py-32 px-5 sm:px-8 md:px-12 relative overflow-x-hidden font-sans-clean"
       >
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
@@ -209,7 +216,7 @@ const ProjectPage = () => {
           .font-sans-clean { font-family: 'Plus Jakarta Sans', sans-serif; }
         `}</style>
 
-        {/* Grid Matrix Background */}
+        {/* Grid Background */}
         <div
           className="absolute inset-0 pointer-events-none opacity-60"
           style={{
@@ -219,15 +226,15 @@ const ProjectPage = () => {
         />
 
         <div className="relative z-10 max-w-5xl mx-auto">
-          {/* Header Badge */}
+          {/* Header Tag */}
           <div className="mb-2 flex w-fit items-center gap-1.5 text-[#E25C1D]">
             <p className="uppercase text-xs font-bold tracking-widest font-sans-clean">
               My Work
             </p>
           </div>
 
-          {/* Section Title */}
-          <h2 className="text-3xl md:text-[42px] font-black tracking-tight text-[#2D2D2D] w-full md:w-2/3 leading-[1.15] uppercase font-sans-clean mb-8 sm:mb-12">
+          {/* Section Heading */}
+          <h2 className="text-3xl md:text-[42px] font-black tracking-tight text-[#2D2D2D] w-full md:w-2/3 leading-[1.15] uppercase font-sans-clean mb-6 sm:mb-12">
             Creating{" "}
             <span className="font-cursive text-[#E25C1D] normal-case text-4xl md:text-[54px] ml-1">
               next level
@@ -235,7 +242,7 @@ const ProjectPage = () => {
             digital products.
           </h2>
 
-          {/* Filter Buttons: Mobile me hidden, sm screen se visible */}
+          {/* Filter Pills: Mobile par hidden, desktop (sm+) par visible */}
           <div className="hidden sm:flex gap-2.5 w-full overflow-x-auto no-scrollbar sm:justify-end">
             {["All", "Development", "Design", "Freelance"].map((label) => (
               <button
@@ -251,14 +258,14 @@ const ProjectPage = () => {
             ))}
           </div>
 
-          {/* Project Grid Layout */}
-          <div className="mt-8 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 gap-y-16 gap-x-10 items-start">
+          {/* Projects List */}
+          <div className="mt-6 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 gap-y-8 sm:gap-y-16 gap-x-10 items-start">
             {filteredProjects.map((item, i) => (
               <motion.div
                 key={item.title}
                 initial={{
-                  rotate: rotations[i % rotations.length],
-                  y: offsets[i % offsets.length],
+                  rotate: isMobile ? 0 : rotations[i % rotations.length],
+                  y: isMobile ? 0 : offsets[i % offsets.length],
                 }}
                 whileHover={{ rotate: 0, y: 0 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
