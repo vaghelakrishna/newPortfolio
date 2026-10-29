@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import ScrollRevealHero from '../components/ScrollRevealHero'
 import AboutMe from '../components/AboutMe'
 import CustomCursor from '../components/CustomCursor'
@@ -23,9 +23,23 @@ import HeroBoard from '../components/HeroBoard'
 import MacWorkWindow from "../components/MacWorkWindow";
 import MacProjectsDesktop from "../components/MacProjectsDesktop";
 import ProjectShowcase from "../components/ProjectShowcase";
+import WorkSection from "../components/WorkSection";
 
 export default function HomePage() {
   const footerRef = useRef(null);
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const targetId = window.location.hash;
+      const el = document.querySelector(targetId);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      }
+    }
+  }, []);
+
   return (
     <>
       <CommunityGarden />
@@ -38,9 +52,9 @@ export default function HomePage() {
       {/* <VisitorPassScroll /> */}
       <HeresHowSection />
       <ProjectShowcase />
+      <WorkSection />
       {/* <MacProjectsDesktop /> */}
       {/* <CatLoader /> */}
-      {/* <WorkSection /> */}
       {/* <LogoMarquee /> */}
       {/* <FilmStrip /> */}
 
