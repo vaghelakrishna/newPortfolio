@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import avatarImg from '../assets/avatar.png';
+import avatarImg from '../assets/avatar.webp';
 import workImg from '../assets/work.png';
-import flowerImg from '../assets/flower2Img.png';
+import flowerImg from '../assets/flower2Img.webp';
 
 export default function ScrollRevealHero() {
   const containerRef = useRef(null);
