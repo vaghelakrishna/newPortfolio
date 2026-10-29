@@ -2,12 +2,11 @@ import IntroScreen from "./pages/IntroScreen";
 import VisitorPass from "./pages/VisitorPass";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import VisitorGallery from './pages/VisitorGallery'
 import ProjectPage from "./pages/ProjectPage";
 import ProjectDetail from "./pages/ProjectDetail";
 import ContactUsPage from "./pages/ContactUsPage";
-import WorkPage from "./pages/WorkPage";
 // import FooterNavigation from "./components/WalkingRobot";
 
 export default function App() {
@@ -33,9 +32,7 @@ export default function App() {
           path="/contact"
           element={<ContactUsPage />} />
 
-        <Route path="/work" element={<WorkPage />} />
-
-        <Route to="/contact" element={<ContactUsPage />} />
+        <Route path="/work" element={<Navigate to="/home#work" replace />} />
 
         <Route path="/visitor-gallery" element={<VisitorGallery />} />
 
