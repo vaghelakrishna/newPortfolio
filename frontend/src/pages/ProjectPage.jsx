@@ -22,27 +22,21 @@ const ProjectCard = ({ item, index, onClick }) => {
   };
 
   // सीरियल नंबर के लिए फ़ॉर्मेटिंग (e.g., 1 -> NO. 01)
-  const serialNumber = String(index + 1).padStart(2, '0');
+  const serialNumber = String(index + 1).padStart(2, "0");
 
   return (
-    /* 
-      MAIN INTERACTIVE CARD CONTAINER 
-      image_3314a6.png की तरह ही इसे एक सुंदर फोल्डर/शीट का लुक दिया गया है।
-      होवर होने पर यह अपनी हाइट स्मूथली एडजस्ट करेगा (max-h-40 से max-h-[600px] ट्रांजिशन)
-    */
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
       className="w-full bg-[#EFECE3] border border-[#DBD6C9] rounded-[28px] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.012)] hover:shadow-[0_24px_50px_rgba(0,0,0,0.06)] relative flex flex-col sm:even:mt-20 overflow-hidden transition-all duration-500 ease-in-out max-h-[380px] hover:max-h-[650px] cursor-pointer"
     >
-
       {/* Top Meta Details Row */}
       <div className="w-full flex items-center justify-between mb-4 px-1 flex-shrink-0">
-        {/* Left Punch Hole Symbol */}
         <div className="w-3.5 h-3.5 rounded-full bg-[#F9F6F0] border border-[#DBD6C9] shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.08)]" />
-        {/* Right Serial Tag */}
-        <span className="text-[10px] font-mono font-bold tracking-widest text-[#7C7667]">NO. {serialNumber}</span>
+        <span className="text-[10px] font-mono font-bold tracking-widest text-[#7C7667]">
+          NO. {serialNumber}
+        </span>
       </div>
 
       {/* IMAGE HOVER ZONE & CUSTOM CURSOR */}
@@ -78,7 +72,9 @@ const ProjectCard = ({ item, index, onClick }) => {
 
       {/* TITLE AND BADGES */}
       <div className="mt-5 flex items-start justify-between flex-shrink-0 font-sans-clean px-1">
-        <h4 className="text-xl font-extrabold tracking-tight text-[#2B2A27]">{item.title}</h4>
+        <h4 className="text-xl font-extrabold tracking-tight text-[#2B2A27]">
+          {item.title}
+        </h4>
         <div className="flex gap-1.5">
           <span className="text-[9px] font-bold uppercase tracking-wider text-[#7C7667] bg-[#E3DEC0]/40 px-2 py-0.5 rounded border border-[#DBD6C9]/40">
             {item.category.split(" & ")[0]}
@@ -89,44 +85,53 @@ const ProjectCard = ({ item, index, onClick }) => {
         </div>
       </div>
 
-      {/* ========================================================
-          HIDDEN EXTRA DETAILS SECTION (Reveals smoothly on Hover)
-          ======================================================== */}
+      {/* HIDDEN EXTRA DETAILS SECTION */}
       <div
-        className={`transition-all duration-500 ease-in-out px-1 overflow-hidden origin-top ${isHovered ? "opacity-100 mt-4 translate-y-0" : "opacity-0 max-h-0 pointer-events-none -translate-y-2"
+        className={`transition-all duration-500 ease-in-out px-1 overflow-hidden origin-top ${isHovered
+            ? "opacity-100 mt-4 translate-y-0"
+            : "opacity-0 max-h-0 pointer-events-none -translate-y-2"
           }`}
       >
-        {/* Short Description */}
         <p className="text-[13px] text-[#635F55] font-medium leading-relaxed">
-          {item.desc || "A high-fidelity premium digital product designed and engineered to deliver top-notch performance and absolute pixel-perfect user experience."}
+          {item.desc ||
+            "A high-fidelity premium digital product designed and engineered to deliver top-notch performance and absolute pixel-perfect user experience."}
         </p>
 
-        {/* Divider Dash Line */}
         <div className="w-full border-t border-dashed border-[#DBD6C9] my-4" />
 
-        {/* Information Meta Table */}
         <div className="space-y-2.5 pb-2 text-[11px] font-medium text-[#635F55]">
           <div className="grid grid-cols-3">
-            <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">Role</span>
-            <span className="col-span-2 text-[#2B2A27] font-bold">{item.category}</span>
+            <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">
+              Role
+            </span>
+            <span className="col-span-2 text-[#2B2A27] font-bold">
+              {item.category}
+            </span>
           </div>
           <div className="grid grid-cols-3">
-            <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">Team</span>
-            <span className="col-span-2 text-[#2B2A27] font-bold">Independent / Solo</span>
+            <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">
+              Team
+            </span>
+            <span className="col-span-2 text-[#2B2A27] font-bold">
+              Independent / Solo
+            </span>
           </div>
           <div className="grid grid-cols-3">
-            <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">Timeframe</span>
-            <span className="col-span-2 text-[#2B2A27] font-mono font-bold">{item.year} - Present</span>
+            <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">
+              Timeframe
+            </span>
+            <span className="col-span-2 text-[#2B2A27] font-mono font-bold">
+              {item.year} - Present
+            </span>
           </div>
         </div>
       </div>
-
     </div>
   );
 };
 
 const rotations = [-2.1, 1.4, -1.2, 2.3, -1.8, 1.1, -2.5, 1.7];
-const offsets   = [0, 30, 10, 45, 5, 35, 15, 40];
+const offsets = [0, 30, 10, 45, 5, 35, 15, 40];
 
 const ProjectPage = () => {
   const [filter, setFilter] = useState("All");
@@ -140,7 +145,7 @@ const ProjectPage = () => {
       year: "2026",
       img: "/projects/eliteverseportfolio.jpg",
       bg: "bg-[#FFF2EB]",
-      desc: "Digital Asset Discovery & Search Platform built with React, Typesense, MongoDB, and Cloudinary."
+      desc: "Digital Asset Discovery & Search Platform built with React, Typesense, MongoDB, and Cloudinary.",
     },
     {
       id: "sugra-jewels",
@@ -149,7 +154,7 @@ const ProjectPage = () => {
       year: "2026",
       img: "/projects/SugraJewels.jpg",
       bg: "bg-[#F0F5FF]",
-      desc: "Production-grade full-stack jewelry storefront with RBAC, persistent cart, real-time inventory, and 90+ Lighthouse score."
+      desc: "Production-grade full-stack jewelry storefront with RBAC, persistent cart, real-time inventory, and 90+ Lighthouse score.",
     },
     {
       id: "onlyloop",
@@ -158,7 +163,7 @@ const ProjectPage = () => {
       year: "2026",
       img: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=600&auto=format&fit=crop&q=80",
       bg: "bg-gray-100",
-      desc: "D2C E-Commerce storefront featuring compound indexing, debounced search, and transactional stock validation."
+      desc: "D2C E-Commerce storefront featuring compound indexing, debounced search, and transactional stock validation.",
     },
     {
       id: "kattalyx-labs",
@@ -167,7 +172,7 @@ const ProjectPage = () => {
       year: "2026",
       img: "/projects/kattalyxlabs.jpg",
       bg: "bg-[#F0F5FF]",
-      desc: "Multi-portal architecture (Admin, School, Speaker) with automated bulk certificate processing and RESTful microservices."
+      desc: "Multi-portal architecture (Admin, School, Speaker) with automated bulk certificate processing and RESTful microservices.",
     },
     {
       id: "curio-ai",
@@ -176,7 +181,7 @@ const ProjectPage = () => {
       year: "2025",
       img: "/projects/carovii.jpg",
       bg: "bg-[#FFFDE0]",
-      desc: "Enterprise Admin CMS in React.js for hierarchical curriculum management, RBAC, and low-latency dashboard tables."
+      desc: "Enterprise Admin CMS in React.js for hierarchical curriculum management, RBAC, and low-latency dashboard tables.",
     },
   ];
 
@@ -184,7 +189,7 @@ const ProjectPage = () => {
     if (filter === "All") return true;
     if (filter === "Development") return p.category.includes("Development");
     if (filter === "Design") return p.category.includes("Design");
-        if (filter === "Freelance") return p.category.includes("Freelance");
+    if (filter === "Freelance") return p.category.includes("Freelance");
     return true;
   });
 
@@ -198,45 +203,48 @@ const ProjectPage = () => {
         transition={{ duration: 0.5, ease: "easeInOut" }}
         className="w-full min-h-screen bg-[#F9F6F0] py-32 px-6 md:px-12 relative overflow-hidden select-none font-sans-clean"
       >
-
         <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght=700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
-        .font-cursive { font-family: 'Caveat', cursive; }
-        .font-sans-clean { font-family: 'Plus Jakarta Sans', sans-serif; }
-      `}</style>
+          @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+          .font-cursive { font-family: 'Caveat', cursive; }
+          .font-sans-clean { font-family: 'Plus Jakarta Sans', sans-serif; }
+        `}</style>
 
         {/* Grid Matrix Background */}
         <div
           className="absolute inset-0 pointer-events-none opacity-60"
           style={{
-            backgroundImage: 'radial-gradient(#E5E0D8 1.5px, transparent 1.5px)',
-            backgroundSize: '24px 24px'
-          }} />
+            backgroundImage: "radial-gradient(#E5E0D8 1.5px, transparent 1.5px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
 
         <div className="relative z-10 max-w-5xl mx-auto">
-
           {/* Header Badge */}
           <div className="mb-2 flex w-fit items-center gap-1.5 text-[#E25C1D]">
-            {/* <Sparkles className="w-4 h-4 fill-[#E25C1D]/10" /> */}
-            <p className="uppercase text-xs font-bold tracking-widest font-sans-clean">My Work</p>
+            <p className="uppercase text-xs font-bold tracking-widest font-sans-clean">
+              My Work
+            </p>
           </div>
 
           {/* Section Title */}
-          <h2 className="text-3xl md:text-[42px] font-black tracking-tight text-[#2D2D2D] w-full md:w-2/3 leading-[1.15] uppercase font-sans-clean mb-12">
-            Creating <span className="font-cursive text-[#E25C1D] normal-case text-4xl md:text-[54px] ml-1">next level</span> digital products.
+          <h2 className="text-3xl md:text-[42px] font-black tracking-tight text-[#2D2D2D] w-full md:w-2/3 leading-[1.15] uppercase font-sans-clean mb-8 sm:mb-12">
+            Creating{" "}
+            <span className="font-cursive text-[#E25C1D] normal-case text-4xl md:text-[54px] ml-1">
+              next level
+            </span>{" "}
+            digital products.
           </h2>
 
-          {/* Filter Buttons */}
-          <div className="flex gap-2.5 w-full overflow-x-auto no-scrollbar sm:justify-end">
-            {["All", "Development", "Design","Freelance"].map((label) => (
+          {/* Filter Buttons: Mobile me hidden, sm screen se visible */}
+          <div className="hidden sm:flex gap-2.5 w-full overflow-x-auto no-scrollbar sm:justify-end">
+            {["All", "Development", "Design", "Freelance"].map((label) => (
               <button
                 key={label}
                 onClick={() => setFilter(label)}
-                className={`relative rounded-full px-6 py-2.5 text-xs font-bold tracking-wider transition-all duration-200 uppercase font-sans-clean border
-                ${filter === label
+                className={`relative rounded-full px-6 py-2.5 text-xs font-bold tracking-wider transition-all duration-200 uppercase font-sans-clean border ${filter === label
                     ? "bg-[#E25C1D] text-white border-[#E25C1D] shadow-md shadow-orange-600/10"
-                    : "bg-[#FFFDF9] text-gray-500 border-gray-200/80 hover:bg-white hover:text-black hover:border-gray-300"}
-              `}
+                    : "bg-[#FFFDF9] text-gray-500 border-gray-200/80 hover:bg-white hover:text-black hover:border-gray-300"
+                  }`}
               >
                 {label}
               </button>
@@ -244,22 +252,29 @@ const ProjectPage = () => {
           </div>
 
           {/* Project Grid Layout */}
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-y-16 gap-x-10 items-start">
+          <div className="mt-8 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 gap-y-16 gap-x-10 items-start">
             {filteredProjects.map((item, i) => (
               <motion.div
                 key={item.title}
-                initial={{ rotate: rotations[i % rotations.length], y: offsets[i % offsets.length] }}
+                initial={{
+                  rotate: rotations[i % rotations.length],
+                  y: offsets[i % offsets.length],
+                }}
                 whileHover={{ rotate: 0, y: 0 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
               >
-                <ProjectCard item={item} index={i} onClick={() => navigate(`/project/${item.id}`)} />
+                <ProjectCard
+                  item={item}
+                  index={i}
+                  onClick={() => navigate(`/project/${item.id}`)}
+                />
               </motion.div>
             ))}
           </div>
-
         </div>
       </motion.section>
-      <Footer /></>
+      <Footer />
+    </>
   );
 };
 
