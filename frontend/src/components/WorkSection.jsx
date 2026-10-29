@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import kattalyxLogo from "../assets/kattalyx_logo.png";
-import curioSvg from "../assets/curio.svg";
+import curioSvg from "../assets/curio.webp";
 
 const experiences = [
   {
