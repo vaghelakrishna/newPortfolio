@@ -24,6 +24,7 @@ import MacWorkWindow from "../components/MacWorkWindow";
 import MacProjectsDesktop from "../components/MacProjectsDesktop";
 import ProjectShowcase from "../components/ProjectShowcase";
 import WorkSection from "../components/WorkSection";
+import MonthlyRecapSection from "../components/MonthlyRecapSection";
 
 export default function HomePage() {
   const footerRef = useRef(null);
@@ -54,6 +55,7 @@ export default function HomePage() {
       <HeresHowSection />
       <ProjectShowcase />
       <WorkSection />
+      <MonthlyRecapSection />
       {/* <MacProjectsDesktop /> */}
       {/* <CatLoader /> */}
       {/* <LogoMarquee /> */}
