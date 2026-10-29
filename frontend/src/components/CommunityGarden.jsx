@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import sproutImg from '../assets/sproutImg.png';
-import flower1Img from '../assets/flower1Img.png';
-import flower2Img from '../assets/flower2Img.png';
+import flower1Img from '../assets/flower1Img.webp';
+import flower2Img from '../assets/flower2Img.webp';
 import wateringCanImg from '../assets/wateringCanImg.png';
 import Plant from '../assets/leave.webm';
 
