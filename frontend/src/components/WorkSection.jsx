@@ -14,7 +14,6 @@ const experiences = [
     logoSrc: kattalyxLogo,
     logoAlt: "Kattalyx Labs Logo",
     desc: "Developed full-stack web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver scalable solutions.",
-
   },
   {
     id: 2,
@@ -40,77 +39,84 @@ const experiences = [
   },
 ];
 
-const WorkCard = ({ item, index }) => {
+const WorkRow = ({ item, index, isLast }) => {
   const serialNumber = String(index + 1).padStart(2, "0");
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.96 }}
+      exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
-      className="w-full bg-[#EFECE3] border border-[#DBD6C9] rounded-[24px] sm:rounded-[28px] p-6 sm:p-7 shadow-[0_8px_30px_rgba(0,0,0,0.012)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:border-[#C8C2B3] relative flex flex-col transition-all duration-300"
+      className={`relative pl-8 sm:pl-10 pb-12 ${!isLast ? "border-l-2 border-[#E5E0D8]" : ""}`}
     >
-      {/* Top Meta Row: Serial Number & Job Type Badge */}
-      <div className="w-full flex items-center justify-between mb-5">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#F9F6F0] border border-[#DBD6C9] shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.08)]" />
-          <span className="text-[10px] font-mono font-bold tracking-widest text-[#7C7667]">NO. {serialNumber}</span>
-        </div>
-        <span className="text-[10px] font-bold uppercase tracking-wider text-[#7C7667] bg-[#E3DEC0]/50 px-2.5 py-1 rounded-full border border-[#DBD6C9]/60">
-          {item.type}
+      {/* Timeline Indicator Dot */}
+      <div className="absolute -left-[9px] top-1.5 flex items-center justify-center">
+        <span className="w-4 h-4 rounded-full bg-[#FAF9F6] border-2 border-[#E25C1D] shadow-sm flex items-center justify-center">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#E25C1D]" />
         </span>
       </div>
 
-      {/* Role Title */}
-      <h4 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#2B2A27] leading-snug">
-        {item.role}
-      </h4>
+      <div className="flex flex-col gap-3">
+        {/* Header Row: Left (Role & Company) vs Right (Duration, Type, Location, Serial No) */}
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
 
-      {/* Company Name with Small Logo Next to it */}
-      <div className="mt-2.5 flex items-center gap-2.5">
-        {item.logoSrc ? (
-          <img
-            src={item.logoSrc}
-            alt={item.logoAlt || item.company}
-            className="w-6 h-6 object-contain rounded-md shrink-0 shadow-xs"
-          />
-        ) : item.logoIcon ? (
-          <span className="w-6 h-6 rounded-md bg-white/70 border border-[#DBD6C9]/60 flex items-center justify-center text-xs shrink-0 shadow-xs">
-            {item.logoIcon}
-          </span>
-        ) : null}
-        <span className="text-base font-bold text-[#4D4940] tracking-tight">{item.company}</span>
-      </div>
+          {/* Left Side: Role (Top) & Company (Directly below Role) */}
+          <div className="flex flex-col">
+            <h4 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#2B2A27] leading-snug">
+              {item.role}
+            </h4>
 
-      {/* Description */}
-      <p className="text-[13px] sm:text-sm text-[#635F55] font-normal leading-relaxed mt-4">
-        {item.desc}
-      </p>
+            <div className="flex items-center gap-2 mt-1">
+              {item.logoSrc ? (
+                <img
+                  src={item.logoSrc}
+                  alt={item.logoAlt || item.company}
+                  className="w-5 h-5 object-contain rounded shrink-0"
+                />
+              ) : item.logoIcon ? (
+                <span className="w-5 h-5 rounded bg-white/70 border border-[#DBD6C9] flex items-center justify-center text-xs shrink-0">
+                  {item.logoIcon}
+                </span>
+              ) : null}
+              <span className="text-base font-bold text-[#E25C1D] tracking-tight">
+                {item.company}
+              </span>
+            </div>
+          </div>
 
-      {/* Dashed Separator */}
-      <div className="w-full border-t border-dashed border-[#DBD6C9] my-5" />
+          {/* Right Side: Meta Info */}
+          <div className="flex flex-wrap sm:flex-col sm:items-end gap-1.5 sm:gap-1 text-right shrink-0">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono font-bold tracking-widest text-[#968F7F]">
+                NO. {serialNumber}
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#7C7667] bg-[#EFECE3] px-2.5 py-0.5 rounded-full border border-[#DBD6C9]">
+                {item.type}
+              </span>
+            </div>
 
-      {/* Metadata Table */}
-      <div className="space-y-2.5 text-[12px] font-medium text-[#635F55] mt-auto">
-        <div className="grid grid-cols-3 items-center">
-          <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">Duration</span>
-          <span className="col-span-2 text-[#2B2A27] font-mono font-semibold text-xs">{item.duration}</span>
+            <div className="flex items-center gap-1.5 text-xs font-mono font-medium text-[#7C7667]">
+              <span>{item.duration}</span>
+              <span className="text-[#968F7F]">•</span>
+              <span className="font-sans">{item.location}</span>
+            </div>
+          </div>
+
         </div>
-        <div className="grid grid-cols-3 items-center">
-          <span className="text-[#968F7F] font-bold tracking-wider uppercase text-[10px]">Location</span>
-          <span className="col-span-2 text-[#2B2A27] font-semibold text-xs">{item.location}</span>
-        </div>
 
+        {/* Description */}
+        <p className="text-sm sm:text-base text-[#635F55] leading-relaxed max-w-3xl mt-1 font-normal">
+          {item.desc}
+        </p>
       </div>
     </motion.div>
   );
 };
 
 export default function WorkSection() {
-  const [filter, setFilter] = useState("All");
-
+  const [filter] = useState("All");
 
   const filtered = experiences.filter((e) => filter === "All" || e.type === filter);
 
@@ -127,34 +133,43 @@ export default function WorkSection() {
       {/* Subtle dotted background */}
       <div
         className="absolute inset-0 pointer-events-none opacity-50"
-        style={{ backgroundImage: "radial-gradient(#E5E0D8 1.5px, transparent 1.5px)", backgroundSize: "24px 24px" }}
+        style={{
+          backgroundImage: "radial-gradient(#E5E0D8 1.5px, transparent 1.5px)",
+          backgroundSize: "24px 24px",
+        }}
       />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-4xl mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
-          <div>
-            <div className="mb-2 flex w-fit items-center gap-1.5 text-[#E25C1D]">
-              <span className="w-2 h-2 rounded-full bg-[#E25C1D] inline-block" />
-              <p className="uppercase text-xs font-bold tracking-widest font-mono">Experience &amp; Career</p>
-            </div>
-
-            <h2 className="text-3xl md:text-[42px] font-black tracking-tight text-[#2D2D2D] leading-[1.15] uppercase">
-              Where I've <span className="font-cursive text-[#E25C1D] normal-case text-4xl md:text-[54px] ml-1">worked &amp; grown.</span>
-            </h2>
+        <div className="mb-14">
+          <div className="mb-2 flex w-fit items-center gap-1.5 text-[#E25C1D]">
+            <span className="w-2 h-2 rounded-full bg-[#E25C1D] inline-block" />
+            <p className="uppercase text-xs font-bold tracking-widest font-mono">
+              Experience &amp; Career
+            </p>
           </div>
 
-
+          <h2 className="text-3xl md:text-[42px] font-black tracking-tight text-[#2D2D2D] leading-[1.15] uppercase">
+            Where I've{" "}
+            <span className="font-cursive text-[#E25C1D] normal-case text-4xl md:text-[54px] ml-1">
+              worked &amp; grown.
+            </span>
+          </h2>
         </div>
 
-        {/* Work Cards Grid */}
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 items-stretch">
+        {/* Vertical Timeline List */}
+        <div className="ml-2 sm:ml-4">
           <AnimatePresence mode="popLayout">
-            {filtered.map((item, i) => (
-              <WorkCard key={item.id} item={item} index={i} />
+            {filtered.map((item, index) => (
+              <WorkRow
+                key={item.id}
+                item={item}
+                index={index}
+                isLast={index === filtered.length - 1}
+              />
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
