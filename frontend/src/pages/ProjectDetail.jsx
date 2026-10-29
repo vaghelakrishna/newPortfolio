@@ -6,8 +6,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 // Local Asset fallbacks
-import caroviiAsset from '../assets/carovii.png';
-import canvaelementsAsset from '../assets/canvaelements.png';
+import caroviiAsset from '../assets/carovii.webp';
+import canvaelementsAsset from '../assets/canvaelements.webp';
 import kattalyxAsset from '../assets/kattalyx.webp';
 
 const projectsData = {
