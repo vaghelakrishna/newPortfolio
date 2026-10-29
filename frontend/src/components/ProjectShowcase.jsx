@@ -1,21 +1,22 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // Assets
-import craftoriaImg from '../assets/carovii.png';
-import fleboImg from '../assets/canvaelements.png';
+import croviiImg from '../assets/carovii.png';
+import canvaelementsImg from '../assets/canvaelements.png';
 import sugraImg from '../assets/kattalyx.webp';
 import leaveVideo from '../assets/leave.webm';
 
 const projects = [
   {
-    id: 'craftoria',
-    image: craftoriaImg,
+    id: 'carovii',
+    image: croviiImg,
     video: leaveVideo,
-    link: '/project/craftoria',
+    link: '/project/carovii',
     details: {
-      brand: 'Craftoria, Open Source',
+      brand: 'Carovii, Open Source',
       year: '2026',
       projectsCount: 'Full Stack App',
       role: 'Full Stack Developer',
@@ -23,12 +24,12 @@ const projects = [
     },
   },
   {
-    id: 'flebo',
-    image: fleboImg,
+    id: 'canvaelements',
+    image: canvaelementsImg,
     video: leaveVideo,
-    link: '/project/flebo',
+    link: '/project/canvaelements',
     details: {
-      brand: 'Flebo, HealthTech',
+      brand: 'Canva Elements, Design Tool',
       year: '2026',
       projectsCount: '3 Portals',
       role: 'Lead UX & Frontend',
@@ -66,7 +67,8 @@ function ArcCornerCard({ project }) {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const cardRef = useRef(null);
-  const videoRef = useRef(null);
+  // Video on hover temporarily commented out per user request:
+  // const videoRef = useRef(null);
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -79,17 +81,21 @@ function ArcCornerCard({ project }) {
 
   const handleMouseEnter = () => {
     setIsHovered(true);
+    /* Video on hover disabled for now:
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
       videoRef.current.play().catch(() => { });
     }
+    */
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+    /* Video on hover disabled for now:
     if (videoRef.current) {
       videoRef.current.pause();
     }
+    */
   };
 
   return (
@@ -98,10 +104,11 @@ function ArcCornerCard({ project }) {
       onMouseLeave={handleMouseLeave}
       className="relative w-full aspect-[16/9] sm:aspect-[2.1/1] p-3 sm:p-4 flex items-center justify-center select-none"
     >
-      {/* --- 1. EXACT CURVED RADIAL ARCS (Image 8 ke according) --- */}
+      {/* --- 1. EXACT CURVED RADIAL ARCS --- */}
       <div
-        className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'
-          }`}
+        className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${
+          isHovered ? 'opacity-0' : 'opacity-100'
+        }`}
       >
         {/* Top-Left Arc */}
         <svg className="absolute top-0 left-0 w-12 h-12 overflow-visible" viewBox="0 0 48 48">
@@ -146,45 +153,48 @@ function ArcCornerCard({ project }) {
             strokeLinecap="round"
           />
         </svg>
-
-          
       </div>
 
-      {/* --- 2. MAIN CARD: Hover par expand hokar arcs ki boundary tak jaata hai --- */}
-      <motion.a
+      {/* --- 2. MAIN CARD: Hover par size expand (scale up) hoti hai aur click par project detail open hoti hai --- */}
+      <motion.div
         ref={cardRef}
-        href={project.link}
         onMouseMove={handleMouseMove}
         animate={{
-          scale: isHovered ? 1.025 : 0.98,
+          scale: isHovered ? 1.045 : 0.98,
         }}
-        transition={{ type: 'spring', stiffness: 280, damping: 24 }}
-        className="relative w-full h-full rounded-[26px] bg-white overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.06)] flex flex-col justify-end cursor-none border border-black/5"
+        transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+        className="relative w-full h-full rounded-[26px] bg-white overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.12)] flex flex-col justify-end cursor-pointer border border-black/5"
       >
-        {/* Poster Image */}
-        <img
-          src={project.image}
-          alt={project.details.brand}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-400 ${isHovered ? 'opacity-0' : 'opacity-100'
+        <Link to={project.link} className="absolute inset-0 z-20 block">
+          {/* Poster Image (Stays visible on hover with subtle zoom) */}
+          <img
+            src={project.image}
+            alt={project.details.brand}
+            className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
+              isHovered ? 'scale-105' : 'scale-100'
             }`}
-        />
+          />
 
-        {/* Full Card Video */}
-        <video
-          ref={videoRef}
-          src={project.video}
-          muted
-          loop
-          playsInline
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          {/* Video element disabled/commented out for now:
+          <video
+            ref={videoRef}
+            src={project.video}
+            muted
+            loop
+            playsInline
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+              isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
-        />
+          />
+          */}
 
-        {/* Subtle Video Tint */}
-        <div
-          className={`absolute inset-0 bg-black/10 pointer-events-none transition-opacity duration-400 ${isHovered ? 'opacity-100' : 'opacity-0'
+          {/* Subtle Image Overlay on Hover */}
+          <div
+            className={`absolute inset-0 bg-black/15 pointer-events-none transition-opacity duration-300 ${
+              isHovered ? 'opacity-100' : 'opacity-0'
             }`}
-        />
+          />
+        </Link>
 
         {/* Custom Follow-Cursor */}
         <AnimatePresence>
@@ -221,7 +231,7 @@ function ArcCornerCard({ project }) {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 40, opacity: 0 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="relative z-30 bg-white/85 backdrop-blur-md border-t border-black/10 py-2.5 px-4 sm:px-8 grid grid-cols-2 sm:grid-cols-5 gap-3 text-[11px] pointer-events-none w-full shadow-sm"
+              className="relative z-30 bg-white/90 backdrop-blur-md border-t border-black/10 py-2.5 px-4 sm:px-8 grid grid-cols-2 sm:grid-cols-5 gap-3 text-[11px] pointer-events-none w-full shadow-sm"
             >
               <div>
                 <p className="text-neutral-500 uppercase tracking-wider text-[9px] font-bold">Brand</p>
@@ -246,7 +256,7 @@ function ArcCornerCard({ project }) {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.a>
+      </motion.div>
     </div>
   );
 }
