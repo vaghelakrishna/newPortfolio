@@ -47,6 +47,7 @@ export default function HomePage() {
       <ScrollRevealHero />
 
       <AboutMe />
+      <WalkingRobot/>
       {/* <PhotoStrip /> */}
       {/* <FilmStripSection /> */}
       {/* <VisitorPassScroll /> */}
