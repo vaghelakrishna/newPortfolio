@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import avatarImg from '../assets/avatar.webp';
-import workImg from '../assets/work.png';
+import avatarImg from '../assets/cute-me.jpeg';
+import workImg from '../assets/carovii.webp';
 import flowerImg from '../assets/flower2Img.webp';
 
 export default function ScrollRevealHero() {
@@ -50,7 +50,7 @@ export default function ScrollRevealHero() {
               transition={{ type: "spring", stiffness: 350, damping: 22 }}
               className="relative p-1 sm:p-1.5 rounded-xl sm:rounded-2xl border border-black/10 bg-white/80 shadow-xs flex-shrink-0 cursor-pointer"
             >
-              <div className="w-9 h-7 sm:w-14 sm:h-11 md:w-18 md:h-14 rounded-lg sm:rounded-xl overflow-hidden bg-neutral-100">
+              <div className="w-9 h-7 sm:w-14 sm:h-11 md:w-18 md:h-19 rounded-lg sm:rounded-xl overflow-hidden bg-neutral-100">
                 <img
                   src={avatarImg}
                   alt="Krishna Vaghela"
@@ -80,7 +80,7 @@ export default function ScrollRevealHero() {
               transition={{ type: "spring", stiffness: 350, damping: 22 }}
               className="relative p-1 sm:p-1.5 rounded-xl sm:rounded-2xl border border-black/10 bg-white/80 shadow-xs flex-shrink-0 cursor-pointer"
             >
-              <div className="w-6 h-9 sm:w-9 sm:h-14 md:w-12 md:h-18 rounded-lg sm:rounded-xl overflow-hidden bg-[#FAF8F5] p-0.5 flex items-center justify-center border border-black/5">
+              <div className="w-6 h-9 sm:w-9 sm:h-14 md:w-29 md:h-18 rounded-lg sm:rounded-xl overflow-hidden bg-[#FAF8F5] p-0.5 flex items-center justify-center border border-black/5">
                 <img
                   src={workImg}
                   alt="Mobile UI"
