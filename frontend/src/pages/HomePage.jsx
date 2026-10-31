@@ -25,6 +25,7 @@ import MacProjectsDesktop from "../components/MacProjectsDesktop";
 import ProjectShowcase from "../components/ProjectShowcase";
 import WorkSection from "../components/WorkSection";
 import MonthlyRecapSection from "../components/MonthlyRecapSection";
+import PhotoAutoScroll from "../components/PhotoAutoScroll";
 
 export default function HomePage() {
   const footerRef = useRef(null);
@@ -49,6 +50,7 @@ export default function HomePage() {
 
       <AboutMe />
       <WalkingRobot/>
+      <PhotoAutoScroll />
       {/* <PhotoStrip /> */}
       {/* <FilmStripSection /> */}
       {/* <VisitorPassScroll /> */}
