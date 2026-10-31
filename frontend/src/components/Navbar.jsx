@@ -1,35 +1,15 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
 
   const navLinks = [
-    { name: "Work", path: "/home#work", rotate: "-2deg" },
+    { name: "Work", path: "/project", rotate: "-2deg" },
     { name: "About", path: "/about", rotate: "2deg" },
-    { name: "Project", path: "/project", rotate: "-1deg" },
     { name: "Contact", path: "/contact", rotate: "3deg" }
   ];
-
-  const handleLinkClick = (e, link) => {
-    if (link.path === "/home#work") {
-      e.preventDefault();
-      if (location.pathname === "/home" || location.pathname === "/") {
-        const el = document.getElementById("work");
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth" });
-        }
-      } else {
-        navigate("/home#work");
-      }
-      setOpen(false);
-    } else {
-      setOpen(false);
-    }
-  };
 
   return (
     <nav className="fixed top-8 left-8 right-8 z-50">
@@ -51,7 +31,7 @@ const Navbar = () => {
               whileHover={{ y: -5, rotate: 0 }}
               style={{ rotate: link.rotate }}
             >
-              <Link to={link.path} onClick={(e) => handleLinkClick(e, link)}>
+              <Link to={link.path} onClick={() => setOpen(false)}>
                 <motion.span
                   className="absolute -bottom-2 left-0 w-full h-1 bg-[#B5440B] opacity-0 group-hover:opacity-100"
                   initial={{ scaleX: 0 }}
@@ -92,7 +72,7 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                onClick={(e) => handleLinkClick(e, link)}
+                onClick={() => setOpen(false)}
                 className="text-[#161515] font-['Gochi_Hand',_cursive] text-2xl border-b border-[#161515]/10 pb-2 last:border-0"
               >
                 {link.name}
