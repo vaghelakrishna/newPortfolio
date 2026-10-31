@@ -287,7 +287,7 @@ const WalkingRobot = ({ footerRef }) => {
               transform: showTooltip ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(4px)',
             }}
           >
-            <div className="bg-[#FF4081] text-white px-3 py-1 rounded-full text-[11px] font-bold shadow-md border border-pink-200 flex items-center gap-1">
+            <div className="bg-[#E25C1D] text-white px-3 py-1 rounded-full text-[11px] font-bold shadow-md border border-orange-300/40 flex items-center gap-1">
               <span>{tooltipText}</span>
             </div>
           </div>
@@ -296,30 +296,30 @@ const WalkingRobot = ({ footerRef }) => {
           <div className={`robot-turn ${isPaused ? 'stopped' : ''}`}>
             <div className="body-sway flex flex-col items-center relative">
 
-              {/* Cute Girly Robot SVG */}
+              {/* Cute Terracotta Mascot SVG */}
               <svg width="48" height="60" viewBox="0 0 48 60" fill="none">
                 {/* Shadow */}
-                <ellipse cx="24" cy="57" rx="14" ry="2.5" fill="#F472B6" opacity="0.25" />
+                <ellipse cx="24" cy="57" rx="14" ry="2.5" fill="#2B2A27" opacity="0.16" />
 
                 {/* Legs */}
-                <rect className={isPanic ? 'leg-left-fast' : 'leg-left'} x="15" y="44" width="7" height="11" rx="3.5" fill="#FF5E8E" />
-                <rect className={isPanic ? 'leg-right-fast' : 'leg-right'} x="26" y="44" width="7" height="11" rx="3.5" fill="#FF5E8E" />
+                <rect className={isPanic ? 'leg-left-fast' : 'leg-left'} x="15" y="44" width="7" height="11" rx="3.5" fill="#E25C1D" />
+                <rect className={isPanic ? 'leg-right-fast' : 'leg-right'} x="26" y="44" width="7" height="11" rx="3.5" fill="#E25C1D" />
 
                 {/* Main Body */}
-                <rect x="5" y="10" width="38" height="36" rx="8" fill="#FFF0F5" stroke="#FF5E8E" strokeWidth="2.5" />
+                <rect x="5" y="10" width="38" height="36" rx="8" fill="#FFFDF8" stroke="#E25C1D" strokeWidth="2.5" />
 
                 {/* Cheeks */}
-                <circle cx="11" cy="31" r="3" fill="#FFB6C1" opacity="0.8" />
-                <circle cx="37" cy="31" r="3" fill="#FFB6C1" opacity="0.8" />
+                <circle cx="11" cy="31" r="3" fill="#FDBA74" opacity="0.85" />
+                <circle cx="37" cy="31" r="3" fill="#FDBA74" opacity="0.85" />
 
                 {/* Expressions */}
                 {isPanic ? (
                   <>
-                    <path d="M14 24 L18 27 L14 30" stroke="#FF4081" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                    <path d="M34 24 L30 27 L34 30" stroke="#FF4081" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                    <path d="M14 24 L18 27 L14 30" stroke="#C84E16" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                    <path d="M34 24 L30 27 L34 30" stroke="#C84E16" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                     <circle className="tear-anim" cx="12" cy="35" r="1.5" fill="#38BDF8" />
                     <circle className="tear-anim" cx="36" cy="35" r="1.5" fill="#38BDF8" />
-                    <ellipse cx="24" cy="32" rx="3.5" ry="4.5" fill="#FF4081" />
+                    <ellipse cx="24" cy="32" rx="3.5" ry="4.5" fill="#C84E16" />
                   </>
                 ) : (
                   <>
@@ -327,15 +327,15 @@ const WalkingRobot = ({ footerRef }) => {
                     <rect className="eye" x="30" y="22" width="4" height="6" rx="2" fill="#2B2327" />
                     <circle cx="15" cy="23.5" r="1" fill="#FFFFFF" />
                     <circle cx="31" cy="23.5" r="1" fill="#FFFFFF" />
-                    <path d="M22 30 Q24 33 26 30" stroke="#FF5E8E" strokeWidth="2" strokeLinecap="round" fill="none" />
+                    <path d="M22 30 Q24 33 26 30" stroke="#E25C1D" strokeWidth="2" strokeLinecap="round" fill="none" />
                   </>
                 )}
 
                 {/* Ribbon Bow on Head */}
                 <g transform="translate(14, 2)">
-                  <ellipse cx="4" cy="6" rx="4.5" ry="3.5" fill="#FF4081" />
-                  <ellipse cx="16" cy="6" rx="4.5" ry="3.5" fill="#FF4081" />
-                  <circle cx="10" cy="6" r="3" fill="#FF1493" />
+                  <ellipse cx="4" cy="6" rx="4.5" ry="3.5" fill="#E25C1D" />
+                  <ellipse cx="16" cy="6" rx="4.5" ry="3.5" fill="#E25C1D" />
+                  <circle cx="10" cy="6" r="3" fill="#C84E16" />
                   <circle cx="9.5" cy="5.5" r="1" fill="#FFFFFF" />
                 </g>
               </svg>
