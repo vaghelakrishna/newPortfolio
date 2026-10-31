@@ -32,8 +32,6 @@ export default function App() {
           path="/contact"
           element={<ContactUsPage />} />
 
-        <Route path="/work" element={<Navigate to="/home#work" replace />} />
-
         <Route path="/visitor-gallery" element={<VisitorGallery />} />
 
         <Route path="/project" element={<ProjectPage />} />
